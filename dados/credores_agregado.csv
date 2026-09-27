@@ -1,0 +1,457 @@
+municipio;exercicio;orgao;n_credores;n_pessoas_juridicas;total_custeio_investimento;cinco_maiores;maior_credor
+Água Boa;2021;Gabinete do Prefeito;54;42;903947;759588;508782
+Água Boa;2021;Camara Municipal;99;83;806138;316576;134000
+Água Boa;2021;Secretaria de Saúde;367;311;32899882;24815656;22094195
+Água Boa;2021;Secretaria de Assistência Social;154;128;1109497;435242;159598
+Água Boa;2021;Secretaria de Finanças;89;72;1707657;1371540;1035983
+Água Boa;2021;Secretaria de Educação;199;170;8859593;3527945;1012769
+Água Boa;2021;Secretaria de Administracáo;45;39;449584;267542;122367
+Água Boa;2021;Secretaria de Infraestrutura;38;27;769686;640178;388775
+Água Boa;2021;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;9;9;168163;151568;51050
+Água Boa;2021;Secretaria Municipal de Cidade e Meio Ambiente;82;64;4481433;3286908;1330702
+Água Boa;2021;Secretaria de Planejamento e Finanças;51;48;1204716;814539;284858
+Água Boa;2021;Secretaria de Desenvolvimento Industria Comércio e Turismo;127;113;3050681;2071783;856314
+Água Boa;2021;Secretaria de Administracáo e Planejamento;150;114;4288303;3636948;3328067
+Água Boa;2021;Secretaria de Infraestrutura e Meio Ambiente;210;194;21162967;9265509;2533785
+Água Boa;2021;Secretaria de Esporte, Cultura, Lazer e Eventos;202;85;1168745;467233;137407
+Água Boa;2022;Gabinete do Prefeito;51;41;1402071;1241507;858760
+Água Boa;2022;Camara Municipal;100;78;952067;391996;168000
+Água Boa;2022;Secretaria de Saúde;276;231;44912938;35647115;28430932
+Água Boa;2022;Secretaria de Assistência Social;159;134;2456256;1342805;565000
+Água Boa;2022;Secretaria de Finanças;128;100;4796288;3118682;1787250
+Água Boa;2022;Secretaria de Educação;185;152;14385816;6065304;1968138
+Água Boa;2022;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;20;19;258341;218391;103991
+Água Boa;2022;Secretaria de Desenvolvimento Industria Comércio e Turismo;128;117;4148661;2057698;603559
+Água Boa;2022;Secretaria de Administracáo e Planejamento;213;115;6310893;4063216;1390500
+Água Boa;2022;Secretaria de Infraestrutura e Meio Ambiente;216;203;52571939;31579026;17254794
+Água Boa;2022;Secretaria de Esporte, Cultura, Lazer e Eventos;190;125;4538314;1989857;787500
+Água Boa;2023;Gabinete do Prefeito;65;57;1369083;1058150;647652
+Água Boa;2023;Camara Municipal;112;90;1483431;718971;472432
+Água Boa;2023;Secretaria de Saúde;219;179;56370167;49726971;37525852
+Água Boa;2023;Secretaria de Assistência Social;167;136;2316619;981448;359167
+Água Boa;2023;Secretaria de Finanças;118;100;7346076;5149294;2203252
+Água Boa;2023;Secretaria de Esporte, Cultura e Lazer;216;140;6179600;3394702;2399331
+Água Boa;2023;Secretaria de Educação;185;154;20652024;10346221;2517693
+Água Boa;2023;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;27;26;231948;160881;55800
+Água Boa;2023;Secretaria de Infraestrutura e Meio Ambiente;205;195;53085837;28919518;9907564
+Água Boa;2023;Secretaria de Desenvolvimento Econômico, Agricultura e Turismo;125;111;3078804;1709864;600000
+Água Boa;2023;Secretaria de Administracão e Planejamento;241;126;3936704;1603409;739852
+Água Boa;2024;Gabinete do Prefeito;43;37;798070;616672;260878
+Água Boa;2024;Camara Municipal;96;77;1411384;747986;544869
+Água Boa;2024;Secretaria de Saúde;191;147;64445973;57954270;40312253
+Água Boa;2024;Secretaria de Assistência Social;159;123;2211578;870296;377939
+Água Boa;2024;Secretaria de Finanças;97;81;9749505;7373795;2173308
+Água Boa;2024;Secretaria de Esporte, Cultura e Lazer;192;135;6710789;3562694;2237247
+Água Boa;2024;Secretaria de Educação;180;146;26846707;11192511;3097713
+Água Boa;2024;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;40;26;256662;182488;76521
+Água Boa;2024;Secretaria de Infraestrutura e Meio Ambiente;223;156;53002121;25283761;8019186
+Água Boa;2024;Secretaria de Desenvolvimento Econômico, Agricultura e Turismo;105;95;10017904;8430142;6383477
+Água Boa;2024;Secretaria de Administracão e Planejamento;151;99;3507243;2008017;829840
+Água Boa;2025;Gabinete do Prefeito;67;61;1433327;947607;382000
+Água Boa;2025;Camara Municipal;109;91;1584076;850800;661056
+Água Boa;2025;Secretaria de Saúde;242;180;69708583;60198929;41008435
+Água Boa;2025;Secretaria de Assistência Social;178;133;3684537;1816215;847077
+Água Boa;2025;Secretaria de Finanças;104;85;13267360;11155177;5667759
+Água Boa;2025;Secretaria de Esporte, Cultura e Lazer;222;154;7702529;4084531;2939588
+Água Boa;2025;Secretaria de Educação;215;168;21619375;9176976;2770819
+Água Boa;2025;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;47;31;350244;244367;83929
+Água Boa;2025;Secretaria de Infraestrutura e Meio Ambiente;258;195;51556430;20014924;4828345
+Água Boa;2025;Secretaria de Desenvolvimento Econômico, Agricultura e Turismo;115;100;8112200;6468216;4551068
+Água Boa;2025;Secretaria de Administracão e Planejamento;172;120;3180183;1419294;419317
+Água Boa;2025;Secretaria de Planejamento, Obras e Engenharia;35;28;349648;250075;111060
+Água Boa;2026;Gabinete do Prefeito;58;49;818235;453190;143455
+Água Boa;2026;Camara Municipal;75;56;1072372;599804;455800
+Água Boa;2026;Secretaria de Saúde;219;163;50007960;43156663;27725317
+Água Boa;2026;Secretaria de Finanças;100;77;7570163;5981972;2939971
+Água Boa;2026;Secretaria de Esporte, Cultura e Lazer;186;130;5720047;3422419;1796505
+Água Boa;2026;Secretaria de Educação;190;119;16573691;6980861;1821555
+Água Boa;2026;Fundo Municipal de Previdência dos Servidores de Água Boa - Água Previ;54;39;227593;117520;37576
+Água Boa;2026;Secretaria de Administracão;134;90;3350322;2407903;1689511
+Água Boa;2026;Secretaria de Infraestrutura e Meio Ambiente;181;144;30152943;17047113;6601328
+Água Boa;2026;Secretaria de Planejamento, Obras e Engenharia;33;28;464155;399628;257135
+Água Boa;2026;Secretaria de Assistência Social e Cidadania;125;96;4357996;3221456;2333076
+Água Boa;2026;Secretaria de Desenvolvimento Econômico, Agricultura, Turismo e Inovação;87;71;3713278;2195957;1000000
+Alto Araguaia;2021;Gabinete do Prefeito;21;14;306692;235849;166835
+Alto Araguaia;2021;Camara Municipal;84;64;1100875;312423;78300
+Alto Araguaia;2021;Secretaria de Administração;115;92;4842692;2669899;787362
+Alto Araguaia;2021;Secretaria de Saúde;272;211;13846690;6761488;4907896
+Alto Araguaia;2021;Secretaria de Educação;181;95;7225319;3642752;1477500
+Alto Araguaia;2021;Fundo de Previdência Municipal;19;18;204688;190787;76118
+Alto Araguaia;2021;Secretaria de Obras;55;31;2403283;2055108;1530905
+Alto Araguaia;2021;Secretaria de Infra-estrutura e Serviços Urbanos;74;68;9689352;7998675;2827165
+Alto Araguaia;2021;Secretaria de Finanças e Planejamento;32;20;2182859;1993400;909516
+Alto Araguaia;2021;Secretaria de Cultura, Esporte, Lazer e Turismo;17;11;170409;160728;100800
+Alto Araguaia;2021;Secretaria de Assistência e Desenvolvimento Social;194;116;3226992;1903908;1037065
+Alto Araguaia;2021;Secretaria de Indústria, Comércio e Serviços;1;1;320;320;320
+Alto Araguaia;2021;Secretaria de Transporte e Frotas;18;17;1608037;1271234;666516
+Alto Araguaia;2021;Secretaria de Meio Ambiente e Desenv. Urbano;19;7;56449;42450;23200
+Alto Araguaia;2021;Secretaria de Agricultura,pecuária e Abastecimento;33;26;460718;363048;240000
+Alto Araguaia;2022;Gabinete do Prefeito;20;10;289381;260274;168240
+Alto Araguaia;2022;Camara Municipal;103;62;1269773;324675;78300
+Alto Araguaia;2022;Secretaria de Administração;122;100;4344588;1769263;512095
+Alto Araguaia;2022;Secretaria de Saúde;279;215;18743129;10140505;4543325
+Alto Araguaia;2022;Secretaria de Educação;285;95;11605831;3845288;1348934
+Alto Araguaia;2022;Fundo de Previdência Municipal;21;20;209363;183974;86135
+Alto Araguaia;2022;Secretaria de Obras;39;35;5621093;4688770;2208959
+Alto Araguaia;2022;Secretaria de Infra-estrutura e Serviços Urbanos;77;62;17726099;14773502;8866341
+Alto Araguaia;2022;Secretaria de Finanças e Planejamento;30;20;4145394;3967756;1390235
+Alto Araguaia;2022;Secretaria de Cultura, Esporte, Lazer e Turismo;33;24;1610504;925000;300000
+Alto Araguaia;2022;Secretaria de Assistência e Desenvolvimento Social;223;118;4671580;2559615;1220456
+Alto Araguaia;2022;Secretaria de Indústria, Comércio e Serviços;3;3;4606;4606;3000
+Alto Araguaia;2022;Secretaria de Transporte e Frotas;11;9;1226831;1211934;845750
+Alto Araguaia;2022;Secretaria de Meio Ambiente e Desenv. Urbano;14;6;59719;51908;19358
+Alto Araguaia;2022;Secretaria de Agricultura,pecuária e Abastecimento;25;21;403792;321918;127015
+Alto Araguaia;2023;Gabinete do Prefeito;14;4;213439;201835;165240
+Alto Araguaia;2023;Camara Municipal;88;62;1819505;647331;254511
+Alto Araguaia;2023;Secretaria de Administração;134;90;3177735;1419493;442869
+Alto Araguaia;2023;Secretaria de Saúde;234;176;27020389;20921985;10290033
+Alto Araguaia;2023;Secretaria de Educação;324;94;17378381;8022766;3377285
+Alto Araguaia;2023;Secretaria de Obras;29;25;3555271;3172668;1991330
+Alto Araguaia;2023;Secretaria de Infra-estrutura e Serviços Urbanos;66;51;19422544;17041219;9047692
+Alto Araguaia;2023;Secretaria de Finanças e Planejamento;31;21;6122746;5794012;2914560
+Alto Araguaia;2023;Secretaria de Cultura, Esporte, Lazer e Turismo;77;38;1905532;1164232;704559
+Alto Araguaia;2023;Secretaria de Assistência e Desenvolvimento Social;188;107;8388825;6686554;4403563
+Alto Araguaia;2023;Secretaria de Indústria, Comércio e Serviços;4;0;3120;3120;780
+Alto Araguaia;2023;Secretaria de Transporte e Frotas;17;12;1250664;1178420;970012
+Alto Araguaia;2023;Previmar - Fundo Municipal de Previdencia Social dos Servidores de Alto Araguaia;24;23;238306;210921;117637
+Alto Araguaia;2023;Secretaria de Meio Ambiente e Desenv. Urbano;3;3;1388;1388;1152
+Alto Araguaia;2023;Secretaria de Agricultura,pecuária e Abastecimento;19;17;1111825;1079828;530000
+Alto Araguaia;2024;Gabinete do Prefeito;6;0;181810;181710;165240
+Alto Araguaia;2024;Camara Municipal;75;47;2005863;715713;342747
+Alto Araguaia;2024;Secretaria de Administração;125;79;4702525;2421605;740743
+Alto Araguaia;2024;Secretaria de Saúde;214;157;29678235;23502057;13394005
+Alto Araguaia;2024;Secretaria de Educação;372;101;21050579;10530284;3990972
+Alto Araguaia;2024;Secretaria de Obras;35;27;3364230;2958757;1486933
+Alto Araguaia;2024;Secretaria de Infra-estrutura e Serviços Urbanos;81;52;11759453;9287096;4122474
+Alto Araguaia;2024;Secretaria de Finanças e Planejamento;27;18;11562772;11097493;5116268
+Alto Araguaia;2024;Secretaria de Cultura, Esporte, Lazer e Turismo;66;31;1670714;1106599;448846
+Alto Araguaia;2024;Secretaria de Assistência e Desenvolvimento Social;204;112;6418659;4402147;1868864
+Alto Araguaia;2024;Secretaria de Indústria, Comércio e Serviços;1;0;520;520;520
+Alto Araguaia;2024;Secretaria de Transporte e Frotas;13;10;1559997;1485566;1368222
+Alto Araguaia;2024;Previmar - Fundo Municipal de Previdencia Social dos Servidores de Alto Araguaia;21;19;286762;270666;144231
+Alto Araguaia;2024;Secretaria de Meio Ambiente e Desenv. Urbano;2;0;520;520;260
+Alto Araguaia;2024;Secretaria de Agricultura,pecuária e Abastecimento;14;10;78481;68000;29670
+Alto Araguaia;2025;Gabinete do Prefeito;13;3;221820;210853;165240
+Alto Araguaia;2025;Camara Municipal;55;43;1647890;1254409;1018846
+Alto Araguaia;2025;Secretaria de Administração;135;79;3579837;1599576;627143
+Alto Araguaia;2025;Secretaria de Saúde;211;127;24258681;20342206;10636355
+Alto Araguaia;2025;Secretaria de Educação;366;118;15091314;5874033;1793612
+Alto Araguaia;2025;Secretaria de Obras;40;29;603377;439909;218587
+Alto Araguaia;2025;Secretaria de Infra-estrutura e Serviços Urbanos;74;56;4628488;3529084;2556940
+Alto Araguaia;2025;Secretaria de Finanças e Planejamento;29;21;7793797;7678661;5176128
+Alto Araguaia;2025;Secretaria de Cultura, Esporte, Lazer e Turismo;35;26;423480;370390;172156
+Alto Araguaia;2025;Secretaria de Assistência e Desenvolvimento Social;150;94;3768283;2412587;1190069
+Alto Araguaia;2025;Secretaria de Indústria, Comércio e Serviços;2;2;20183;20183;20000
+Alto Araguaia;2025;Secretaria de Transporte e Frotas;30;21;649942;511476;282612
+Alto Araguaia;2025;Previmar - Fundo Municipal de Previdencia Social dos Servidores de Alto Araguaia;30;29;708076;657858;401677
+Alto Araguaia;2025;Secretaria de Meio Ambiente e Desenv. Urbano;1;1;2472;2472;2472
+Alto Araguaia;2025;Secretaria de Agricultura,pecuária e Abastecimento;23;21;96732;66603;16835
+Alto Araguaia;2026;Gabinete do Prefeito;10;0;118340;115200;96390
+Alto Araguaia;2026;Camara Municipal;50;42;935482;748481;613710
+Alto Araguaia;2026;Secretaria de Administração;70;63;1421714;782104;299548
+Alto Araguaia;2026;Secretaria de Saúde;184;126;9827286;7459529;4917683
+Alto Araguaia;2026;Secretaria de Educação e Cultura;298;91;6480446;2261281;689126
+Alto Araguaia;2026;Secretaria de Obras;31;27;347251;216134;77249
+Alto Araguaia;2026;Secretaria de Infra-estrutura e Serviços Urbanos;127;66;3542982;2223115;1454622
+Alto Araguaia;2026;Secretaria de Finanças e Planejamento;27;18;6524619;6319704;2397885
+Alto Araguaia;2026;Secretaria de Assistência e Desenvolvimento Social;121;75;2266350;1464197;677645
+Alto Araguaia;2026;Secretaria de Transporte e Frotas;7;6;41196;37696;12340
+Alto Araguaia;2026;Previmar - Fundo Municipal de Previdencia Social dos Servidores de Alto Araguaia;30;29;247106;200417;88204
+Alto Araguaia;2026;Secretaria de Meio Ambiente e Desenv. Urbano;4;2;2595;2595;1400
+Alto Araguaia;2026;Secretaria de Agricultura,pecuária e Abastecimento;24;19;109946;65933;22557
+Alto Araguaia;2026;Secretaria de Esporte, Lazer e Turismo;34;27;201946;140096;81889
+Alto Araguaia;2026;Secretaria de Indústria, Comércio e Serviços e Empregos;3;1;5209;5209;2590
+Arenápolis;2021;Secretaria Municipal de Assistencia Social;81;61;513644;218704;107000
+Arenápolis;2021;Secretaria Municipal de Saude;294;211;12774676;8047445;6980904
+Arenápolis;2021;Secretaria Municipal de Governo;32;25;282562;188338;71175
+Arenápolis;2021;Secretaria Municipal de Gestao;117;94;1781419;1143048;510089
+Arenápolis;2021;Secretaria Municipal de Infraestrutura e Transportes;153;130;3946988;2391126;1114011
+Arenápolis;2021;Secr Mun. Desenvolvimento Economico e Agropecuario;38;36;357082;248155;139650
+Arenápolis;2021;Secr Mun de Educacao Cultura Desporto e Lazer;140;127;2085002;707749;229358
+Arenápolis;2021;Camara Municipal de Arenapolis;83;66;416993;191066;78000
+Arenápolis;2021;Secretaria Municipal de Representacao Instituciona;1;0;600;600;600
+Arenápolis;2022;Secretaria Municipal de Administracao;89;74;727114;275460;76999
+Arenápolis;2022;Secretaria Municipal de Assistencia Social;107;80;882175;367639;129900
+Arenápolis;2022;Secretaria Municipal de Saude;280;199;18278975;12478998;8511297
+Arenápolis;2022;Secretaria Municipal de Fazenda;37;28;1172180;1064508;520279
+Arenápolis;2022;Camara Municipal de Vereadores de Arenapolis;38;31;339503;208319;74494
+Arenápolis;2022;Camara Municipal de Arenapolis;69;54;535193;306730;154600
+Arenápolis;2022;Secr Mun de Educacao e Cultura;184;166;6840058;1618108;467872
+Arenápolis;2022;Secretaria Munic. Transporte Obras Serv. Publicos;120;112;6540714;4203570;1203951
+Arenápolis;2022;Secretaria Munic. Agricultura e Meio Ambiente;39;36;602572;489383;267376
+Arenápolis;2022;Secretaria Munic. Desporto Lazer e Turismo;15;13;88767;67523;17550
+Arenápolis;2023;Secretaria Municipal de Administracao;94;73;1331519;826270;442957
+Arenápolis;2023;Secretaria Municipal de Assistencia Social;95;72;941226;366800;92420
+Arenápolis;2023;Secretaria Municipal de Saude;233;172;13544923;8676201;7338001
+Arenápolis;2023;Secretaria Municipal de Fazenda;45;33;1144172;1011647;559330
+Arenápolis;2023;Camara Municipal de Vereadores de Arenapolis;43;35;397441;208826;80037
+Arenápolis;2023;Camara Municipal de Arenapolis;54;39;640443;200755;57190
+Arenápolis;2023;Secr Mun de Educacao e Cultura;178;147;5583110;1790551;668235
+Arenápolis;2023;Secretaria Munic. Transporte Obras Serv. Publicos;125;106;5775807;3541523;1027471
+Arenápolis;2023;Secretaria Munic. Agricultura e Meio Ambiente;36;34;506090;372356;140000
+Arenápolis;2023;Secretaria Munic. de Representacao Institucional;1;0;2430;2430;2430
+Arenápolis;2023;Secretaria Municipal de Desporto, Lazer e Turismo;30;28;730155;561570;342149
+Arenápolis;2024;Gabinete do Prefeito;28;21;434977;237930;70425
+Arenápolis;2024;Secretaria Municipal de Administracao;78;63;1418401;684956;288383
+Arenápolis;2024;Secretaria Municipal de Assistencia Social;66;43;2294018;1689046;1423551
+Arenápolis;2024;Secretaria Municipal de Saude;162;111;15166539;9472021;7156304
+Arenápolis;2024;Secretaria Municipal de Fazenda;31;17;1407461;1268847;680419
+Arenápolis;2024;Camara Municipal de Arenapolis;69;52;727681;213527;59895
+Arenápolis;2024;Secr Mun de Educacao e Cultura;114;89;9576842;3451145;1312861
+Arenápolis;2024;Secretaria Munic. Agricultura e Meio Ambiente;22;20;458638;354991;138136
+Arenápolis;2024;Secretaria Munic. Transporte, Obras Serv. Publicos;75;54;5798082;3827656;1065151
+Arenápolis;2024;Secretaria Munic. Desporto, Lazer e Turismo;19;15;440703;276368;112500
+Arenápolis;2025;Gabinete do Prefeito;27;20;471383;263104;98479
+Arenápolis;2025;Secretaria Municipal de Administracao;84;74;2608369;1482563;868602
+Arenápolis;2025;Secretaria Municipal de Assistencia Social;77;57;1166026;391998;183042
+Arenápolis;2025;Secretaria Municipal de Saude;166;107;20647167;14104669;4784800
+Arenápolis;2025;Secretaria Municipal de Educacao;119;84;7851778;2887805;770575
+Arenápolis;2025;Secretaria Municipal de Fazenda;31;23;1233429;1075385;830128
+Arenápolis;2025;Camara Municipal de Arenapolis;72;55;1033803;341795;94800
+Arenápolis;2025;Secretaria Munic. Agricultura e Meio Ambiente;29;25;799198;572424;215116
+Arenápolis;2025;Secretaria Municipal de Esporte, Cultura, Lazer e Turismo;37;32;4409819;3162043;1830041
+Arenápolis;2025;Secretaria Municipal de Convenios, Licitacoes e Contratos;1;0;569;569;569
+Arenápolis;2025;Secretaria Munic. Transporte, Obras Serv. Publicos;80;57;9016384;6566759;2347813
+Arenápolis;2026;Gabinete do Prefeito;20;14;300632;197076;68088
+Arenápolis;2026;Secretaria Municipal de Administracao;73;57;1094190;444052;120738
+Arenápolis;2026;Secretaria Municipal de Assistencia Social;57;36;654874;282627;112987
+Arenápolis;2026;Secretaria Municipal de Saude;133;88;13231652;8749679;4234041
+Arenápolis;2026;Secretaria Municipal de Fazenda;25;13;1733871;1643753;533388
+Arenápolis;2026;Camara Municipal de Arenapolis;66;50;843818;250796;65200
+Arenápolis;2026;Secr Mun de Educacao e Cultura;90;61;5138529;2920969;959989
+Arenápolis;2026;Secretaria Munic. Agricultura e Meio Ambiente;22;18;478066;365497;114326
+Arenápolis;2026;Secretaria Munic. Transporte, Obras Serv. Publicos;60;48;4157323;2639237;837422
+Arenápolis;2026;Secretaria Munic. Desporto, Lazer e Turismo;34;30;3371006;2220870;784000
+Arenápolis;2026;Secretaria Munic. Convenios, Licitacoes e Contratos;1;0;473;473;473
+Canarana;2021;Camara Municipal;99;73;1070181;663570;496651
+Canarana;2021;Secretaria Municipal de Educação e Cultura;129;106;14005092;5737019;1706000
+Canarana;2021;Secretaria Municipal de Finanças;40;34;3678972;3130624;1294929
+Canarana;2021;Secretaria Municipal de Saúde e Saneamento;177;138;18221894;6032990;2023138
+Canarana;2021;Secretaria Municipal de Esportes e Lazer;71;31;1057570;545184;143590
+Canarana;2021;Secretaria Mun. de Assistência Social;88;59;2447061;1164511;359106
+Canarana;2021;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;23;19;306895;212290;78734
+Canarana;2021;Secretaria Mun. de Administração e Serviços Gerais;67;58;2806547;1170644;313725
+Canarana;2021;Secretaria Municipal de Obras, Estradas e Rodagens;100;92;36047602;17341609;4322767
+Canarana;2021;Secretaria Mun. de Agricultura e Meio Ambeinte;39;35;1463474;858857;251809
+Canarana;2021;Secretaria de Gestão Governamental;48;40;770102;442165;203215
+Canarana;2021;Prevican-fundo Mun. Prev. Serv. Canarana;18;14;190649;171878;91500
+Canarana;2022;Camara Municipal;99;78;1328901;354355;93763
+Canarana;2022;Secretaria Municipal de Educação e Cultura;195;117;19516105;9435310;3251953
+Canarana;2022;Secretaria Municipal de Finanças;43;37;4510223;3955507;1745632
+Canarana;2022;Secretaria Municipal de Saúde e Saneamento;189;135;28119106;13673821;5787097
+Canarana;2022;Secretaria Mun. de Assistência Social;111;74;3732440;1870233;635486
+Canarana;2022;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;52;48;1599924;745947;200000
+Canarana;2022;Secretaria Mun. de Administração e Serviços Gerais;82;67;3311899;1657509;623753
+Canarana;2022;Secretaria Municipal de Obras, Estradas e Rodagens;128;108;31796455;17797880;6171188
+Canarana;2022;Secretaria Mun. de Agricultura e Meio Ambeinte;54;46;2342526;1416115;577385
+Canarana;2022;Secretaria de Gestão Governamental;58;44;1591324;1169436;776312
+Canarana;2022;Prevican-fundo Mun. Prev. Serv. Canarana;21;18;275582;233390;105222
+Canarana;2022;Secretaria Municipal de Juventude Esportes e Lazer;125;64;3420342;1376141;311181
+Canarana;2023;Camara Municipal;109;85;1656621;415872;102309
+Canarana;2023;Secretaria Municipal de Educação e Cultura;195;124;21943859;9770995;3501816
+Canarana;2023;Secretaria Municipal de Finanças;53;41;13840280;12665618;5591521
+Canarana;2023;Secretaria Municipal de Saúde e Saneamento;151;112;31093524;17615456;7260560
+Canarana;2023;Secretaria Municipal de Esportes e Lazer;97;58;3026010;1879706;715962
+Canarana;2023;Secretaria Mun. de Assistência Social;127;75;3870101;2133751;1040441
+Canarana;2023;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;56;51;1874102;1239793;729900
+Canarana;2023;Secretaria Mun. de Administração e Serviços Gerais;77;61;4157727;2238423;743469
+Canarana;2023;Secretaria Municipal de Obras, Estradas e Rodagens;114;102;59037532;42747986;16868751
+Canarana;2023;Secretaria Mun. de Agricultura e Meio Ambeinte;47;42;1922442;1237879;522557
+Canarana;2023;Secretaria de Gestão Governamental;73;50;1071003;428697;123923
+Canarana;2023;Prevican-fundo Mun. Prev. Serv. Canarana;19;16;299046;257560;114458
+Canarana;2024;Camara Municipal;80;57;1659496;481023;108964
+Canarana;2024;Secretaria Municipal de Educação e Cultura;186;120;26206835;13360070;4875188
+Canarana;2024;Secretaria Municipal de Finanças;49;38;13497536;11679610;3080524
+Canarana;2024;Secretaria Municipal de Saúde e Saneamento;144;102;57086123;41726273;22135813
+Canarana;2024;Secretaria Municipal de Esportes e Lazer;93;53;5315080;4290234;2889360
+Canarana;2024;Secretaria Mun. de Assistência Social;141;60;10989067;8732083;7160431
+Canarana;2024;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;56;49;4854114;3375720;1001900
+Canarana;2024;Secretaria Mun. de Administração e Serviços Gerais;93;77;4528392;2235700;1118583
+Canarana;2024;Secretaria Municipal de Obras, Estradas e Rodagens;103;97;43225081;23729861;8166058
+Canarana;2024;Secretaria Mun. de Agricultura e Meio Ambeinte;50;41;2986939;1909273;560000
+Canarana;2024;Secretaria de Gestão Governamental;52;35;1332991;862111;360000
+Canarana;2024;Prevican-fundo Mun. Prev. Serv. Canarana;26;22;264015;203723;107035
+Canarana;2025;Camara Municipal;89;66;2920770;881203;323023
+Canarana;2025;Secretaria Municipal de Educação e Cultura;177;112;23819109;10723273;4047366
+Canarana;2025;Secretaria Municipal de Finanças;37;28;11444255;8994422;2242457
+Canarana;2025;Secretaria Municipal de Saúde e Saneamento;197;124;29895038;16865671;6703155
+Canarana;2025;Secretaria Municipal de Esportes e Lazer;140;42;2298673;1139438;493852
+Canarana;2025;Secretaria Mun. de Assistência Social;131;54;2561948;1454832;695899
+Canarana;2025;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;50;35;636955;340031;91257
+Canarana;2025;Secretaria Mun. de Administração e Serviços Gerais;67;55;4344805;2712502;1112450
+Canarana;2025;Secretaria Municipal de Obras, Estradas e Rodagens;92;86;52934540;33468830;20000276
+Canarana;2025;Secretaria Mun. de Agricultura e Meio Ambeinte;36;28;1863618;1151019;309035
+Canarana;2025;Secretaria de Gestão Governamental;45;26;1233132;800774;302978
+Canarana;2025;Prevican-fundo Mun. Prev. Serv. Canarana;40;30;505728;344274;158387
+Canarana;2026;Câmara Municipal;66;46;2534857;1179750;571500
+Canarana;2026;Secretaria Municipal de Educação e Cultura;170;104;20243182;8380531;2047600
+Canarana;2026;Secretaria Municipal de Finanças;42;34;10657414;8796873;2669425
+Canarana;2026;Secretaria Municipal de Saúde e Saneamento;178;126;34937980;20149652;10043641
+Canarana;2026;Secretaria Municipal de Esportes e Lazer;359;39;3192262;1505537;586889
+Canarana;2026;Secretaria Mun. de Assistência Social;144;51;3336454;1993437;1000000
+Canarana;2026;Secretaria Mun. Desenvol. Sócioeconômico e Turisti;46;35;1890432;1105638;493000
+Canarana;2026;Secretaria Mun. de Administração e Serviços Gerais;80;70;3583031;1767920;834045
+Canarana;2026;Secretaria Municipal de Obras, Estradas e Rodagens;84;70;18009014;11005567;3469247
+Canarana;2026;Secretaria Mun. de Agricultura e Meio Ambeinte;24;18;1372865;991937;391249
+Canarana;2026;Secretaria de Gestão Governamental;55;36;2024427;1108765;434960
+Canarana;2026;Prevican-funco Mun.prev. Serv. Canarana;26;21;250454;180324;93390
+Ribeirão Cascalheira;2021;Gabinete do Prefeito;55;43;546409;319291;120000
+Ribeirão Cascalheira;2021;Camara Municipal;60;36;704700;496681;378000
+Ribeirão Cascalheira;2021;Secretaria Municipal de Assistencia Social;62;43;427354;181576;46323
+Ribeirão Cascalheira;2021;Secretaria Municipal de Saude;184;149;8551099;5481758;4346784
+Ribeirão Cascalheira;2021;Secretaria Municipal de Infra Estrutura;149;122;6252633;3623809;1019654
+Ribeirão Cascalheira;2021;Secretaria Municipal de Administração;80;67;2494264;1734022;813576
+Ribeirão Cascalheira;2021;Secretaria Municipal de Agricultura;21;19;659708;630296;561200
+Ribeirão Cascalheira;2021;Secretaria Municipal de Finanças;34;31;2255445;2059162;1057803
+Ribeirão Cascalheira;2021;Secretaria Municipal de Educação;97;90;3586610;1646553;409690
+Ribeirão Cascalheira;2021;Secretaria Municipal de Cultura, Desporto e Lazer;15;13;93752;81157;31771
+Ribeirão Cascalheira;2021;Secretaria Municipal de Meio Ambiante e Turismo;30;24;80862;60933;30000
+Ribeirão Cascalheira;2021;Secretaria Municipal de Transito;13;12;34128;27895;17196
+Ribeirão Cascalheira;2021;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;21;20;137503;114207;44614
+Ribeirão Cascalheira;2022;Gabinete do Prefeito;69;51;1621311;971915;464000
+Ribeirão Cascalheira;2022;Camara Municipal;83;49;1264800;775600;378000
+Ribeirão Cascalheira;2022;Secretaria Municipal de Assistencia Social;108;70;1018401;522050;220850
+Ribeirão Cascalheira;2022;Secretaria Municipal de Saude;178;153;11747441;6791414;4226013
+Ribeirão Cascalheira;2022;Secretaria Municipal de Infra Estrutura;160;114;9822680;6766729;2416471
+Ribeirão Cascalheira;2022;Secretaria Municipal de Administração;94;82;3249248;2311474;981794
+Ribeirão Cascalheira;2022;Secretaria Municipal de Agricultura;28;24;353716;318941;216500
+Ribeirão Cascalheira;2022;Secretaria Municipal de Finanças;38;32;2624145;2437715;1369273
+Ribeirão Cascalheira;2022;Secretaria Municipal de Educação;133;101;6237833;2559060;1195570
+Ribeirão Cascalheira;2022;Secretaria Municipal de Cultura, Desporto e Lazer;68;58;714697;309033;79088
+Ribeirão Cascalheira;2022;Secretaria Municipal de Meio Ambiante e Turismo;44;33;409972;302230;99857
+Ribeirão Cascalheira;2022;Secretaria Municipal de Transito;19;16;91671;80994;42000
+Ribeirão Cascalheira;2022;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;32;24;224456;181911;59752
+Ribeirão Cascalheira;2023;Gabinete do Prefeito;44;32;734037;396975;134100
+Ribeirão Cascalheira;2023;Camara Municipal;101;72;1804634;988222;374500
+Ribeirão Cascalheira;2023;Secretaria Municipal de Saude;122;93;9384139;6949892;4616054
+Ribeirão Cascalheira;2023;Secretaria Municipal de Infra Estrutura;112;74;12395072;10598270;6998646
+Ribeirão Cascalheira;2023;Secretaria Municipal de Administração;90;76;2000074;1053752;577500
+Ribeirão Cascalheira;2023;Secretaria Municipal de Agricultura;18;14;238319;221896;148860
+Ribeirão Cascalheira;2023;Secretaria de Assistência Social;91;50;1299286;838877;633000
+Ribeirão Cascalheira;2023;Secretaria Municipal de Educação;91;67;4411549;1843046;1058995
+Ribeirão Cascalheira;2023;Secretaria de Finanças;42;35;2498815;2314559;1188572
+Ribeirão Cascalheira;2023;Secretaria Municipal de Turismo;5;4;48692;48692;40217
+Ribeirão Cascalheira;2023;Secretaria Municipal de Cultura, Desporto e Lazer;59;45;1054044;567733;238000
+Ribeirão Cascalheira;2023;Secretaria Municipal de Transito;17;12;77588;63235;43717
+Ribeirão Cascalheira;2023;Secretaria Municipal de Meio Ambiente;10;7;516375;509251;334977
+Ribeirão Cascalheira;2023;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;34;24;225147;183698;64090
+Ribeirão Cascalheira;2024;Gabinete do Prefeito;43;32;658889;338647;141740
+Ribeirão Cascalheira;2024;Camara Municipal;99;65;2414650;1503746;860177
+Ribeirão Cascalheira;2024;Secretaria Municipal de Saude;99;75;20428752;17298288;8323564
+Ribeirão Cascalheira;2024;Secretaria Municipal de Infra Estrutura;89;71;11197466;8822813;3767495
+Ribeirão Cascalheira;2024;Secretaria Municipal de Administração;98;71;3929526;2718946;796477
+Ribeirão Cascalheira;2024;Secretaria Municipal de Agricultura;9;7;53579;51579;38138
+Ribeirão Cascalheira;2024;Secretaria de Assistência Social;84;57;697743;234856;69814
+Ribeirão Cascalheira;2024;Secretaria Municipal de Educação;75;60;5807796;2888647;1602579
+Ribeirão Cascalheira;2024;Secretaria de Finanças;34;31;3853994;3609880;1787187
+Ribeirão Cascalheira;2024;Secretaria Municipal de Turismo;2;1;46067;46067;38138
+Ribeirão Cascalheira;2024;Secretaria Municipal de Cultura, Desporto e Lazer;46;42;689006;417022;159259
+Ribeirão Cascalheira;2024;Secretaria Municipal de Transito;14;12;63185;59801;44290
+Ribeirão Cascalheira;2024;Secretaria Municipal de Meio Ambiente;17;15;336937;323916;266465
+Ribeirão Cascalheira;2024;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;30;21;312627;254705;99933
+Ribeirão Cascalheira;2025;Gabinete do Prefeito;53;39;598353;374033;144000
+Ribeirão Cascalheira;2025;Camara Municipal;116;82;2133883;840185;417760
+Ribeirão Cascalheira;2025;Secretaria Municipal de Saude;306;87;13618626;9911964;5512853
+Ribeirão Cascalheira;2025;Secretaria Municipal de Infra Estrutura;79;61;8261865;6537448;3417713
+Ribeirão Cascalheira;2025;Secretaria Municipal de Administração;77;55;2622052;1697946;641189
+Ribeirão Cascalheira;2025;Secretaria Municipal de Agricultura;21;17;115465;96663;57227
+Ribeirão Cascalheira;2025;Secretaria de Assistência Social;94;64;811380;323178;86131
+Ribeirão Cascalheira;2025;Secretaria Municipal de Educação;107;77;5537746;2681045;1504838
+Ribeirão Cascalheira;2025;Secretaria de Finanças;42;38;3127307;2896185;1020423
+Ribeirão Cascalheira;2025;Secretaria Municipal de Turismo;10;9;707944;704116;311880
+Ribeirão Cascalheira;2025;Secretaria Municipal de Cultura, Desporto e Lazer;55;25;355275;214771;97699
+Ribeirão Cascalheira;2025;Secretaria Municipal de Transito;15;13;74963;67531;55127
+Ribeirão Cascalheira;2025;Secretaria Municipal de Meio Ambiente;35;33;1049664;937332;263118
+Ribeirão Cascalheira;2025;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;21;19;303556;257916;84407
+Ribeirão Cascalheira;2026;Gabinete do Prefeito;24;18;131819;103906;36600
+Ribeirão Cascalheira;2026;Camara Municipal;77;52;876397;383099;214495
+Ribeirão Cascalheira;2026;Secretaria Municipal de Saude;137;73;7324284;5758686;3903818
+Ribeirão Cascalheira;2026;Secretaria Municipal de Infra Estrutura;56;42;4940651;3600574;2044651
+Ribeirão Cascalheira;2026;Secretaria Municipal de Administração;101;60;1231726;724864;263364
+Ribeirão Cascalheira;2026;Secretaria Municipal de Agricultura;19;17;60358;54934;23373
+Ribeirão Cascalheira;2026;Secretaria de Assistência Social;55;49;294981;144576;37939
+Ribeirão Cascalheira;2026;Secretaria Municipal de Educação;105;67;3056673;1407715;727882
+Ribeirão Cascalheira;2026;Secretaria de Finanças;32;30;1571875;1253961;600060
+Ribeirão Cascalheira;2026;Secretaria Municipal de Turismo;2;1;28825;28825;25320
+Ribeirão Cascalheira;2026;Secretaria Municipal de Cultura, Desporto e Lazer;37;29;876508;702594;306405
+Ribeirão Cascalheira;2026;Secretaria Municipal de Transito;11;9;30892;29877;21425
+Ribeirão Cascalheira;2026;Secretaria Municipal de Meio Ambiente;21;17;438418;373367;181693
+Ribeirão Cascalheira;2026;Fundo Mun Prev Social Serv Publico de Ribeirao Cas;8;6;10657;10373;3895
+São Félix do Araguaia;2021;Secretaria Municipal de Financas;31;20;2189665;1910172;744669
+São Félix do Araguaia;2021;Secretaria Municipal de Saude;334;214;11138563;6425414;5414421
+São Félix do Araguaia;2021;Secretaria Municipal de Educacao e Cultura;230;133;2397857;892973;399146
+São Félix do Araguaia;2021;Secretaria Municipal de Obras e Servicos Urbanos;229;142;15349348;9420903;3023102
+São Félix do Araguaia;2021;Secretaria Municipal de Agricultura;71;45;572955;279155;84458
+São Félix do Araguaia;2021;Secretaria Municipal de Turismo e Meio Ambiente;34;29;503695;398352;302034
+São Félix do Araguaia;2021;Secretaria Municipal de Esportes e Lazer;35;28;776757;670594;614510
+São Félix do Araguaia;2021;Secretaria Municipal de Meio Ambiente;62;41;294195;97921;39614
+São Félix do Araguaia;2021;Gabinete do Prefeito Municipal;156;78;1508187;575626;292255
+São Félix do Araguaia;2021;Camara Municipal de São Felix do Araguaia;68;50;987939;713681;459800
+São Félix do Araguaia;2021;Secretaria Municipal de Admin, Planej.de Fazenda;183;114;3293112;1583271;994749
+São Félix do Araguaia;2021;Secretaria Munic.de Desenv.e Acao Social;133;78;838889;289294;117070
+São Félix do Araguaia;2021;Ipasfa - Instituto de Previdencia de Sao Felix;12;11;231684;229124;220915
+São Félix do Araguaia;2022;Secretaria Municipal de Financas;28;22;3472952;3312479;1300249
+São Félix do Araguaia;2022;Secretaria Municipal de Saude;304;203;13572545;8400672;7006307
+São Félix do Araguaia;2022;Secretaria Municipal de Educacao e Cultura;345;179;8241326;2953457;1363207
+São Félix do Araguaia;2022;Secretaria Municipal de Obras e Servicos Urbanos;246;171;30280017;18756656;12590535
+São Félix do Araguaia;2022;Secretaria Municipal de Agricultura;80;51;686942;314438;103600
+São Félix do Araguaia;2022;Secretaria Municipal de Turismo e Meio Ambiente;72;54;1216766;672589;377500
+São Félix do Araguaia;2022;Secretaria Municipal de Esportes e Lazer;105;45;792428;386011;218435
+São Félix do Araguaia;2022;Secretaria Municipal de Meio Ambiente;84;54;696593;283068;133776
+São Félix do Araguaia;2022;Gabinete do Prefeito Municipal;203;105;3197336;1243771;464000
+São Félix do Araguaia;2022;Secretaria Municipal de Admin, Planej.de Fazenda;238;158;5866647;1976694;722131
+São Félix do Araguaia;2022;Secretaria Munic.de Desenv.e Acao Social;140;88;1439649;529292;253995
+São Félix do Araguaia;2022;Ipasfa - Instituto de Previdencia de Sao Felix;13;10;260847;246483;114884
+São Félix do Araguaia;2022;1;83;62;1543390;833758;542800
+São Félix do Araguaia;2023;Secretaria Municipal de Financas;22;16;6312863;5937021;2831604
+São Félix do Araguaia;2023;Secretaria Municipal de Saude;305;220;14861897;9334172;7959487
+São Félix do Araguaia;2023;Secretaria Municipal de Educacao e Cultura;289;170;9923775;4837984;2023146
+São Félix do Araguaia;2023;Secretaria Municipal de Obras e Servicos Urbanos;203;151;34778409;23880978;15454451
+São Félix do Araguaia;2023;Secretaria Municipal de Agricultura;58;32;987754;671470;490000
+São Félix do Araguaia;2023;Secretaria Municipal de Turismo e Meio Ambiente;111;91;2407639;1029769;299999
+São Félix do Araguaia;2023;Secretaria Municipal de Esportes e Lazer;86;48;864352;353692;250892
+São Félix do Araguaia;2023;Secretaria Municipal de Meio Ambiente;65;42;634081;226304;75000
+São Félix do Araguaia;2023;Gabinete do Prefeito Municipal;144;87;2613707;716055;297975
+São Félix do Araguaia;2023;Camara Municipal de Sao Felix do Araguaia;74;56;1513210;820294;542800
+São Félix do Araguaia;2023;Secretaria Municipal de Admin, Planej.de Fazenda;252;184;6164819;1846952;1014545
+São Félix do Araguaia;2023;Secretaria Munic.de Desenv.e Acao Social;173;97;1861764;597211;204770
+São Félix do Araguaia;2023;Ipasfa - Instituto de Previdencia de Sao Felix;26;16;314128;272904;127177
+São Félix do Araguaia;2024;Secretaria Municipal de Financas;30;17;10154030;9362695;6101079
+São Félix do Araguaia;2024;Secretaria Municipal de Saude;323;245;16287149;9719236;8331542
+São Félix do Araguaia;2024;Secretaria Municipal de Educacao e Cultura;304;170;12608345;6253156;3175636
+São Félix do Araguaia;2024;Secretaria Municipal de Obras e Servicos Urbanos;225;179;46375841;31804879;12471000
+São Félix do Araguaia;2024;Secretaria Municipal de Agricultura;79;59;735408;207802;53722
+São Félix do Araguaia;2024;Secretaria Municipal de Turismo e Meio Ambiente;132;100;3607698;2080564;919490
+São Félix do Araguaia;2024;Secretaria Municipal de Esportes e Lazer;101;64;1211828;439340;243046
+São Félix do Araguaia;2024;Secretaria Municipal de Meio Ambiente;57;46;569301;235200;107100
+São Félix do Araguaia;2024;Gabinete do Prefeito Municipal;117;77;2432483;876330;591201
+São Félix do Araguaia;2024;Camara Municipal de Sao Felix do Araguaia;77;60;1577000;766142;431000
+São Félix do Araguaia;2024;Secretaria Municipal de Admin, Planej.de Fazenda;278;194;7433418;2090775;946283
+São Félix do Araguaia;2024;Secretaria Munic.de Desenv.e Acao Social;190;122;2956490;1345154;752834
+São Félix do Araguaia;2024;Ipasfa - Instituto de Previdencia de Sao Felix;16;14;275061;263993;210533
+São Félix do Araguaia;2025;Secretaria Municipal de Saude;358;247;17290187;10710898;8645151
+São Félix do Araguaia;2025;Secretaria Municipal de Educacao e Cultura;294;170;11667522;5071226;2574556
+São Félix do Araguaia;2025;Secretaria Municipal de Obras e Servicos Urbanos;452;354;29087928;13362803;5093598
+São Félix do Araguaia;2025;Secretaria Municipal de Agricultura;122;89;1532523;550662;246650
+São Félix do Araguaia;2025;Secretaria Municipal de Finanças;39;27;14620395;13722229;8357628
+São Félix do Araguaia;2025;Secretaria Municipal de Turismo e Meio Ambiente;205;139;7853130;3521428;1215768
+São Félix do Araguaia;2025;Secretaria Municipal de Esportes e Lazer;299;94;2084325;738036;348400
+São Félix do Araguaia;2025;Secretaria Municipal de Meio Ambiente;77;60;848401;322701;105000
+São Félix do Araguaia;2025;Gabinete do Prefeito Municipal;213;166;4213590;2038838;967500
+São Félix do Araguaia;2025;Camara Municipal de Sao Felix do Araguaia;75;57;2015126;730259;266000
+São Félix do Araguaia;2025;Secretaria Municipal de Admin, Planej.de Fazenda;293;213;7007649;2658760;878467
+São Félix do Araguaia;2025;Secretaria Munic.de Desenv.e Acao Social;272;168;4851566;2357913;1437666
+São Félix do Araguaia;2025;Ipasfa - Instituto de Previdencia de Sao Felix;22;17;321838;295173;217207
+São Félix do Araguaia;2026;Secretaria Municipal de Educacao e Cultura;193;118;4548423;1814302;704383
+São Félix do Araguaia;2026;Secretaria Municipal de Agricultura;85;56;594002;197670;65344
+São Félix do Araguaia;2026;Secretaria Municipal de Finanças;22;16;5865949;5622860;3332794
+São Félix do Araguaia;2026;Secretaria Municipal de Obras e Serviços Urbanos;307;254;7017182;3308670;1316836
+São Félix do Araguaia;2026;Secretaria Municipal de Esportes e Lazer;95;59;1337260;576133;244570
+São Félix do Araguaia;2026;Secretaria Municipal de Turismo;125;97;2089845;1020914;337800
+São Félix do Araguaia;2026;Secretaria Municipal de Meio Ambiente;51;39;417795;155340;36180
+São Félix do Araguaia;2026;Gabinete do Prefeito Municipal;106;80;1518145;694073;306680
+São Félix do Araguaia;2026;Camara Municipal de Sao Felix do Araguaia;72;53;1679427;829564;537358
+São Félix do Araguaia;2026;Secretaria Municipal de Admin, Planej.de Fazenda;165;114;3077570;1395426;694505
+São Félix do Araguaia;2026;Ipasfa - Instituto de Previdencia de Sao Felix;21;15;225426;188581;131431
+São Félix do Araguaia;2026;Secretaria Municipal de Sáude;238;160;9272177;5501844;4600906
+São Félix do Araguaia;2026;Secretaria Municipal de Desenv. Assistência Social;170;110;1510202;383081;86762

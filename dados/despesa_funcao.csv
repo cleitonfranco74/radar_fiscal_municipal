@@ -1,0 +1,566 @@
+municipio;exercicio;funcao;liquidado;empenhado
+Água Boa;2021;Legislativa;3095000;3095000
+Água Boa;2021;Administração;17485591;18063093
+Água Boa;2021;Assistência Social;3017464;3029698
+Água Boa;2021;Previdência Municipal;5774249;5774249
+Água Boa;2021;Saúde;47148971;47479870
+Água Boa;2021;Educação;32205241;34006632
+Água Boa;2021;Cultura;1821557;1826799
+Água Boa;2021;Urbanismo;12185165;17077255
+Água Boa;2021;Saneamento;7976675;8225819
+Água Boa;2021;Gestão Ambiental;1196874;1196874
+Água Boa;2021;Agricultura;1679314;1724523
+Água Boa;2021;Comércio e Serviços;135900;135900
+Água Boa;2021;Energia;2135092;2359711
+Água Boa;2021;Transporte;4474172;4574909
+Água Boa;2021;Desporto e Lazer;3037408;3319691
+Água Boa;2022;Legislativa;3863000;3863000
+Água Boa;2022;Administração;28104694;28386573
+Água Boa;2022;Segurança Pública;68680;77976
+Água Boa;2022;Assistência Social;4972238;4984171
+Água Boa;2022;Previdência Municipal;8574142;8574142
+Água Boa;2022;Saúde;62434954;65287169
+Água Boa;2022;Educação;50369222;52839756
+Água Boa;2022;Cultura;4103917;4209482
+Água Boa;2022;Urbanismo;27428750;29824693
+Água Boa;2022;Habitação;280764;6483798
+Água Boa;2022;Saneamento;9347865;11401120
+Água Boa;2022;Gestão Ambiental;583474;643915
+Água Boa;2022;Agricultura;3875340;3958929
+Água Boa;2022;Indústria;1054255;1691329
+Água Boa;2022;Comércio e Serviços;176513;176513
+Água Boa;2022;Energia;1267545;1309688
+Água Boa;2022;Transporte;13693292;13707047
+Água Boa;2022;Desporto e Lazer;3434149;3447523
+Água Boa;2023;Legislativa;4673000;4673000
+Água Boa;2023;Administração;27885013;28437227
+Água Boa;2023;Segurança Pública;340622;5774614
+Água Boa;2023;Assistência Social;5736217;5804248
+Água Boa;2023;Previdência Municipal;10096270;10096270
+Água Boa;2023;Saúde;78457411;79777361
+Água Boa;2023;Trabalho;7166;7166
+Água Boa;2023;Educação;65662293;65796536
+Água Boa;2023;Cultura;4193123;4396693
+Água Boa;2023;Urbanismo;18234860;18647630
+Água Boa;2023;Habitação;2139548;2175108
+Água Boa;2023;Saneamento;13053538;13483299
+Água Boa;2023;Gestão Ambiental;372627;383747
+Água Boa;2023;Agricultura;9907921;9928533
+Água Boa;2023;Indústria;912911;938222
+Água Boa;2023;Comércio e Serviços;305416;309416
+Água Boa;2023;Energia;1635291;1637131
+Água Boa;2023;Transporte;11841144;14074230
+Água Boa;2023;Desporto e Lazer;3826428;3972709
+Água Boa;2024;Legislativa;4982492;4982492
+Água Boa;2024;Administração;35985839;36765839
+Água Boa;2024;Segurança Pública;103060;126526
+Água Boa;2024;Assistência Social;6018764;6087779
+Água Boa;2024;Previdência Municipal;12799545;12799545
+Água Boa;2024;Saúde;91876062;94914046
+Água Boa;2024;Trabalho;22779;26000
+Água Boa;2024;Educação;72384009;76928286
+Água Boa;2024;Cultura;4328982;4583640
+Água Boa;2024;Urbanismo;17964656;18650154
+Água Boa;2024;Habitação;2626140;3714125
+Água Boa;2024;Saneamento;17266895;18736106
+Água Boa;2024;Gestão Ambiental;227493;245934
+Água Boa;2024;Agricultura;4351573;4820833
+Água Boa;2024;Indústria;409512;418732
+Água Boa;2024;Comércio e Serviços;517520;543023
+Água Boa;2024;Energia;8011728;8236649
+Água Boa;2024;Transporte;9679438;9983843
+Água Boa;2024;Desporto e Lazer;4005295;4118440
+Água Boa;2025;Legislativa;5323508;5323508
+Água Boa;2025;Administração;42789413;44169987
+Água Boa;2025;Segurança Pública;554402;678972
+Água Boa;2025;Assistência Social;8076854;8456205
+Água Boa;2025;Previdência Municipal;14417155;14420043
+Água Boa;2025;Saúde;100736174;102611114
+Água Boa;2025;Trabalho;11367;15000
+Água Boa;2025;Educação;72823828;75324657
+Água Boa;2025;Cultura;5362310;5627226
+Água Boa;2025;Urbanismo;22021470;23260989
+Água Boa;2025;Habitação;2208363;2484769
+Água Boa;2025;Saneamento;11123370;12065467
+Água Boa;2025;Gestão Ambiental;605729;628854
+Água Boa;2025;Agricultura;4873995;5015152
+Água Boa;2025;Indústria;462440;502701
+Água Boa;2025;Comércio e Serviços;56872;56872
+Água Boa;2025;Energia;6343271;6472503
+Água Boa;2025;Transporte;10959343;11160740
+Água Boa;2025;Desporto e Lazer;4184579;4232747
+Água Boa;2026;Legislativa;3344990;3522485
+Água Boa;2026;Administração;22002269;31205645
+Água Boa;2026;Segurança Pública;1874798;2131752
+Água Boa;2026;Assistência Social;6982642;13591109
+Água Boa;2026;Previdência Municipal;10364347;10487971
+Água Boa;2026;Saúde;68449602;98377022
+Água Boa;2026;Educação;48001941;61183591
+Água Boa;2026;Cultura;3810939;5484952
+Água Boa;2026;Urbanismo;20703238;34873596
+Água Boa;2026;Habitação;286591;3475425
+Água Boa;2026;Saneamento;8166502;11947988
+Água Boa;2026;Gestão Ambiental;228456;604127
+Água Boa;2026;Ciência e Tecnologia;170875;242517
+Água Boa;2026;Agricultura;4598162;5558204
+Água Boa;2026;Indústria;165725;513176
+Água Boa;2026;Comércio e Serviços;33735;48194
+Água Boa;2026;Energia;884377;3939689
+Água Boa;2026;Transporte;2567994;5898764
+Água Boa;2026;Desporto e Lazer;2938060;5043403
+Alto Araguaia;2021;Legislativa;3746138;3909080
+Alto Araguaia;2021;Administração;12984509;13663597
+Alto Araguaia;2021;Assistência Social;6493222;6836973
+Alto Araguaia;2021;Previdência Municipal;6306013;6306013
+Alto Araguaia;2021;Saúde;26254775;27039827
+Alto Araguaia;2021;Educação;19900931;20659941
+Alto Araguaia;2021;Cultura;76421;98516
+Alto Araguaia;2021;Urbanismo;8523516;9236088
+Alto Araguaia;2021;Habitação;43919;160740
+Alto Araguaia;2021;Saneamento;2354255;2369868
+Alto Araguaia;2021;Agricultura;369454;371356
+Alto Araguaia;2021;Energia;1801302;2035660
+Alto Araguaia;2021;Transporte;4876304;5918729
+Alto Araguaia;2021;Desporto e Lazer;778775;781530
+Alto Araguaia;2021;Encargos Especiais;3653626;3657342
+Alto Araguaia;2022;Legislativa;4480716;4720720
+Alto Araguaia;2022;Administração;14889007;14905460
+Alto Araguaia;2022;Assistência Social;7649350;7677272
+Alto Araguaia;2022;Previdência Municipal;8611102;8611102
+Alto Araguaia;2022;Saúde;34667396;34726936
+Alto Araguaia;2022;Educação;28525599;28547091
+Alto Araguaia;2022;Cultura;1223986;1336747
+Alto Araguaia;2022;Urbanismo;16744582;20816060
+Alto Araguaia;2022;Habitação;416518;416518
+Alto Araguaia;2022;Saneamento;2649099;2660397
+Alto Araguaia;2022;Agricultura;316897;680748
+Alto Araguaia;2022;Indústria;114;114
+Alto Araguaia;2022;Energia;1759468;1759468
+Alto Araguaia;2022;Transporte;7709079;7709533
+Alto Araguaia;2022;Desporto e Lazer;1279545;1291948
+Alto Araguaia;2022;Encargos Especiais;4669832;4669832
+Alto Araguaia;2023;Legislativa;5714097;6024033
+Alto Araguaia;2023;Administração;14969795;14971286
+Alto Araguaia;2023;Assistência Social;7716236;7718336
+Alto Araguaia;2023;Previdência Municipal;10381560;10381560
+Alto Araguaia;2023;Saúde;45421748;45421776
+Alto Araguaia;2023;Educação;34185550;34188435
+Alto Araguaia;2023;Cultura;1451788;1451788
+Alto Araguaia;2023;Urbanismo;19043651;19043651
+Alto Araguaia;2023;Habitação;4463309;4463309
+Alto Araguaia;2023;Saneamento;2483784;2483784
+Alto Araguaia;2023;Agricultura;1085055;1085055
+Alto Araguaia;2023;Energia;1663105;1663105
+Alto Araguaia;2023;Transporte;5904268;5904268
+Alto Araguaia;2023;Desporto e Lazer;1456206;1456206
+Alto Araguaia;2023;Encargos Especiais;5865806;5869674
+Alto Araguaia;2024;Legislativa;6143731;6160687
+Alto Araguaia;2024;Administração;20726853;20754094
+Alto Araguaia;2024;Assistência Social;8893280;8893280
+Alto Araguaia;2024;Previdência Municipal;11240332;11240332
+Alto Araguaia;2024;Saúde;50043158;51271146
+Alto Araguaia;2024;Educação;39472665;39491117
+Alto Araguaia;2024;Cultura;1102880;1102880
+Alto Araguaia;2024;Urbanismo;11152713;11152713
+Alto Araguaia;2024;Habitação;1868864;1868864
+Alto Araguaia;2024;Saneamento;3107065;3107065
+Alto Araguaia;2024;Agricultura;52378;52378
+Alto Araguaia;2024;Energia;1438527;1438527
+Alto Araguaia;2024;Transporte;6129014;6129014
+Alto Araguaia;2024;Desporto e Lazer;1482965;1482965
+Alto Araguaia;2024;Encargos Especiais;9282645;9282645
+Alto Araguaia;2025;Legislativa;6225954;6337422
+Alto Araguaia;2025;Administração;18022826;18302662
+Alto Araguaia;2025;Assistência Social;7079093;8277991
+Alto Araguaia;2025;Previdência Municipal;12758498;12758498
+Alto Araguaia;2025;Saúde;45213164;47408761
+Alto Araguaia;2025;Educação;35507671;36029598
+Alto Araguaia;2025;Cultura;882948;1006349
+Alto Araguaia;2025;Urbanismo;4484456;4641335
+Alto Araguaia;2025;Habitação;221602;631788
+Alto Araguaia;2025;Saneamento;2994545;3014783
+Alto Araguaia;2025;Agricultura;44104;44104
+Alto Araguaia;2025;Energia;1212062;1212062
+Alto Araguaia;2025;Transporte;1545510;1557109
+Alto Araguaia;2025;Desporto e Lazer;1445819;1666517
+Alto Araguaia;2025;Encargos Especiais;7772610;7772610
+Alto Araguaia;2026;Legislativa;3550962;3928011
+Alto Araguaia;2026;Administração;9364578;11113325
+Alto Araguaia;2026;Assistência Social;4397470;6330353
+Alto Araguaia;2026;Previdência Municipal;7928404;7928404
+Alto Araguaia;2026;Saúde;22407138;31395976
+Alto Araguaia;2026;Educação;18264176;22409397
+Alto Araguaia;2026;Cultura;189231;202163
+Alto Araguaia;2026;Urbanismo;2795359;6646119
+Alto Araguaia;2026;Saneamento;1923573;2307212
+Alto Araguaia;2026;Agricultura;95872;104174
+Alto Araguaia;2026;Energia;688347;1241875
+Alto Araguaia;2026;Transporte;1304371;1470563
+Alto Araguaia;2026;Desporto e Lazer;772918;917142
+Alto Araguaia;2026;Encargos Especiais;6472414;8034712
+Arenápolis;2021;Legislativa;1122000;1122000
+Arenápolis;2021;Administração;3750061;3755561
+Arenápolis;2021;Assistência Social;1102635;1119985
+Arenápolis;2021;Saúde;18007906;19143734
+Arenápolis;2021;Trabalho;418949;418949
+Arenápolis;2021;Educação;7776674;8577938
+Arenápolis;2021;Cultura;17288;17288
+Arenápolis;2021;Urbanismo;4459380;6520875
+Arenápolis;2021;Agricultura;162909;202125
+Arenápolis;2021;Comércio e Serviços;351989;391239
+Arenápolis;2021;Transporte;1232535;1232535
+Arenápolis;2021;Desporto e Lazer;64380;214631
+Arenápolis;2021;Encargos Especiais;510089;510089
+Arenápolis;2022;Legislativa;1454086;1454086
+Arenápolis;2022;Administração;4571715;4594995
+Arenápolis;2022;Assistência Social;1676058;1687018
+Arenápolis;2022;Saúde;24710169;26737913
+Arenápolis;2022;Trabalho;519556;519556
+Arenápolis;2022;Educação;12451837;13997659
+Arenápolis;2022;Cultura;1971169;2744556
+Arenápolis;2022;Urbanismo;6808675;16673633
+Arenápolis;2022;Agricultura;819008;976258
+Arenápolis;2022;Transporte;1938984;1938984
+Arenápolis;2022;Desporto e Lazer;226592;453575
+Arenápolis;2022;Encargos Especiais;469789;469789
+Arenápolis;2023;Legislativa;1729155;1729155
+Arenápolis;2023;Administração;5861957;5876588
+Arenápolis;2023;Assistência Social;1777518;1777518
+Arenápolis;2023;Saúde;21180990;21606525
+Arenápolis;2023;Trabalho;558956;558956
+Arenápolis;2023;Educação;13823755;14222569
+Arenápolis;2023;Cultura;1505792;1870484
+Arenápolis;2023;Urbanismo;6257162;8147027
+Arenápolis;2023;Gestão Ambiental;436;436
+Arenápolis;2023;Agricultura;748688;748688
+Arenápolis;2023;Transporte;1655801;1667469
+Arenápolis;2023;Desporto e Lazer;871332;880774
+Arenápolis;2023;Encargos Especiais;350815;350815
+Arenápolis;2024;Legislativa;1973977;1973977
+Arenápolis;2024;Administração;6252457;6268957
+Arenápolis;2024;Assistência Social;1932145;1933645
+Arenápolis;2024;Saúde;23521576;24421114
+Arenápolis;2024;Trabalho;680419;680419
+Arenápolis;2024;Educação;15413138;16761438
+Arenápolis;2024;Cultura;4078706;4520728
+Arenápolis;2024;Urbanismo;6267897;7311288
+Arenápolis;2024;Habitação;1423551;5565000
+Arenápolis;2024;Agricultura;751484;751484
+Arenápolis;2024;Transporte;1930173;1930173
+Arenápolis;2024;Desporto e Lazer;623342;623342
+Arenápolis;2024;Encargos Especiais;388394;388394
+Arenápolis;2025;Legislativa;2590363;2718424
+Arenápolis;2025;Administração;8678235;8679735
+Arenápolis;2025;Assistência Social;2336319;2336319
+Arenápolis;2025;Saúde;29529144;29550404
+Arenápolis;2025;Trabalho;830168;830168
+Arenápolis;2025;Educação;19335572;19821905
+Arenápolis;2025;Cultura;3923736;3995793
+Arenápolis;2025;Urbanismo;9856448;14325478
+Arenápolis;2025;Habitação;27131;27131
+Arenápolis;2025;Agricultura;1186401;1186401
+Arenápolis;2025;Transporte;1827978;1827978
+Arenápolis;2025;Desporto e Lazer;756339;756339
+Arenápolis;2025;Encargos Especiais;43196;43196
+Arenápolis;2026;Legislativa;1908173;2365746
+Arenápolis;2026;Administração;5014655;5323426
+Arenápolis;2026;Assistência Social;1420395;1562897
+Arenápolis;2026;Saúde;19430723;23975227
+Arenápolis;2026;Trabalho;532928;687883
+Arenápolis;2026;Educação;12840054;13185708
+Arenápolis;2026;Cultura;2807103;4214347
+Arenápolis;2026;Urbanismo;5091026;5943711
+Arenápolis;2026;Habitação;0;4279
+Arenápolis;2026;Agricultura;735976;819647
+Arenápolis;2026;Comércio e Serviços;1718;1718
+Arenápolis;2026;Transporte;1216819;4899678
+Arenápolis;2026;Desporto e Lazer;715142;785352
+Arenápolis;2026;Encargos Especiais;460537;460537
+Canarana;2021;Legislativa;3298968;3298968
+Canarana;2021;Administração;25790903;25800653
+Canarana;2021;Assistência Social;4395549;4395549
+Canarana;2021;Previdência Municipal;5860315;5870347
+Canarana;2021;Saúde;37885564;38160927
+Canarana;2021;Trabalho;1294929;1294929
+Canarana;2021;Educação;32493276;32496601
+Canarana;2021;Cultura;775192;781192
+Canarana;2021;Urbanismo;8691650;8981680
+Canarana;2021;Saneamento;704027;704027
+Canarana;2021;Gestão Ambiental;32038;32038
+Canarana;2021;Agricultura;2135365;2135365
+Canarana;2021;Indústria;9000;9000
+Canarana;2021;Comércio e Serviços;578243;578243
+Canarana;2021;Energia;3932323;3932323
+Canarana;2021;Transporte;10736092;10736092
+Canarana;2021;Desporto e Lazer;1663831;1663831
+Canarana;2021;Encargos Especiais;1415453;1415453
+Canarana;2022;Legislativa;4075044;4080094
+Canarana;2022;Administração;25076951;25100715
+Canarana;2022;Assistência Social;6219680;6219680
+Canarana;2022;Previdência Municipal;7366949;7379770
+Canarana;2022;Saúde;45304799;45337522
+Canarana;2022;Trabalho;1134473;1134473
+Canarana;2022;Educação;41481464;41728683
+Canarana;2022;Cultura;2228936;3221800
+Canarana;2022;Urbanismo;5613801;5619530
+Canarana;2022;Saneamento;4956446;5574048
+Canarana;2022;Gestão Ambiental;278883;278883
+Canarana;2022;Agricultura;2958890;2960052
+Canarana;2022;Comércio e Serviços;1942408;1942408
+Canarana;2022;Energia;3334592;3334753
+Canarana;2022;Transporte;14089679;14128363
+Canarana;2022;Desporto e Lazer;4404606;4404606
+Canarana;2022;Encargos Especiais;2046617;2046617
+Canarana;2023;Legislativa;4737437;4785437
+Canarana;2023;Administração;25134344;25171844
+Canarana;2023;Assistência Social;6750390;6750390
+Canarana;2023;Previdência Municipal;7829216;7872512
+Canarana;2023;Saúde;47588530;48579969
+Canarana;2023;Trabalho;2147750;2147750
+Canarana;2023;Educação;52347304;52347304
+Canarana;2023;Cultura;3303247;3331747
+Canarana;2023;Urbanismo;11817523;13412869
+Canarana;2023;Saneamento;5795579;5795579
+Canarana;2023;Gestão Ambiental;176940;176940
+Canarana;2023;Agricultura;2851828;2862570
+Canarana;2023;Comércio e Serviços;2254207;2254207
+Canarana;2023;Energia;2626334;2626334
+Canarana;2023;Transporte;37402091;38368918
+Canarana;2023;Desporto e Lazer;3754278;3909038
+Canarana;2023;Encargos Especiais;10517816;10517816
+Canarana;2024;Legislativa;5062879;5097821
+Canarana;2024;Administração;29033836;29081271
+Canarana;2024;Assistência Social;8113881;8113881
+Canarana;2024;Previdência Municipal;9056564;9091002
+Canarana;2024;Saúde;77161107;77300323
+Canarana;2024;Trabalho;2189257;2189257
+Canarana;2024;Educação;64287642;64287642
+Canarana;2024;Cultura;2358014;2362514
+Canarana;2024;Urbanismo;10879039;10879039
+Canarana;2024;Habitação;5898707;5898707
+Canarana;2024;Saneamento;6807758;6807758
+Canarana;2024;Gestão Ambiental;33960;33960
+Canarana;2024;Agricultura;4188035;4188035
+Canarana;2024;Comércio e Serviços;5276355;5276355
+Canarana;2024;Energia;3651682;3651682
+Canarana;2024;Transporte;20588093;20588093
+Canarana;2024;Desporto e Lazer;6251986;6251986
+Canarana;2024;Encargos Especiais;9445964;9445964
+Canarana;2025;Legislativa;6958755;7027549
+Canarana;2025;Administração;35981194;35986814
+Canarana;2025;Assistência Social;5406000;5406000
+Canarana;2025;Previdência Municipal;10464174;10518120
+Canarana;2025;Saúde;55991642;56064691
+Canarana;2025;Trabalho;2042215;2042215
+Canarana;2025;Educação;68489109;70033997
+Canarana;2025;Cultura;2575761;2581761
+Canarana;2025;Urbanismo;3415551;3415551
+Canarana;2025;Saneamento;5758788;5758788
+Canarana;2025;Gestão Ambiental;33160;33160
+Canarana;2025;Agricultura;3390890;3570790
+Canarana;2025;Comércio e Serviços;1251841;1251841
+Canarana;2025;Energia;22572585;22572585
+Canarana;2025;Transporte;12190096;12190096
+Canarana;2025;Desporto e Lazer;3546815;3546815
+Canarana;2025;Encargos Especiais;6930677;6930677
+Canarana;2026;Legislativa;5465613;7696075
+Canarana;2026;Administração;25758249;26585975
+Canarana;2026;Assistência Social;4324164;4490969
+Canarana;2026;Previdência Municipal;7547490;7586511
+Canarana;2026;Saúde;49353707;52025684
+Canarana;2026;Trabalho;1748035;1748035
+Canarana;2026;Educação;49462466;51443319
+Canarana;2026;Cultura;1759564;1797292
+Canarana;2026;Urbanismo;2003296;2475257
+Canarana;2026;Habitação;1000000;1000000
+Canarana;2026;Saneamento;4890667;5330035
+Canarana;2026;Gestão Ambiental;44346;44346
+Canarana;2026;Agricultura;2459434;2786268
+Canarana;2026;Comércio e Serviços;2514204;2607763
+Canarana;2026;Energia;1735830;1735877
+Canarana;2026;Transporte;4593105;5729042
+Canarana;2026;Desporto e Lazer;4109031;4124989
+Canarana;2026;Encargos Especiais;7405928;7405928
+Ribeirão Cascalheira;2021;Legislativa;1531456;1531456
+Ribeirão Cascalheira;2021;Administração;7549442;7625669
+Ribeirão Cascalheira;2021;Assistência Social;1161641;1164801
+Ribeirão Cascalheira;2021;Previdência Municipal;2453641;2454301
+Ribeirão Cascalheira;2021;Saúde;12855639;12869049
+Ribeirão Cascalheira;2021;Educação;11210596;11410845
+Ribeirão Cascalheira;2021;Cultura;147494;147494
+Ribeirão Cascalheira;2021;Urbanismo;2171146;2179874
+Ribeirão Cascalheira;2021;Saneamento;781153;781153
+Ribeirão Cascalheira;2021;Gestão Ambiental;232878;232878
+Ribeirão Cascalheira;2021;Agricultura;972581;972581
+Ribeirão Cascalheira;2021;Comércio e Serviços;12982;12982
+Ribeirão Cascalheira;2021;Transporte;5552906;5725994
+Ribeirão Cascalheira;2021;Desporto e Lazer;94603;94603
+Ribeirão Cascalheira;2021;Encargos Especiais;1271577;1271577
+Ribeirão Cascalheira;2022;Legislativa;2439406;2439406
+Ribeirão Cascalheira;2022;Administração;11143220;12364455
+Ribeirão Cascalheira;2022;Assistência Social;1935412;1966038
+Ribeirão Cascalheira;2022;Previdência Municipal;3871750;3871750
+Ribeirão Cascalheira;2022;Saúde;17067870;17383721
+Ribeirão Cascalheira;2022;Educação;19144039;19808242
+Ribeirão Cascalheira;2022;Cultura;690584;690722
+Ribeirão Cascalheira;2022;Urbanismo;1703408;1705952
+Ribeirão Cascalheira;2022;Saneamento;519874;1230306
+Ribeirão Cascalheira;2022;Gestão Ambiental;503810;546217
+Ribeirão Cascalheira;2022;Agricultura;794749;802830
+Ribeirão Cascalheira;2022;Comércio e Serviços;1500;1500
+Ribeirão Cascalheira;2022;Transporte;10337435;15982587
+Ribeirão Cascalheira;2022;Desporto e Lazer;186771;190643
+Ribeirão Cascalheira;2022;Encargos Especiais;1543955;1543955
+Ribeirão Cascalheira;2023;Legislativa;3013919;3013919
+Ribeirão Cascalheira;2023;Administração;14339601;14693047
+Ribeirão Cascalheira;2023;Assistência Social;2522586;2522586
+Ribeirão Cascalheira;2023;Previdência Municipal;4476921;4483785
+Ribeirão Cascalheira;2023;Saúde;16001932;16192631
+Ribeirão Cascalheira;2023;Educação;23928821;23928821
+Ribeirão Cascalheira;2023;Cultura;1018402;1018402
+Ribeirão Cascalheira;2023;Urbanismo;2317085;2317085
+Ribeirão Cascalheira;2023;Saneamento;289104;289104
+Ribeirão Cascalheira;2023;Gestão Ambiental;654753;654753
+Ribeirão Cascalheira;2023;Agricultura;705521;712011
+Ribeirão Cascalheira;2023;Comércio e Serviços;6653;6653
+Ribeirão Cascalheira;2023;Transporte;8173936;8173936
+Ribeirão Cascalheira;2023;Desporto e Lazer;162246;189397
+Ribeirão Cascalheira;2023;Encargos Especiais;1398595;1398595
+Ribeirão Cascalheira;2024;Legislativa;3588642;3588642
+Ribeirão Cascalheira;2024;Administração;15436545;15436545
+Ribeirão Cascalheira;2024;Assistência Social;1908261;1908261
+Ribeirão Cascalheira;2024;Previdência Municipal;5061255;5061255
+Ribeirão Cascalheira;2024;Saúde;27859404;27861183
+Ribeirão Cascalheira;2024;Educação;24889344;24889344
+Ribeirão Cascalheira;2024;Cultura;801653;801653
+Ribeirão Cascalheira;2024;Urbanismo;2298329;2298329
+Ribeirão Cascalheira;2024;Saneamento;294843;294843
+Ribeirão Cascalheira;2024;Gestão Ambiental;541009;541009
+Ribeirão Cascalheira;2024;Agricultura;624883;624883
+Ribeirão Cascalheira;2024;Comércio e Serviços;2218;2218
+Ribeirão Cascalheira;2024;Transporte;9662943;10505727
+Ribeirão Cascalheira;2024;Desporto e Lazer;134243;134243
+Ribeirão Cascalheira;2024;Encargos Especiais;2102731;2102731
+Ribeirão Cascalheira;2025;Legislativa;3623244;3623244
+Ribeirão Cascalheira;2025;Administração;12081810;12319801
+Ribeirão Cascalheira;2025;Assistência Social;2176040;2304779
+Ribeirão Cascalheira;2025;Previdência Municipal;5590319;5590319
+Ribeirão Cascalheira;2025;Saúde;24228005;28697730
+Ribeirão Cascalheira;2025;Educação;25744586;27447502
+Ribeirão Cascalheira;2025;Cultura;924952;930952
+Ribeirão Cascalheira;2025;Urbanismo;2893791;3319641
+Ribeirão Cascalheira;2025;Saneamento;1117814;1120314
+Ribeirão Cascalheira;2025;Gestão Ambiental;1351349;1409284
+Ribeirão Cascalheira;2025;Agricultura;904346;911304
+Ribeirão Cascalheira;2025;Comércio e Serviços;13535;13535
+Ribeirão Cascalheira;2025;Transporte;7445797;7872143
+Ribeirão Cascalheira;2025;Desporto e Lazer;221220;221820
+Ribeirão Cascalheira;2025;Encargos Especiais;1410991;1410991
+Ribeirão Cascalheira;2026;Legislativa;1797645;2016899
+Ribeirão Cascalheira;2026;Administração;7068842;8557055
+Ribeirão Cascalheira;2026;Assistência Social;1105297;1812605
+Ribeirão Cascalheira;2026;Previdência Municipal;465349;478919
+Ribeirão Cascalheira;2026;Saúde;13617698;14305918
+Ribeirão Cascalheira;2026;Educação;16341124;17434672
+Ribeirão Cascalheira;2026;Cultura;673819;685853
+Ribeirão Cascalheira;2026;Urbanismo;2743876;3166049
+Ribeirão Cascalheira;2026;Saneamento;593219;625120
+Ribeirão Cascalheira;2026;Gestão Ambiental;624853;1094633
+Ribeirão Cascalheira;2026;Agricultura;603156;757077
+Ribeirão Cascalheira;2026;Comércio e Serviços;4543;4543
+Ribeirão Cascalheira;2026;Transporte;3767188;4416046
+Ribeirão Cascalheira;2026;Desporto e Lazer;409225;417715
+Ribeirão Cascalheira;2026;Encargos Especiais;404545;571914
+São Félix do Araguaia;2021;Legislativa;2617397;2624065
+São Félix do Araguaia;2021;Administração;19096891;19232672
+São Félix do Araguaia;2021;Segurança Pública;8297;8297
+São Félix do Araguaia;2021;Assistência Social;2132579;2139159
+São Félix do Araguaia;2021;Previdência Municipal;2021625;2021625
+São Félix do Araguaia;2021;Saúde;21232653;21428893
+São Félix do Araguaia;2021;Educação;14631311;14759077
+São Félix do Araguaia;2021;Cultura;37364;37364
+São Félix do Araguaia;2021;Direitos de Cidadania;100409;100409
+São Félix do Araguaia;2021;Urbanismo;5561218;5580470
+São Félix do Araguaia;2021;Saneamento;1365650;1409686
+São Félix do Araguaia;2021;Gestão Ambiental;89;89
+São Félix do Araguaia;2021;Agricultura;924369;925151
+São Félix do Araguaia;2021;Organização Agrária;2000;3000
+São Félix do Araguaia;2021;Comércio e Serviços;317822;404319
+São Félix do Araguaia;2021;Transporte;4383681;4412197
+São Félix do Araguaia;2021;Desporto e Lazer;881660;881660
+São Félix do Araguaia;2021;Encargos Especiais;1661308;1671964
+São Félix do Araguaia;2022;Legislativa;4147987;4147987
+São Félix do Araguaia;2022;Administração;33093046;33093316
+São Félix do Araguaia;2022;Assistência Social;2276795;2276795
+São Félix do Araguaia;2022;Previdência Municipal;2561388;2561388
+São Félix do Araguaia;2022;Saúde;25479932;25479932
+São Félix do Araguaia;2022;Educação;22312764;22313364
+São Félix do Araguaia;2022;Cultura;181391;181391
+São Félix do Araguaia;2022;Direitos de Cidadania;534402;534402
+São Félix do Araguaia;2022;Urbanismo;14279676;14279676
+São Félix do Araguaia;2022;Saneamento;1762467;1762467
+São Félix do Araguaia;2022;Agricultura;1287870;1287870
+São Félix do Araguaia;2022;Comércio e Serviços;637340;637340
+São Félix do Araguaia;2022;Transporte;4978552;4978552
+São Félix do Araguaia;2022;Desporto e Lazer;932183;932183
+São Félix do Araguaia;2022;Encargos Especiais;2496362;2496362
+São Félix do Araguaia;2023;Legislativa;4454786;4462736
+São Félix do Araguaia;2023;Administração;31762849;31904429
+São Félix do Araguaia;2023;Segurança Pública;3650;3650
+São Félix do Araguaia;2023;Assistência Social;3260958;3264461
+São Félix do Araguaia;2023;Previdência Municipal;3170955;3171409
+São Félix do Araguaia;2023;Saúde;28647687;28806751
+São Félix do Araguaia;2023;Educação;30707565;30752510
+São Félix do Araguaia;2023;Cultura;174566;175826
+São Félix do Araguaia;2023;Direitos de Cidadania;39914;39914
+São Félix do Araguaia;2023;Urbanismo;25604718;25788445
+São Félix do Araguaia;2023;Saneamento;1556965;1557789
+São Félix do Araguaia;2023;Agricultura;1788360;1797893
+São Félix do Araguaia;2023;Comércio e Serviços;880851;880851
+São Félix do Araguaia;2023;Transporte;2384224;2388631
+São Félix do Araguaia;2023;Desporto e Lazer;1014421;1014421
+São Félix do Araguaia;2023;Encargos Especiais;5745655;5745975
+São Félix do Araguaia;2024;Legislativa;4733103;4868103
+São Félix do Araguaia;2024;Administração;35418432;35421373
+São Félix do Araguaia;2024;Assistência Social;3884702;3884702
+São Félix do Araguaia;2024;Previdência Municipal;3730379;3730386
+São Félix do Araguaia;2024;Saúde;30544659;30554081
+São Félix do Araguaia;2024;Educação;31404817;31405436
+São Félix do Araguaia;2024;Cultura;400884;400884
+São Félix do Araguaia;2024;Urbanismo;34917244;34917244
+São Félix do Araguaia;2024;Saneamento;2023997;2023997
+São Félix do Araguaia;2024;Agricultura;1554387;1554387
+São Félix do Araguaia;2024;Organização Agrária;33000;33000
+São Félix do Araguaia;2024;Comércio e Serviços;2414927;2414927
+São Félix do Araguaia;2024;Transporte;2662688;2662688
+São Félix do Araguaia;2024;Desporto e Lazer;1430553;1430553
+São Félix do Araguaia;2024;Encargos Especiais;8583202;8583310
+São Félix do Araguaia;2025;Legislativa;5518123;5758123
+São Félix do Araguaia;2025;Administração;43006117;43279020
+São Félix do Araguaia;2025;Assistência Social;4518137;5520177
+São Félix do Araguaia;2025;Previdência Municipal;4408475;4411777
+São Félix do Araguaia;2025;Saúde;34494831;34566327
+São Félix do Araguaia;2025;Educação;31453889;32391627
+São Félix do Araguaia;2025;Cultura;155321;155321
+São Félix do Araguaia;2025;Urbanismo;10802518;10805018
+São Félix do Araguaia;2025;Saneamento;3916914;3923359
+São Félix do Araguaia;2025;Gestão Ambiental;43441;43441
+São Félix do Araguaia;2025;Agricultura;2600960;2601703
+São Félix do Araguaia;2025;Organização Agrária;13789;13789
+São Félix do Araguaia;2025;Comércio e Serviços;2953949;2959039
+São Félix do Araguaia;2025;Transporte;4961528;4961528
+São Félix do Araguaia;2025;Desporto e Lazer;4814137;4840549
+São Félix do Araguaia;2025;Encargos Especiais;13979805;13979805
+São Félix do Araguaia;2026;Legislativa;3722111;3924261
+São Félix do Araguaia;2026;Administração;17691633;19157692
+São Félix do Araguaia;2026;Assistência Social;3094091;3244798
+São Félix do Araguaia;2026;Previdência Municipal;2859771;2988529
+São Félix do Araguaia;2026;Saúde;17057395;17330342
+São Félix do Araguaia;2026;Educação;12482578;13197917
+São Félix do Araguaia;2026;Cultura;661556;661556
+São Félix do Araguaia;2026;Urbanismo;1697314;1697314
+São Félix do Araguaia;2026;Saneamento;1294361;1418061
+São Félix do Araguaia;2026;Comércio e Serviços;553360;1633360
+São Félix do Araguaia;2026;Transporte;1147005;1147512
+São Félix do Araguaia;2026;Desporto e Lazer;1581285;1760073
+São Félix do Araguaia;2026;Encargos Especiais;5605772;5605772
