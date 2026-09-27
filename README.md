@@ -1,6 +1,6 @@
 # Radar dos Polos
 
-Painel das finanças municipais dos seis polos da disciplina **Introdução à Economia** (Bacharelado em Administração Pública EaD, UNEMAT/DEAD, 2026/2), organizado por secretaria, com dados do **Radar de Controle Público do TCE-MT**.
+Painel das finanças municipais, da saúde e da educação dos seis polos da disciplina **Introdução à Economia** (Bacharelado em Administração Pública EaD, UNEMAT/DEAD, 2026/2), organizado por secretaria, com dados do **Radar de Controle Público do TCE-MT**.
 
 **Acesse o painel:** https://cleitonfranco74.github.io/radar_fiscal_municipal/
 
@@ -15,6 +15,8 @@ Painel das finanças municipais dos seis polos da disciplina **Introdução à E
 - **Secretarias**: despesa de cada órgão municipal por natureza (pessoal, custeio, investimento, dívida), elemento de despesa, fonte de recurso, programa e mês, com a ficha de indicadores usada no Trabalho Interdisciplinar.
 - **Receitas**: receita arrecadada por origem, principais impostos e transferências (ICMS, FPM, ISS, IPTU e outros) e receita por espécie.
 - **Situação fiscal**: indicadores calculados pelo TCE-MT (Educação, Saúde, pessoal, Art. 167-A, FUNDEB, repasse à Câmara, quociente financeiro, resultado orçamentário, receita própria).
+- **Saúde: gasto e resultado**: gasto em saúde por habitante ao lado da cobertura vacinal, da cobertura da Saúde da Família, de médicos e leitos por mil habitantes e da população com plano privado.
+- **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
 - **Comparar polos**: gasto por habitante em cada função de governo e indicadores fiscais lado a lado.
 - **Pesquisar**: busca por palavra em todas as secretarias e receitas.
 
@@ -37,8 +39,14 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `receita_especie.csv` | Receita por categoria, origem e espécie |
 | `receita_detalhe.csv` | Receita por desdobramento |
 | `situacao_fiscal.csv` | Indicadores do Radar Situação Fiscal dos Municípios (2020 a 2024) |
+| `saude_vacinacao.csv` | Cobertura vacinal por vacina, ano e município (2021 a 2026), com doses, público-alvo e meta |
+| `saude_vacinacao_media.csv` | Cobertura vacinal média por município e de Mato Grosso |
+| `saude_planos_privados.csv` | Beneficiários de planos privados de saúde por trimestre |
+| `saude_estrutura_cnes.csv` | Equipes, profissionais, médicos, estabelecimentos e leitos (CNES, 08/2026) |
+| `educacao_ideb.csv` | Ideb, meta, nota Saeb e rendimento por etapa e rede (2017 a 2025) |
+| `educacao_matriculas_2025.csv` | Matrículas da educação básica por rede e etapa (Censo Escolar 2025) |
 
-**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC. Extração em 26/09/2026.
+**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). Extração em 26 e 27/09/2026.
 
 ### Como ler
 
