@@ -17,8 +17,11 @@ Painel das finanças municipais, da saúde e da educação dos seis polos da dis
 - **Receitas**: receita arrecadada por origem, principais impostos e transferências (ICMS, FPM, ISS, IPTU e outros) e receita por espécie; composição da receita de 2023 a 2025 em percentual (Eixo D); e a economia do município pelo IBGE (PIB, PIB por habitante, valor adicionado por setor e receita própria ÷ PIB).
 - **Situação fiscal**: indicadores calculados pelo TCE-MT (Educação, Saúde, pessoal, Art. 167-A, FUNDEB, repasse à Câmara, quociente financeiro, resultado orçamentário, receita própria).
 - **Saúde: gasto e resultado**: gasto em saúde por habitante ao lado da cobertura vacinal, da cobertura da Saúde da Família, de médicos e leitos por mil habitantes e da população com plano privado.
+- **Assistência, agricultura e saneamento**: gasto da função ao lado do Cadastro Único, Bolsa Família e BPC (MDS), da produção agrícola e do rebanho (IBGE, PAM e PPM) e de água e esgoto nos domicílios (Censo 2022).
 - **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
 - **Comparar polos**: gasto por habitante em cada função de governo e indicadores fiscais lado a lado.
+- **Valores nominais ou em reais de 2025**: seletor no topo que corrige os valores pelo IPCA.
+- **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
 - **Pesquisar**: busca por palavra em todas as secretarias e receitas.
 
 ## Dados
@@ -39,7 +42,12 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `receita_grupo.csv` | Receita arrecadada por grupo de origem |
 | `receita_especie.csv` | Receita por categoria, origem e espécie |
 | `receita_detalhe.csv` | Receita por desdobramento |
-| `receita_composicao.csv` | Participação de cada origem na receita arrecadada, receita tributária própria, FPM, ICMS e arrecadado ÷ previsto, por ano |
+| `receita_composicao.csv` | Participação de cada origem na receita arrecadada (sem RPPS): própria, União, Estado, FUNDEB e operações de crédito; receita tributária própria, FPM, ICMS e arrecadado ÷ previsto, por ano |
+| `assistencia_mds.csv` | Cadastro Único, Bolsa Família, BPC e CRAS em dezembro de 2023, 2024 e 2025 (MDS, VIS Data) |
+| `agricultura_ibge.csv` | Área colhida e valor da produção agrícola (PAM), rebanho bovino (PPM) e soja, 2022 a 2024 |
+| `saneamento_censo2022.csv` | Domicílios com rede de água, esgoto ligado à rede e fossas (Censo 2022) |
+| `populacao_ibge.csv` | Estimativas de população do IBGE (2021, 2024 a 2026) e Censo 2022 |
+| `ipca.csv` | IPCA de dezembro e fator para reais de 2025 |
 | `ibge_pib.csv` | PIB 2021 a 2023, população do Censo 2022, PIB por habitante 2022 e valor adicionado por setor 2021 (IBGE) |
 | `situacao_fiscal.csv` | Indicadores do Radar Situação Fiscal dos Municípios (2020 a 2024) |
 | `saude_vacinacao.csv` | Cobertura vacinal por vacina, ano e município (2021 a 2026), com doses, público-alvo e meta |
@@ -49,12 +57,14 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `educacao_ideb.csv` | Ideb, meta, nota Saeb e rendimento por etapa e rede (2017 a 2025) |
 | `educacao_matriculas_2025.csv` | Matrículas da educação básica por rede e etapa (Censo Escolar 2025) |
 
-**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). IBGE: [SIDRA, tabela 5938](https://sidra.ibge.gov.br/tabela/5938) (PIB dos Municípios) e [tabela 4709](https://sidra.ibge.gov.br/tabela/4709) (Censo 2022). Extração em 26 e 27/09/2026 (TCE-MT e INEP) e 08/10/2026 (IBGE).
+**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). IBGE: [SIDRA, tabela 5938](https://sidra.ibge.gov.br/tabela/5938) (PIB dos Municípios) e [tabela 4709](https://sidra.ibge.gov.br/tabela/4709) (Censo 2022). MDS: [VIS Data](https://aplicacoes.mds.gov.br/sagi/vis/data3/). IBGE: PAM (tabela 5457), PPM (tabela 3939), Censo 2022 (tabelas 6803 e 6805), estimativas de população (tabela 6579) e IPCA (tabela 1737). Extração em 26 e 27/09/2026 (TCE-MT e INEP) e 08/10/2026 (IBGE e MDS).
 
 ### Como ler
 
 - Exercícios de 2021 a 2025 encerrados; 2026 parcial até a data da extração.
-- Valores em reais correntes (sem correção pela inflação), com o filtro Orçamento Fiscal e da Seguridade Social (OFSS) do Radar.
+- Valores em reais correntes por padrão; o seletor "Valores" converte para reais de 2025 pelo IPCA. Filtro Orçamento Fiscal e da Seguridade Social (OFSS) do Radar.
+- Por habitante: estimativas do IBGE de cada ano (Censo 2022 para 2022 e 2023).
+- O grupo "Demais Transferências do Município" do Radar Receita corresponde ao FUNDEB nos seis polos.
 - No Radar, cada secretaria é um **órgão**. O nome muda de um município para outro e às vezes entre anos; para comparar municípios, use a **função de governo**.
 - São dados declaratórios, não auditados. Para o relatório, confirme cada valor no próprio Radar e registre a data de acesso e os filtros usados.
 
