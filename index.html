@@ -140,6 +140,9 @@ tr:last-child td{border-bottom:0}
 #tip{position:fixed; pointer-events:none; z-index:50; background:var(--ink); color:var(--bg); font-size:12.5px; padding:6px 9px; border-radius:6px; max-width:280px; line-height:1.35; opacity:0; transition:opacity .08s}
 #tip.on{opacity:1}
 .tabstamp{margin:0;font-size:12.5px;color:var(--muted);border-left:3px solid var(--line-2);padding:2px 0 2px 10px}
+.elebar{display:grid;grid-template-columns:minmax(0,2fr) minmax(0,1fr);gap:10px;align-items:end}
+@media (max-width:760px){.elebar{grid-template-columns:minmax(0,1fr)}}
+.field select{width:100%;min-width:0}
 .foot{margin-top:28px; font-size:12.5px; color:var(--muted); border-top:1px solid var(--line); padding-top:14px}
 .searchbar{display:grid; grid-template-columns:minmax(0,2fr) repeat(3,minmax(0,1fr)); gap:10px; align-items:end}
 @media (max-width:760px){.searchbar{grid-template-columns:1fr 1fr}.searchbar .field:first-child{grid-column:1/-1}}
@@ -172,6 +175,7 @@ select{max-width:100%}
 <nav class="tabs" role="tablist" aria-label="Seções">
   <button class="tab" role="tab" data-tab="ad2">Roteiro da AD2</button>
   <button class="tab" role="tab" data-tab="secretarias">Secretarias</button>
+  <button class="tab" role="tab" data-tab="elementos">Elementos de despesa</button>
   <button class="tab" role="tab" data-tab="receitas">Receitas</button>
   <button class="tab" role="tab" data-tab="fiscal">Situação fiscal</button>
   <button class="tab" role="tab" data-tab="saude">Saúde: gasto e resultado</button>
@@ -184,6 +188,7 @@ select{max-width:100%}
 <main>
   <section class="view" id="v-ad2" hidden></section>
   <section class="view" id="v-secretarias"></section>
+  <section class="view" id="v-elementos" hidden></section>
   <section class="view" id="v-receitas" hidden></section>
   <section class="view" id="v-social" hidden></section>
   <section class="view" id="v-fiscal" hidden></section>
@@ -847,6 +852,96 @@ function renderEducacao(){
   wireCopy('cp-edu', ()=>toCSV(['Município','Gasto educação 2025','Matrículas rede municipal 2025','Gasto por aluno','Ideb AI municipal 2025','Ideb AF pública 2025','% Educação 2023'], tbl.map(t=>[t.mm.nome,n2(t.g),t.mt.municipal,n2(t.pa),t.ai??'',t.af??'',t.edu])));
 }
 
+// ---------- ELEMENTOS DE DESPESA ----------
+const ELE_CAT=[
+ ['Pessoal e encargos', /vencimentos|obriga[cç][õo]es patronais|tempo determinado|pessoal|trabalhistas|aux[ií]lio.?.?alimenta/i, 'var(--s1)'],
+ ['Previdência (aposentadorias e pensões)', /aposentadorias|pens[õo]es|previd[eê]ncia|rpps|benef[ií]cios assistenciais do servidor/i, 'var(--s5)'],
+ ['Material de consumo e distribuição', /material de consumo|distribui[cç][ãa]o gratuita/i, 'var(--s3)'],
+ ['Serviços de terceiros', /servi[cç]os|consultoria|contrato de gest[ãa]o|ppp|parceria|arrendamento/i, 'var(--s4)'],
+ ['Obras, equipamentos e imóveis', /obras|equipamentos|im[óo]veis/i, 'var(--s2)'],
+ ['Consórcios, subvenções e auxílios', /cons[óo]rcio|subven|contribui[cç][õo]es$|^contribui|aux[ií]lio|premia|fundos, organismos/i, 'var(--s1-soft)'],
+ ['Dívida (juros e amortização)', /d[ií]vida/i, 'var(--muted)'],
+ ['Diárias, impostos, sentenças e outros', /.*/, 'var(--line-2)']];
+const eleCat = ei => { const n=D.ele[ei]; return ELE_CAT.findIndex(c=>c[1].test(n)); };
+const ORG_ADM=/gabinete|administ|admin,|financ|finan[cç]|planej|fazenda|gest[ãa]o|governo|representa|conv[eê]nios|licita|servi[cç]os gerais/i;
+const ORG_LEG=/c[aâ]mara/i, ORG_PREV=/previd|prev\b|prevican|previmar|ipasfa|fundo mun.* prev|fundo de previd/i;
+function orgGroup(oi){ const n=D.org[oi]; if(ORG_LEG.test(n)) return 'leg'; if(ORG_PREV.test(n)) return 'prev'; if(ORG_ADM.test(n) && !/obras|engenharia|sa[uú]de|educa/i.test(n)) return 'adm'; return 'fim'; }
+const GRP_LAB={all:'Toda a prefeitura',adm:'Administração geral (gabinete, administração, finanças, planejamento, governo)',fim:'Secretarias finalísticas (saúde, educação, assistência, obras e demais)',leg:'Câmara Municipal',prev:'Previdência própria (RPPS)'};
+function eleSum(m,y,sel){ const out=new Map(); let tot=0;
+  for(const r of DATA.ele){ if(r[0]!==m||r[1]!==y) continue;
+    if(sel!=='all'){ if(sel.startsWith('o:')){ if(String(r[2])!==sel.slice(2)) continue; } else if(orgGroup(r[2])!==sel) continue; }
+    out.set(r[3],(out.get(r[3])||0)+r[4]); tot+=r[4]; }
+  return {map:out,tot}; }
+function renderElementos(){
+  const el=$('#v-elementos'); const m=S.m, y=S.y, mun=M[m];
+  if(!S.eleSel) S.eleSel='all';
+  const orgs=orgsOf(m,y);
+  const okSel = S.eleSel==='all' || GRP_LAB[S.eleSel] || orgs.some(o=>'o:'+o[0]===S.eleSel);
+  if(!okSel) S.eleSel='all';
+  const sel=S.eleSel; const selLab = sel.startsWith('o:') ? D.org[+sel.slice(2)] : GRP_LAB[sel];
+  const cur=eleSum(m,y,sel), prev=eleSum(m,y-1,sel), prev2=eleSum(m,y-2,sel);
+  if(!cur.tot){ el.innerHTML=`<div class="note">Sem despesa por elemento para essa seleção em ${y}.</div>`; return; }
+  const pop=POPY(m,y);
+  const cat=ELE_CAT.map(()=>0), catP=ELE_CAT.map(()=>0);
+  cur.map.forEach((v,ei)=>cat[eleCat(ei)]+=v); prev.map.forEach((v,ei)=>catP[eleCat(ei)]+=v);
+  const catItems=ELE_CAT.map((c,i)=>({label:c[0],v:cat[i],v2:prev.tot?catP[i]:null,color:c[2],valText:`${brl(cat[i])} · ${pct(cat[i]/cur.tot*100)}`,tip:`<b>${esc(c[0])}</b><br>${y}: ${brl(cat[i])} (${pct(cat[i]/cur.tot*100)})<br>${y-1}: ${brl(catP[i])}`})).filter(i=>i.v>0||(i.v2||0)>0).sort((a,b)=>b.v-a.v);
+  const rows=[...new Set([...cur.map.keys(),...prev.map.keys()])].map(ei=>({ei,n:D.ele[ei],c:ELE_CAT[eleCat(ei)][0],v:cur.map.get(ei)||0,p:prev.map.get(ei)||0,p2:prev2.map.get(ei)||0})).sort((a,b)=>b.v-a.v);
+  const varTxt=(a,b)=>b>0?`<span class="${a>=b?'up':'down'}">${a>=b?'+':''}${pct((a/b-1)*100)}</span>`:(a>0?'novo':'–');
+  const top=rows[0];
+  // comparação entre municípios: grupo de órgãos escolhido (sem órgão específico) e elemento escolhido
+  const cmpSel = sel.startsWith('o:') ? 'all' : sel;
+  if(S.eleCmp==null || !D.ele[S.eleCmp]) S.eleCmp=top.ei;
+  const cmp=M.map((mm,i)=>{ const e=eleSum(i,y,cmpSel); const v=e.map.get(S.eleCmp)||0; return {i,n:mm.nome,v,pc:v/POPY(i,y),sh:e.tot?v/e.tot*100:0,tot:e.tot}; }).sort((a,b)=>b.pc-a.pc);
+  const admRows=M.map((mm,i)=>{ const a=eleSum(i,y,'adm'), t=eleSum(i,y,'all'); const tp=[...a.map.entries()].sort((x,z)=>z[1]-x[1])[0]; let pes=0; a.map.forEach((v,ei)=>{ if(eleCat(ei)===0) pes+=v; }); return {i,mm,a:a.tot,pc:a.tot/POPY(i,y),sh:t.tot?a.tot/t.tot*100:0,pes:a.tot?pes/a.tot*100:0,top:tp?D.ele[tp[0]]:'–',topv:tp?tp[1]:0}; });
+  const eleOpts=[...new Set(DATA.ele.filter(r=>r[1]===y).map(r=>r[3]))].sort((a,b)=>D.ele[a].localeCompare(D.ele[b],'pt'));
+  el.innerHTML=`
+  <div class="head-org"><div class="eyebrow">${esc(mun.nome)} · ${y}${y===PARCIAL?' (parcial)':''}</div><h2>Elementos de despesa: o que a prefeitura compra</h2>
+  <p class="sub" style="margin:0;max-width:85ch">O elemento de despesa diz <i>o que</i> foi pago (salários, material, serviços, obras), qualquer que seja a secretaria. Escolha toda a prefeitura, a administração geral (gabinete, administração, finanças, planejamento) ou um órgão.</p></div>
+  <div class="elebar">
+    <div class="field"><label for="ele-sel">Órgãos</label><select id="ele-sel">
+      ${Object.entries(GRP_LAB).map(([k,l])=>`<option value="${k}" ${sel===k?'selected':''}>${esc(l)}</option>`).join('')}
+      <optgroup label="Um órgão">${orgs.map(([oi])=>`<option value="o:${oi}" ${sel==='o:'+oi?'selected':''}>${esc(D.org[oi])}</option>`).join('')}</optgroup>
+    </select></div>
+    <div class="field"><label for="ele-q">Filtrar elemento</label><input type="search" id="ele-q" placeholder="ex.: material, obras, diárias" value="${esc(S.eleQ||'')}"></div>
+  </div>
+  <div class="kpis">
+    <div class="kpi"><span class="k">Liquidado · ${esc(sel.startsWith('o:')?'órgão':sel==='all'?'prefeitura':'grupo')}</span><span class="v">${brl(cur.tot)}</span><span class="d">${prev.tot?varTxt(cur.tot,prev.tot)+' sobre '+(y-1):''} · ${reais(cur.tot/pop)} por habitante</span></div>
+    <div class="kpi"><span class="k">Pessoal e encargos</span><span class="v">${pct(cat[0]/cur.tot*100)}</span><span class="d">${brl(cat[0])}</span></div>
+    <div class="kpi"><span class="k">Serviços de terceiros</span><span class="v">${pct(cat[3]/cur.tot*100)}</span><span class="d">${brl(cat[3])}</span></div>
+    <div class="kpi"><span class="k">Obras e equipamentos</span><span class="v">${pct(cat[4]/cur.tot*100)}</span><span class="d">${brl(cat[4])}</span></div>
+    <div class="kpi"><span class="k">Material de consumo</span><span class="v">${pct(cat[2]/cur.tot*100)}</span><span class="d">${brl(cat[2])}</span></div>
+    <div class="kpi"><span class="k">Maior elemento</span><span class="v" style="font-size:18px">${esc(top.n)}</span><span class="d">${pct(top.v/cur.tot*100)} do total · ${rows.filter(r=>r.v>0).length} elementos com gasto</span></div>
+  </div>
+  <div class="panel"><h3>Por grupo de despesa</h3><p class="sub">${esc(selLab)}, liquidado em ${y}. Barra clara: ${y-1}.</p>${hbars(catItems)}</div>
+  <div class="panel"><div class="row-between"><div><h3>Todos os elementos</h3><p class="sub">${esc(selLab)} · ${esc(mun.nome)}. Liquidado nos três últimos anos, variação e participação no total de ${y}.</p></div><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="dl-ele">Baixar quadro para o Word</button>${copyBtn('cp-ele')}</div></div>
+    <div class="tbl-wrap" style="max-height:620px;overflow:auto"><table id="ele-tbl"><thead><tr><th>Elemento</th><th>Grupo</th><th class="num">${y-2}</th><th class="num">${y-1}</th><th class="num">${y}${y===PARCIAL?'*':''}</th><th class="num">Variação</th><th class="num">% do total</th><th class="num">Por habitante</th></tr></thead><tbody>
+    ${rows.map(r=>`<tr data-q="${esc(norm(r.n+' '+r.c))}"><td style="white-space:normal">${esc(r.n)}</td><td class="muted" style="white-space:normal">${esc(r.c)}</td><td class="num">${brl(r.p2)}</td><td class="num">${brl(r.p)}</td><td class="num"><b>${brl(r.v)}</b></td><td class="num">${varTxt(r.v,r.p)}</td><td class="num">${pct(r.v/cur.tot*100)}</td><td class="num">${reais(r.v/pop)}</td></tr>`).join('')}
+    </tbody></table></div>
+    <p class="sub" style="margin-top:8px">Clique em um elemento para compará-lo entre os municípios no quadro abaixo.</p></div>
+  <div class="panel"><div class="row-between"><div><h3>Administração geral nos polos, ${y}</h3><p class="sub">Órgãos de gabinete, administração, finanças, planejamento e governo, identificados pelo nome no Radar. Não inclui Câmara nem previdência.</p></div>${copyBtn('cp-adm')}</div>
+    <div class="tbl-wrap"><table><thead><tr><th>Município</th><th class="num">Liquidado</th><th class="num">Por habitante</th><th class="num">% da prefeitura</th><th class="num">Pessoal no grupo</th><th>Maior elemento</th></tr></thead><tbody>
+    ${admRows.map(r=>`<tr ${r.i===m?'style="background:var(--accent-soft)"':''}><td>${esc(r.mm.nome)}</td><td class="num">${brl(r.a)}</td><td class="num">${reais(r.pc)}</td><td class="num">${pct(r.sh)}</td><td class="num">${pct(r.pes)}</td><td style="white-space:normal">${esc(r.top)} (${brl(r.topv)})</td></tr>`).join('')}
+    </tbody></table></div>
+    <p class="note" style="margin-top:10px">A estrutura administrativa muda de um município para outro: em alguns, compras e licitações ficam na Administração; em outros, há secretarias próprias de governo ou de gestão. Para comparar com segurança, use também a função Administração na aba Comparar polos.</p></div>
+  <div class="panel"><h3>Um elemento entre os municípios</h3><p class="sub">${esc(GRP_LAB[cmpSel])}, ${y}, R$ por habitante. Em laranja, ${esc(mun.nome)}.</p>
+    <div class="field" style="max-width:520px;min-width:0;margin-bottom:12px"><label for="ele-cmp">Elemento</label><select id="ele-cmp">${eleOpts.map(ei=>`<option value="${ei}" ${ei===S.eleCmp?'selected':''}>${esc(D.ele[ei])}</option>`).join('')}</select></div>
+    ${hbars(cmp.map(c=>({label:c.n,v:c.pc,color:c.i===m?'var(--s2)':'var(--s1)',valText:`${reais(c.pc)} · ${pct(c.sh)} do total`,tip:`<b>${esc(c.n)}</b><br>${esc(D.ele[S.eleCmp])}: ${brl(c.v)}<br>${pct(c.sh)} do liquidado do grupo`})))}
+  </div>`;
+  $('#ele-sel').addEventListener('change',e=>{ S.eleSel=e.target.value; render(); });
+  $('#ele-cmp').addEventListener('change',e=>{ S.eleCmp=+e.target.value; render(); });
+  const applyQ=()=>{ const q=norm($('#ele-q').value.trim()); S.eleQ=$('#ele-q').value; document.querySelectorAll('#ele-tbl tbody tr').forEach(tr=>tr.hidden = q && !tr.dataset.q.includes(q)); };
+  $('#ele-q').addEventListener('input',applyQ); applyQ();
+  document.querySelectorAll('#ele-tbl tbody tr').forEach((tr,i)=>{ tr.style.cursor='pointer'; tr.addEventListener('click',()=>{ S.eleCmp=rows[i].ei; render(); setTimeout(()=>$('#ele-cmp')&&$('#ele-cmp').scrollIntoView({block:'center'}),50); }); });
+  wireCopy('cp-ele', ()=>toCSV(['Município','Órgãos','Elemento','Grupo',String(y-2),String(y-1),String(y),'% do total '+y,'Por habitante '+y], rows.map(r=>[mun.nome,selLab,r.n,r.c,n2(r.p2),n2(r.p),n2(r.v),(r.v/cur.tot*100).toFixed(1),n2(r.v/pop)])));
+  wireCopy('cp-adm', ()=>toCSV(['Município','Ano','Administração geral liquidado','Por habitante','% da prefeitura','% pessoal no grupo','Maior elemento','Valor do maior elemento'], admRows.map(r=>[r.mm.nome,y,n2(r.a),n2(r.pc),r.sh.toFixed(1),r.pes.toFixed(1),r.top,n2(r.topv)])));
+  $('#dl-ele').addEventListener('click',()=>{
+    const head=`<tr><th style="text-align:left">Elemento de despesa</th><th>${y-2}</th><th>${y-1}</th><th>${y}</th><th>% do total ${y}</th></tr>`;
+    const body=rows.filter(r=>r.v>0||r.p>0).slice(0,15).map(r=>`<tr><td>${esc(r.n)}</td><td style="text-align:right">${brl(r.p2)}</td><td style="text-align:right">${brl(r.p)}</td><td style="text-align:right">${brl(r.v)}</td><td style="text-align:right">${pct(r.v/cur.tot*100)}</td></tr>`).join('')+`<tr><td><b>Total</b></td><td style="text-align:right">${brl(prev2.tot)}</td><td style="text-align:right">${brl(prev.tot)}</td><td style="text-align:right"><b>${brl(cur.tot)}</b></td><td style="text-align:right">100%</td></tr>`;
+    downloadDoc(`elementos_${norm(mun.nome).replace(/\W+/g,'_')}_${y}.doc`, `Quadro – Despesa liquidada por elemento: ${selLab}, ${mun.nome}, ${y-2} a ${y} (15 maiores elementos)`, `<table border="1" cellspacing="0" cellpadding="4" style="border-collapse:collapse;font-size:10pt">${head}${body}</table>`,
+      `Fonte: elaborado pelo grupo com dados do TRIBUNAL DE CONTAS DO ESTADO DE MATO GROSSO, Radar de Controle Público, Módulo Despesas (https://radardespesa.tce.mt.gov.br/), filtros Município, Exercício, Órgão e Elemento de Despesa. ${S.real?'Valores em reais de 2025, corrigidos pelo IPCA. ':'Valores nominais. '}Acesso em: ___/___/______.`);
+  });
+}
+
 // ---------- ASSISTÊNCIA, AGRICULTURA E SANEAMENTO ----------
 function renderSocial(){
   const el=$('#v-social'); const m=S.m, mun=M[m];
@@ -1012,6 +1107,7 @@ function renderAD2(){
 const STAMP={
   ad2:'Números do TCE-MT (extraídos em 26/09/2026), do IBGE (08/10/2026), do INEP e do MDS. Confira cada valor na base original antes de usar.',
   secretarias:'Fonte: TCE-MT, Radar Despesas, extraído em 26/09/2026. População: estimativas do IBGE de cada ano (Censo 2022 para 2022 e 2023).',
+  elementos:'Fonte: TCE-MT, Radar Despesas (despesa liquidada por elemento), extraído em 26/09/2026. Órgãos de administração geral identificados pelo nome.',
   receitas:'Fonte: TCE-MT, Radar Receita, extraído em 26/09/2026; IBGE (PIB dos Municípios e Censo 2022), consultado em 08/10/2026.',
   fiscal:'Fonte: TCE-MT, Radar Situação Fiscal dos Municípios, extraído em 26/09/2026. Indicadores calculados pelo TCE-MT, em valores nominais.',
   saude:'Fonte: TCE-MT, Radar Despesas e Radar Saúde (Ministério da Saúde, CNES e ANS), extraídos em 26 e 27/09/2026.',
@@ -1029,6 +1125,7 @@ function render(){
 function renderTab(){
   if(S.tab==='ad2') renderAD2();
   else if(S.tab==='social') renderSocial();
+  else if(S.tab==='elementos') renderElementos();
   else if(S.tab==='secretarias') renderSecretarias();
   else if(S.tab==='receitas') renderReceitas();
   else if(S.tab==='fiscal') renderFiscal();
@@ -1041,7 +1138,7 @@ function renderTab(){
 applyReal(S.real);
 renderPickers();
 const h=(location.hash||'').slice(1);
-setTab(['ad2','secretarias','receitas','social','fiscal','saude','educacao','comparar','pesquisar','sobre'].includes(h)?h:'secretarias');
+setTab(['ad2','secretarias','elementos','receitas','social','fiscal','saude','educacao','comparar','pesquisar','sobre'].includes(h)?h:'secretarias');
 })();
 </script>
 </body>
