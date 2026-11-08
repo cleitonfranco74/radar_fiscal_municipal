@@ -74,6 +74,42 @@ def ideb(pasta, ctx):
     return len(linhas)
 
 
+# Sinopse 2025: (planilha, coluna) de cada variável; colunas contadas a partir de 0
+MATRICULAS = {
+    'total': ('1.2', 4), 'rede_publica': ('1.2', 5), 'rede_estadual': ('1.2', 7), 'rede_municipal': ('1.2', 8),
+    'rede_privada': ('1.2', 9), 'educacao_infantil_municipal': ('Educação Infantil 1.8', 8),
+    'creche_municipal': ('Educação Infantil 1.8', 18), 'pre_escola_municipal': ('Educação Infantil 1.8', 28),
+    'fundamental_municipal': ('Ensino Fundamental 1.20', 8), 'fundamental_estadual': ('Ensino Fundamental 1.20', 7),
+    'eja_total': ('Educação Básica 1.1', 33),
+}
+
+
+def matriculas(pasta, ctx, ano=2025):
+    z = zipfile.ZipFile(baixar(f'dados_abertos/sinopses_estatisticas/sinopse_estatistica_censo_escolar_{ano}.zip', pasta, ctx))
+    arq = next(n for n in z.namelist() if n.endswith('.xlsx'))
+    destino = os.path.join(pasta, os.path.basename(arq))
+    if not os.path.exists(destino):
+        with z.open(arq) as src, open(destino, 'wb') as dst:
+            dst.write(src.read())
+    wb = openpyxl.load_workbook(destino, read_only=True)
+    dados = {}
+    for planilha in sorted({p for p, _ in MATRICULAS.values()}):
+        for row in wb[planilha].iter_rows(values_only=True):
+            cod = str(row[3] or '').strip()
+            if not cod.startswith('51') or len(cod) != 7:
+                continue
+            d = dados.setdefault(cod, {'municipio': str(row[2]).strip()})
+            for nome, (p, c) in MATRICULAS.items():
+                if p == planilha:
+                    d[nome] = int(num(row[c]) or 0)
+    with open(os.path.join(RAIZ, 'dados', 'mt', f'educacao_matriculas_mt_{ano}.csv'), 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f, delimiter=';')
+        w.writerow(['cod_ibge', 'municipio'] + list(MATRICULAS))
+        for cod in sorted(dados, key=lambda c: dados[c]['municipio']):
+            w.writerow([cod, dados[cod]['municipio']] + [dados[cod].get(k, '') for k in MATRICULAS])
+    return len(dados)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--pasta', default=os.path.join(RAIZ, '.cache_inep'))
@@ -81,6 +117,7 @@ def main():
     os.makedirs(a.pasta, exist_ok=True)
     ctx = contexto()
     print(ideb(a.pasta, ctx), 'linhas do Ideb', file=sys.stderr)
+    print(matriculas(a.pasta, ctx), 'municípios com matrículas', file=sys.stderr)
 
 
 if __name__ == '__main__':
