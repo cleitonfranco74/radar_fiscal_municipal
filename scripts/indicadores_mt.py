@@ -97,9 +97,9 @@ def main():
     pop = {}
     with open(os.path.join(MT, 'populacao_mt.csv'), encoding='utf-8') as f:
         for r in csv.DictReader(f, delimiter=';'):
-            pop[int(r['cod_ibge'])] = {a: int(r[c]) if r[c] else None for a, c in
-                                       (('2021', 'estimativa_2021'), ('2022', 'censo_2022'), ('2023', 'censo_2022'),
-                                        ('2024', 'estimativa_2024'), ('2025', 'estimativa_2025'))}
+            anos = [(str(a), f'estimativa_{a}') for a in range(2015, 2022)] + [
+                ('2022', 'censo_2022'), ('2023', 'censo_2022'), ('2024', 'estimativa_2024'), ('2025', 'estimativa_2025')]
+            pop[int(r['cod_ibge'])] = {a: int(r[c]) if r.get(c) else None for a, c in anos}
     origens, funcoes = {}, {}
     with open(os.path.join(MT, 'receita_origem_mt.csv'), encoding='utf-8') as f:
         for r in csv.DictReader(f, delimiter=';'):

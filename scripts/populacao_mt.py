@@ -1,4 +1,4 @@
-"""Baixa do IBGE (SIDRA) a população dos municípios de MT: estimativas 2021, 2024 e 2025
+"""Baixa do IBGE (SIDRA) a população dos municípios de MT: estimativas 2015 a 2021, 2024 e 2025
 (tabela 6579) e Censo 2022 (tabela 4709). Gera dados/mt/populacao_mt.csv."""
 import csv, json, os, urllib.request
 
@@ -12,13 +12,13 @@ def sidra(t, v, p):
 
 
 pop = {}
-for r in sidra(6579, 9324, '2021,2024,2025'):
+for r in sidra(6579, 9324, '2015,2016,2017,2018,2019,2020,2021,2024,2025'):
     d = pop.setdefault(r['D1C'], {'municipio': r['D1N'].removesuffix(' - MT')})
     d['estimativa_' + r['D3C']] = r['V'] if r['V'].isdigit() else ''
 for r in sidra(4709, 93, '2022'):
     d = pop.setdefault(r['D1C'], {'municipio': r['D1N'].removesuffix(' - MT')})
     d['censo_2022'] = r['V'] if r['V'].isdigit() else ''
-campos = ['cod_ibge', 'municipio', 'estimativa_2021', 'censo_2022', 'estimativa_2024', 'estimativa_2025']
+campos = ['cod_ibge', 'municipio'] + [f'estimativa_{a}' for a in range(2015, 2022)] + ['censo_2022', 'estimativa_2024', 'estimativa_2025']
 with open(os.path.join(RAIZ, 'dados', 'mt', 'populacao_mt.csv'), 'w', newline='', encoding='utf-8') as f:
     w = csv.DictWriter(f, campos, delimiter=';', restval='')
     w.writeheader()

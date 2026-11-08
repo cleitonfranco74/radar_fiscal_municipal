@@ -13,8 +13,8 @@ Painel das finanças dos 142 municípios de Mato Grosso: índice de gestão fisc
 - **Saúde: gasto e resultado**: gasto em saúde por habitante ao lado da cobertura vacinal, da cobertura da Saúde da Família, de médicos e leitos por mil habitantes e da população com plano privado.
 - **Assistência, agricultura e saneamento**: gasto da função ao lado do Cadastro Único, Bolsa Família e BPC (MDS), da produção agrícola e do rebanho (IBGE, PAM e PPM) e de água e esgoto nos domicílios (Censo 2022).
 - **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
-- **Mato Grosso: gestão fiscal**: os 142 municípios do estado, com busca por nome. Índice de gestão fiscal construído com os cinco pilares do IGFM do TCE-MT (receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida), conceito de A a D, posição no estado, comparação com a mediana do grupo populacional, receita própria e transferências (FPM, ICMS, FUNDEB e SUS) por habitante, ranking de 2021 a 2025 e cobertura vacinal de crianças em 2025 (BCG, pentavalente, pólio, pneumocócica, rotavírus e tríplice viral), com um gráfico do repasse do SUS por habitante contra a cobertura média.
-- **Mato Grosso: receitas e despesas**: para os 142 municípios, composição da receita de 2021 a 2025 (tributos próprios, União, Estado, FUNDEB e outras), receita por origem e despesa liquidada por função de governo por habitante, com a mediana do grupo populacional.
+- **Mato Grosso: gestão fiscal**: os 142 municípios do estado, com busca por nome. Índice de gestão fiscal construído com os cinco pilares do IGFM do TCE-MT (receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida), conceito de A a D, posição no estado, comparação com a mediana do grupo populacional, receita própria e transferências (FPM, ICMS, FUNDEB e SUS) por habitante, ranking de 2015 a 2025 e cobertura vacinal de crianças em 2025 (BCG, pentavalente, pólio, pneumocócica, rotavírus e tríplice viral), com um gráfico do repasse do SUS por habitante contra a cobertura média.
+- **Mato Grosso: receitas e despesas**: para os 142 municípios, composição da receita de 2015 a 2025 (tributos próprios, União, Estado, FUNDEB e outras), receita por origem e despesa liquidada por função de governo por habitante, com a mediana do grupo populacional.
 - **Comparar municípios**: qualquer município de MT ao lado do seu grupo populacional ou de todo o estado: gasto por habitante em cada função de governo e indicadores no padrão do Radar Situação Fiscal do TCE-MT (pessoal, art. 167-A, resultado orçamentário e receita própria por habitante), recalculados com o SICONFI.
 - **Valores nominais ou em reais de 2025**: seletor no topo que corrige os valores pelo IPCA.
 - **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
@@ -52,7 +52,7 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `saude_estrutura_cnes.csv` | Equipes, profissionais, médicos, estabelecimentos e leitos (CNES, 08/2026) |
 | `educacao_ideb.csv` | Ideb, meta, nota Saeb e rendimento por etapa e rede (2017 a 2025) |
 | `educacao_matriculas_2025.csv` | Matrículas da educação básica por rede e etapa (Censo Escolar 2025) |
-| `mt/siconfi_mt.csv` | Os 142 municípios de MT, 2021 a 2025: RCL, despesa com pessoal, caixa e restos a pagar (RGF do Executivo), receita tributária, IPTU, ISS, ITBI, FPM, ICMS, FUNDEB, SUS da União e do Estado (DCA I-C) e investimentos, juros e amortização (DCA I-D) |
+| `mt/siconfi_mt.csv` | Os 142 municípios de MT, 2015 a 2025: RCL, despesa com pessoal, caixa e restos a pagar (RGF do Executivo), receita tributária, IPTU, ISS, ITBI, FPM, ICMS, FUNDEB, SUS da União e do Estado (DCA I-C) e investimentos, juros e amortização (DCA I-D) |
 | `mt/receita_origem_mt.csv` | Receita arrecadada por origem (bruta), por município e ano (DCA I-C) |
 | `mt/despesa_funcao_mt.csv` | Despesa liquidada por função de governo, por município e ano (DCA I-E) |
 | `mt/indicadores_padrao_tce_mt.csv` | Pessoal (% da RCL), despesa corrente ÷ receita corrente, resultado orçamentário (% da RCL) e receita tributária própria por habitante |
@@ -80,7 +80,7 @@ Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py`
 
 ### Como ler
 
-- Exercícios de 2021 a 2025 encerrados; 2026 parcial até a data da extração.
+- Abas detalhadas do TCE-MT: exercícios de 2021 a 2025 encerrados; 2026 parcial até a data da extração.
 - Valores em reais correntes por padrão; o seletor "Valores" converte para reais de 2025 pelo IPCA. Filtro Orçamento Fiscal e da Seguridade Social (OFSS) do Radar.
 - Por habitante: estimativas do IBGE de cada ano (Censo 2022 para 2022 e 2023).
 - O grupo "Demais Transferências do Município" do Radar Receita corresponde ao FUNDEB nos seis municípios detalhados.
