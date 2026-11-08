@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Despesas por secretaria, receitas, situação fiscal, saúde e educação dos municípios-polo da disciplina Introdução à Economia (UNEMAT/DEAD), com dados do TCE-MT e do INEP, e índice de gestão fiscal dos 142 municípios de Mato Grosso (SICONFI).">
 <meta charset="utf-8">
-<title>Radar dos Polos</title>
+<title>Radar Fiscal de Mato Grosso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@87,500;87,600;87,700;100,600&family=Public+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap">
@@ -159,15 +159,13 @@ select{max-width:100%}
   <div class="title-row">
     <div>
       <div class="eyebrow">Introdução à Economia · Administração Pública EaD · UNEMAT/DEAD · 2026/2</div>
-      <h1>Radar dos Polos</h1>
+      <h1>Radar Fiscal de Mato Grosso</h1>
       <p class="lede">As finanças das prefeituras dos seis polos da turma, secretaria por secretaria, com dados do Radar de Controle Público do TCE-MT. Na aba Mato Grosso, o índice de gestão fiscal dos 142 municípios do estado.</p>
     </div>
     <div class="stamp">Dados consultados em 26/09/2026<br>2021–2025 exercícios encerrados · 2026 parcial</div>
   </div>
   <div class="pickers">
-    <div class="polo"><span class="polo-label">Polos das 19h</span><div class="chips" data-polo="19h"></div></div>
-    <div class="polo"><span class="polo-label">Polos das 20h</span><div class="chips" data-polo="20h"></div></div>
-    <div class="polo"><span class="polo-label">Polos das 21h</span><div class="chips" data-polo="21h"></div></div>
+    <div class="field"><label for="mun">Município (polos da turma)</label><select id="mun"></select></div>
     <div class="field"><label for="ano">Exercício</label><select id="ano"></select></div>
     <div class="field"><label for="valores">Valores</label><select id="valores"><option value="nom">Nominais (como no Radar)</option><option value="real">Em reais de 2025 (IPCA)</option></select></div>
   </div>
@@ -381,10 +379,7 @@ const n2 = v => String(Math.round(v)); // CSV numeric
 
 // ---------- header controls ----------
 function renderPickers(){
-  document.querySelectorAll('.chips').forEach(box=>{
-    const polo=box.dataset.polo;
-    box.innerHTML = M.map((m,i)=>m.polo===polo?`<button class="chip" data-m="${i}" aria-pressed="${i===S.m}">${esc(m.nome)}</button>`:'').join('');
-  });
+  $('#mun').innerHTML = M.map((m,i)=>`<option value="${i}" ${i===S.m?'selected':''}>${esc(m.nome)}</option>`).join('');
   const vs=$('#valores'); vs.value=S.real?'real':'nom';
   const sel=$('#ano'); sel.innerHTML = YEARS.slice().reverse().map(y=>`<option value="${y}" ${y===S.y?'selected':''}>${y}${y===PARCIAL?' (parcial)':''}</option>`).join('');
 }
@@ -393,6 +388,7 @@ document.addEventListener('click', e=>{
   const t=e.target.closest('.tab'); if(t){ setTab(t.dataset.tab); return; }
   const o=e.target.closest('.org'); if(o){ S.org=+o.dataset.o; store.set('org',S.org); render(); return; }
 });
+$('#mun').addEventListener('change', e=>{ S.m=+e.target.value; S.org=null; store.set('m',S.m); store.set('org',null); render(); });
 $('#ano').addEventListener('change', e=>{ S.y=+e.target.value; store.set('y',S.y); render(); });
 $('#valores').addEventListener('change', e=>{ S.real=e.target.value==='real'; store.set('real',S.real); applyReal(S.real); render(); });
 function setTab(t){ S.tab=t; document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected', b.dataset.tab===t)); document.querySelectorAll('section.view').forEach(v=>v.hidden = v.id!=='v-'+t);
