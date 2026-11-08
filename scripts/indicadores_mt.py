@@ -31,6 +31,51 @@ VARS = ['rcl', 'receita_corrente', 'receita_tributaria', 'iptu', 'iss', 'itbi', 
         'fundeb', 'despesa_total_pessoal', 'caixa_liquida_apos_rp_nv', 'investimentos', 'juros', 'amortizacao']
 
 
+# cobertura vacinal de crianças: (rótulo, meta %, idade em anos, [(imunobiológico, dose), ...])
+VACINAS = [
+    ('BCG', 90, '0', [('BCG', 'Única'), ('BCG', 'Dose')]),
+    ('Pentavalente (3ª dose)', 95, '0', [('Penta', '3ª Dose'), ('Hexa acelular', '3ª Dose'), ('Penta acelular', '3ª Dose')]),
+    ('Poliomielite (3ª dose)', 95, '0', [('VIP', '3ª Dose'), ('Hexa acelular', '3ª Dose'), ('DTPa/VIP', '3ª Dose')]),
+    ('Pneumocócica (2ª dose)', 95, '0', [('VPC10', '2ª Dose'), ('VPC13', '2ª Dose'), ('VPC15', '2ª Dose'), ('VPC20', '2ª Dose')]),
+    ('Rotavírus (2ª dose)', 90, '0', [('ROTA', '2ª Dose'), ('ROTA5', '3ª Dose')]),
+    ('Tríplice viral (1ª dose)', 95, '1', [('SCR', '1ª Dose')]),
+]
+
+
+def vacinacao(ano, cods):
+    """Cobertura vacinal por município (código IBGE de 7 dígitos), se os arquivos existirem."""
+    fd = os.path.join(MT, f'vacinacao_doses_mt_{ano}.csv')
+    fn = os.path.join(MT, f'nascidos_vivos_mt_{ano}.csv')
+    if not (os.path.exists(fd) and os.path.exists(fn)):
+        return None
+    seis = {str(c)[:6]: c for c in cods}
+    with open(fn, encoding='utf-8') as f:
+        nv = {seis[r['co_municipio_ibge6']]: int(r['nascidos_vivos']) for r in csv.DictReader(f, delimiter=';')
+              if r['co_municipio_ibge6'] in seis}
+    doses = {}
+    with open(fd, encoding='utf-8') as f:
+        for r in csv.DictReader(f, delimiter=';'):
+            c = seis.get(r['co_municipio_ibge6'])
+            if c:
+                k = (c, r['sg_imunobiologico'], r['ds_tipo_dose'], r['idade_anos'])
+                doses[k] = doses.get(k, 0) + int(r['doses'])
+    linhas, bloco = [], {}
+    for c in cods:
+        if not nv.get(c):
+            continue
+        cob = []
+        for rot, meta, idade, pares in VACINAS:
+            d = sum(doses.get((c, im, dose, idade), 0) for im, dose in pares)
+            cob.append(round(d / nv[c] * 100, 1))
+        bloco[c] = [nv[c]] + cob
+        linhas.append([c, ano, nv[c]] + cob)
+    with open(os.path.join(MT, f'cobertura_vacinal_mt_{ano}.csv'), 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f, delimiter=';')
+        w.writerow(['cod_ibge', 'ano', 'nascidos_vivos'] + [v[0] for v in VACINAS])
+        w.writerows(linhas)
+    return {'ano': ano, 'vac': [[v[0], v[1]] for v in VACINAS], 'm': bloco}
+
+
 def nota(x, zero, um):
     if x is None:
         return None
@@ -100,7 +145,8 @@ def main():
         m['g'] = next(i for i, (lim, _) in enumerate(GRUPOS) if (p24 or 0) <= lim) if p24 else None
     bloco = {'VARS': VARS, 'PIL': list(CORTES), 'CORTES': CORTES, 'GRUPOS': [g for _, g in GRUPOS],
              'CONC': [[lim, c, d] for lim, c, d in CONCEITOS],
-             'M': sorted(mun.values(), key=lambda m: m['n'])}
+             'M': sorted(mun.values(), key=lambda m: m['n']),
+             'VAC': vacinacao(2025, list(mun))}
     js = json.dumps(bloco, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     p = os.path.join(RAIZ, 'index.html')
     html = open(p, encoding='utf-8').read()
