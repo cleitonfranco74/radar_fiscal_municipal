@@ -1,4 +1,4 @@
-# Radar dos Polos
+# Radar Fiscal de Mato Grosso
 
 Painel das finanças municipais, da saúde e da educação dos seis polos da disciplina **Introdução à Economia** (Bacharelado em Administração Pública EaD, UNEMAT/DEAD, 2026/2), organizado por secretaria, com dados do **Radar de Controle Público do TCE-MT**.
 
