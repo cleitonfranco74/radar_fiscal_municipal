@@ -95,6 +95,33 @@ def ibge():
     return out
 
 
+def educacao():
+    """Ideb (anos iniciais e finais, redes municipal, estadual e pública) e matrículas 2025 (INEP)."""
+    out = {}
+    arq = os.path.join(MT, 'educacao_ideb_mt.csv')
+    if os.path.exists(arq):
+        with open(arq, encoding='utf-8') as f:
+            for r in csv.DictReader(f, delimiter=';'):
+                if r['ideb']:
+                    k = ('i' if r['etapa'] == 'Anos iniciais' else 'f') + r['rede'][0]   # iM, iE, iP, fM, fE, fP
+                    out.setdefault(r['cod_ibge'], {}).setdefault(k, {})[r['ano']] = float(r['ideb'])
+    arq = os.path.join(MT, 'educacao_matriculas_mt_2025.csv')
+    if os.path.exists(arq):
+        with open(arq, encoding='utf-8') as f:
+            for r in csv.DictReader(f, delimiter=';'):
+                out.setdefault(r['cod_ibge'], {})['mat'] = [int(r[c] or 0) for c in list(r)[2:]]
+    return out
+
+
+def cnes():
+    """Estabelecimentos e leitos (CNES)."""
+    arq = os.path.join(MT, 'saude_cnes_mt.csv')
+    if not os.path.exists(arq):
+        return None
+    with open(arq, encoding='utf-8') as f:
+        return {r['co_municipio_ibge6']: [int(r[c]) for c in list(r)[2:]] for r in csv.DictReader(f, delimiter=';')}
+
+
 def nota(x, zero, um):
     if x is None:
         return None
@@ -195,7 +222,7 @@ def main():
     bloco = {'VARS': VARS, 'PIL': list(CORTES), 'CORTES': CORTES, 'GRUPOS': [g for _, g in GRUPOS],
              'CONC': [[lim, c, d] for lim, c, d in CONCEITOS], 'ORIG': ORIG, 'FUN': FUN, 'TCE': TCE,
              'M': sorted(mun.values(), key=lambda m: m['n']),
-             'VAC': vacinacao(2025, list(mun)), 'IB': ibge()}
+             'VAC': vacinacao(2025, list(mun)), 'IB': ibge(), 'EDU': educacao(), 'CNES': cnes()}
     js = json.dumps(bloco, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     p = os.path.join(RAIZ, 'index.html')
     html = open(p, encoding='utf-8').read()
