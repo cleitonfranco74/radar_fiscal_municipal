@@ -10,8 +10,12 @@ Fontes (API pública https://apidatalake.tesouro.gov.br/ords/siconfi/tt/):
 - DCA Anexo I-D: despesa liquidada por natureza (investimentos, juros, amortização)
 - RGF Anexo 01, Poder Executivo, último período: despesa com pessoal e RCL
 - RGF Anexo 05, Poder Executivo, último período: disponibilidade de caixa e restos a pagar
+- DCA Anexo I-E: despesa liquidada por função de governo
+
+Gera também dados/mt/receita_origem_mt.csv (receita por origem) e
+dados/mt/despesa_funcao_mt.csv (despesa liquidada por função).
 """
-import argparse, csv, json, os, sys, time, urllib.parse, urllib.request
+import argparse, csv, json, os, re, sys, time, urllib.parse, urllib.request
 from concurrent.futures import ThreadPoolExecutor
 
 API = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/'
@@ -41,9 +45,32 @@ DESPESAS = {
     'investimentos': 'DO4.4.00.00.00.00',
     'amortizacao': 'DO4.6.00.00.00.00',
 }
+# totais para o resultado orçamentário e o art. 167-A da Constituição (despesa empenhada)
+EMPENHADAS = {
+    'despesa_empenhada_total': 'TotalDespesas',
+    'despesa_corrente_empenhada': 'DO3.0.00.00.00.00',
+}
 CAMPOS = (['cod_ibge', 'municipio', 'ano', 'periodo_rgf', 'rcl', 'despesa_total_pessoal', 'pct_pessoal_rcl',
            'caixa_bruta_nv', 'caixa_liquida_apos_rp_nv', 'rp_total_nv']
-          + list(RECEITAS) + list(DESPESAS))
+          + list(RECEITAS) + ['receita_total', 'deducoes_total', 'deducoes_correntes'] + list(DESPESAS) + list(EMPENHADAS))
+
+
+# receita orçamentária por origem: nome -> (códigos somados, códigos subtraídos), coluna "Receitas Brutas Realizadas"
+def _r(n):
+    return f'RO{n}' + '.0' * (3 - n.count('.')) + '.00.0.0'
+
+
+ORIGENS = {
+    'Tributos próprios': ([_r('1.1')], []),
+    'Contribuições': ([_r('1.2')], []),
+    'Patrimonial, serviços e outras correntes': ([_r('1.3'), _r('1.4'), _r('1.5'), _r('1.6'), _r('1.9')], []),
+    'Transferências da União': ([_r('1.7.1'), _r('2.4.1')], []),
+    'Transferências do Estado': ([_r('1.7.2'), _r('2.4.2')], []),
+    'FUNDEB': ([_r('1.7.5')], []),
+    'Outras transferências': ([_r('1.7'), _r('2.4')], [_r('1.7.1'), _r('1.7.2'), _r('1.7.5'), _r('2.4.1'), _r('2.4.2')]),
+    'Operações de crédito': ([_r('2.1')], []),
+    'Outras receitas de capital': ([_r('2')], [_r('2.1'), _r('2.4')]),
+}
 
 
 def baixar(ep, cache, **p):
@@ -134,6 +161,26 @@ def linha(ente, ano, cache):
         r[n] = valor(dd, 'Despesas Liquidadas', k) if dd else None
         if dd and r[n] is None:
             r[n] = 0
+    r['receita_total'] = realizadas.get('TotalReceitas') if dc else None
+    deducoes = [i for i in dc if i['coluna'] in ('Deduções - FUNDEB', 'Outras Deduções da Receita')]
+    r['deducoes_total'] = sum(i['valor'] for i in deducoes if i['cod_conta'] == 'TotalReceitas') if dc else None
+    r['deducoes_correntes'] = sum(i['valor'] for i in deducoes if i['cod_conta'] == 'RO1.0.0.0.00.0.0') if dc else None
+    for n, k in EMPENHADAS.items():
+        r[n] = valor(dd, 'Despesas Empenhadas', k) if dd else None
+    r['_origem'] = {}
+    if dc:
+        for n, (mais, menos) in ORIGENS.items():
+            r['_origem'][n] = round(sum(realizadas.get(c, 0) for c in mais) - sum(realizadas.get(c, 0) for c in menos), 2)
+    r['_funcao'] = {}
+    de = baixar('dca', cache, an_exercicio=ano, no_anexo='DCA-Anexo I-E', id_ente=cod)
+    for i in de:
+        if i['coluna'] != 'Despesas Liquidadas':
+            continue
+        if i['conta'].startswith('Despesas Intraor'):
+            break  # o bloco seguinte repete as funções para as despesas intraorçamentárias
+        m = re.match(r'(\d\d) - (.+)', i['conta'])
+        if m:
+            r['_funcao'][f'{m[1]} - {m[2].strip()}'] = round(i['valor'], 2)
     return r
 
 
@@ -166,6 +213,18 @@ def main():
         w.writeheader()
         for r in linhas:
             w.writerow({k: ('' if r.get(k) is None else (round(r[k], 2) if isinstance(r[k], float) else r[k])) for k in CAMPOS})
+    with open(os.path.join(RAIZ, 'dados', 'mt', 'receita_origem_mt.csv'), 'w', newline='', encoding='utf-8') as fh:
+        w = csv.writer(fh, delimiter=';')
+        w.writerow(['cod_ibge', 'municipio', 'ano', 'origem', 'arrecadada'])
+        for r in linhas:
+            for n, v in r['_origem'].items():
+                w.writerow([r['cod_ibge'], r['municipio'], r['ano'], n, v])
+    with open(os.path.join(RAIZ, 'dados', 'mt', 'despesa_funcao_mt.csv'), 'w', newline='', encoding='utf-8') as fh:
+        w = csv.writer(fh, delimiter=';')
+        w.writerow(['cod_ibge', 'municipio', 'ano', 'funcao', 'liquidado'])
+        for r in linhas:
+            for n, v in sorted(r['_funcao'].items()):
+                w.writerow([r['cod_ibge'], r['municipio'], r['ano'], n, v])
     print(f'{len(linhas)} linhas em {saida}', file=sys.stderr)
 
 

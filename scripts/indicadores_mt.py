@@ -28,7 +28,13 @@ GRUPOS = [(5000, 'Grupo 1 (até 5 mil hab.)'), (10000, 'Grupo 2 (5 a 10 mil hab.
           (50000, 'Grupo 4 (20 a 50 mil hab.)'), (100000, 'Grupo 5 (50 a 100 mil hab.)'), (10 ** 9, 'Grupo 6 (mais de 100 mil hab.)')]
 # variáveis em reais levadas para a página (por município e ano)
 VARS = ['rcl', 'receita_corrente', 'receita_tributaria', 'iptu', 'iss', 'itbi', 'fpm', 'icms', 'sus_uniao', 'sus_estado',
-        'fundeb', 'despesa_total_pessoal', 'caixa_liquida_apos_rp_nv', 'investimentos', 'juros', 'amortizacao']
+        'fundeb', 'despesa_total_pessoal', 'caixa_liquida_apos_rp_nv', 'investimentos', 'juros', 'amortizacao',
+        'receita_total', 'deducoes_total', 'receita_corrente', 'deducoes_correntes', 'despesa_empenhada_total',
+        'despesa_corrente_empenhada']
+VARS = list(dict.fromkeys(VARS))
+# indicadores no padrão do Radar Situação Fiscal do TCE-MT que o SICONFI permite calcular
+TCE = ['Despesa com pessoal do Executivo (% da RCL)', 'Despesa corrente ÷ receita corrente (art. 167-A, %)',
+       'Resultado orçamentário (% da RCL)', 'Receita tributária própria por habitante (R$)']
 
 
 # cobertura vacinal de crianças: (rótulo, meta %, idade em anos, [(imunobiológico, dose), ...])
@@ -94,6 +100,16 @@ def main():
             pop[int(r['cod_ibge'])] = {a: int(r[c]) if r[c] else None for a, c in
                                        (('2021', 'estimativa_2021'), ('2022', 'censo_2022'), ('2023', 'censo_2022'),
                                         ('2024', 'estimativa_2024'), ('2025', 'estimativa_2025'))}
+    origens, funcoes = {}, {}
+    with open(os.path.join(MT, 'receita_origem_mt.csv'), encoding='utf-8') as f:
+        for r in csv.DictReader(f, delimiter=';'):
+            origens.setdefault((int(r['cod_ibge']), int(r['ano'])), {})[r['origem']] = float(r['arrecadada'])
+    with open(os.path.join(MT, 'despesa_funcao_mt.csv'), encoding='utf-8') as f:
+        for r in csv.DictReader(f, delimiter=';'):
+            funcoes.setdefault((int(r['cod_ibge']), int(r['ano'])), {})[r['funcao']] = float(r['liquidado'])
+    ORIG = list(dict.fromkeys(o for d in origens.values() for o in d))
+    FUN = sorted({f for d in funcoes.values() for f in d})
+    tce_linhas = []
     linhas = []
     with open(os.path.join(MT, 'siconfi_mt.csv'), encoding='utf-8') as f:
         for r in csv.DictReader(f, delimiter=';'):
@@ -130,21 +146,41 @@ def main():
                     **{f'{k}_rcl': '' if x.get(k) is None else round(x[k] * 100, 2) for k in CORTES},
                     **{f'nota_{k}': '' if notas[k] is None else round(notas[k], 3) for k in CORTES},
                     'indice': '' if indice is None else round(indice, 3), 'conceito': conceito, 'observacao': obs})
+        # indicadores no padrão do TCE-MT (receita líquida = bruta - deduções para o FUNDEB e outras)
+        tce = [None] * len(TCE)
+        if r['periodo_rgf'] and rcl and rc and 0.6 <= rcl / rc <= 1.05:
+            tce[0] = num(r['pct_pessoal_rcl'])
+        if v['receita_total'] is not None and v['despesa_empenhada_total'] is not None:
+            rc_liq = rc - (v['deducoes_correntes'] or 0)
+            if rc_liq and v['despesa_corrente_empenhada'] is not None:
+                tce[1] = round(v['despesa_corrente_empenhada'] / rc_liq * 100, 2)
+            if tce[0] is not None:
+                tce[2] = round((v['receita_total'] - (v['deducoes_total'] or 0) - v['despesa_empenhada_total']) / rcl * 100, 2)
+        if v['receita_tributaria'] is not None and p:
+            tce[3] = round(v['receita_tributaria'] / p, 2)
+        tce_linhas.append([cod, r['municipio'], ano] + ['' if t is None else t for t in tce])
         m = mun.setdefault(cod, {'c': cod, 'n': r['municipio'], 'pop': pop.get(cod, {}), 'a': {}})
         m['a'][ano] = {'v': [None if v[k] is None else round(v[k]) for k in VARS],
                        'x': [None if x.get(k) is None else round(x[k] * 100, 2) for k in CORTES],
                        'nt': [None if notas[k] is None else round(notas[k], 3) for k in CORTES],
-                       'i': None if indice is None else round(indice, 3), 'per': r['periodo_rgf'], 'obs': obs}
+                       'i': None if indice is None else round(indice, 3), 'per': r['periodo_rgf'], 'obs': obs,
+                       'o': [round(origens[(cod, ano)].get(o, 0)) for o in ORIG] if (cod, ano) in origens else None,
+                       'f': [round(funcoes[(cod, ano)].get(fn, 0)) for fn in FUN] if funcoes.get((cod, ano)) else None,
+                       't': tce}
     campos = list(out[0].keys())
     with open(os.path.join(MT, 'indice_gestao_fiscal_mt.csv'), 'w', newline='', encoding='utf-8') as f:
         w = csv.DictWriter(f, campos, delimiter=';')
         w.writeheader()
         w.writerows(sorted(out, key=lambda o: (o['municipio'], o['ano'])))
+    with open(os.path.join(MT, 'indicadores_padrao_tce_mt.csv'), 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f, delimiter=';')
+        w.writerow(['cod_ibge', 'municipio', 'ano'] + TCE)
+        w.writerows(sorted(tce_linhas, key=lambda t: (t[1], t[2])))
     for m in mun.values():
         p24 = m['pop'].get('2024') or m['pop'].get('2025') or m['pop'].get('2022')
         m['g'] = next(i for i, (lim, _) in enumerate(GRUPOS) if (p24 or 0) <= lim) if p24 else None
     bloco = {'VARS': VARS, 'PIL': list(CORTES), 'CORTES': CORTES, 'GRUPOS': [g for _, g in GRUPOS],
-             'CONC': [[lim, c, d] for lim, c, d in CONCEITOS],
+             'CONC': [[lim, c, d] for lim, c, d in CONCEITOS], 'ORIG': ORIG, 'FUN': FUN, 'TCE': TCE,
              'M': sorted(mun.values(), key=lambda m: m['n']),
              'VAC': vacinacao(2025, list(mun))}
     js = json.dumps(bloco, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')

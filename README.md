@@ -20,7 +20,8 @@ Painel das finanças municipais, da saúde e da educação dos seis polos da dis
 - **Assistência, agricultura e saneamento**: gasto da função ao lado do Cadastro Único, Bolsa Família e BPC (MDS), da produção agrícola e do rebanho (IBGE, PAM e PPM) e de água e esgoto nos domicílios (Censo 2022).
 - **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
 - **Mato Grosso: gestão fiscal**: os 142 municípios do estado, com busca por nome. Índice de gestão fiscal construído com os cinco pilares do IGFM do TCE-MT (receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida), conceito de A a D, posição no estado, comparação com a mediana do grupo populacional, receita própria e transferências (FPM, ICMS, FUNDEB e SUS) por habitante, ranking de 2021 a 2025 e cobertura vacinal de crianças em 2025 (BCG, pentavalente, pólio, pneumocócica, rotavírus e tríplice viral), com um gráfico do repasse do SUS por habitante contra a cobertura média.
-- **Comparar polos**: gasto por habitante em cada função de governo e indicadores fiscais lado a lado.
+- **Mato Grosso: receitas e despesas**: para os 142 municípios, composição da receita de 2021 a 2025 (tributos próprios, União, Estado, FUNDEB e outras), receita por origem e despesa liquidada por função de governo por habitante, com a mediana do grupo populacional.
+- **Comparar municípios**: qualquer município de MT ao lado do seu grupo populacional, dos polos ou de todo o estado: gasto por habitante em cada função de governo e indicadores no padrão do Radar Situação Fiscal do TCE-MT (pessoal, art. 167-A, resultado orçamentário e receita própria por habitante), recalculados com o SICONFI.
 - **Valores nominais ou em reais de 2025**: seletor no topo que corrige os valores pelo IPCA.
 - **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
 - **Pesquisar**: busca por palavra em todas as secretarias e receitas.
@@ -58,6 +59,9 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `educacao_ideb.csv` | Ideb, meta, nota Saeb e rendimento por etapa e rede (2017 a 2025) |
 | `educacao_matriculas_2025.csv` | Matrículas da educação básica por rede e etapa (Censo Escolar 2025) |
 | `mt/siconfi_mt.csv` | Os 142 municípios de MT, 2021 a 2025: RCL, despesa com pessoal, caixa e restos a pagar (RGF do Executivo), receita tributária, IPTU, ISS, ITBI, FPM, ICMS, FUNDEB, SUS da União e do Estado (DCA I-C) e investimentos, juros e amortização (DCA I-D) |
+| `mt/receita_origem_mt.csv` | Receita arrecadada por origem (bruta), por município e ano (DCA I-C) |
+| `mt/despesa_funcao_mt.csv` | Despesa liquidada por função de governo, por município e ano (DCA I-E) |
+| `mt/indicadores_padrao_tce_mt.csv` | Pessoal (% da RCL), despesa corrente ÷ receita corrente, resultado orçamentário (% da RCL) e receita tributária própria por habitante |
 | `mt/indice_gestao_fiscal_mt.csv` | Indicadores (% da RCL), notas de 0 a 1, índice e conceito de cada município e ano |
 | `mt/vacinacao_doses_mt_2025.csv` | Doses aplicadas em 2025 em residentes de MT, por município, imunobiológico, dose e idade (microdados do PNI) |
 | `mt/nascidos_vivos_mt_2025.csv` | Nascidos vivos de 2025 por município de residência (SINASC) |
