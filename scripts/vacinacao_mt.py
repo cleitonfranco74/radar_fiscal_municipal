@@ -35,7 +35,26 @@ def linhas_zip(url):
         break
 
 
-def doses_mes(ano, mes):
+def doses_mes(ano, mes, cache):
+    """Soma as doses de um mês; guarda o resultado em cache e repete se o download cair."""
+    arq = os.path.join(cache, f'doses_{mes}_{ano}.csv')
+    if os.path.exists(arq):
+        with open(arq, encoding='utf-8') as fh:
+            return collections.Counter({tuple(r[:5]): int(r[5]) for r in csv.reader(fh, delimiter=';')})
+    for tentativa in range(3):
+        try:
+            cont = _doses_mes(ano, mes)
+            break
+        except (OSError, Exception) as e:
+            print(f'{mes}/{ano}: falhou ({e}); tentativa {tentativa + 2}', file=sys.stderr, flush=True)
+            if tentativa == 2:
+                raise
+    with open(arq, 'w', newline='', encoding='utf-8') as fh:
+        csv.writer(fh, delimiter=';').writerows([*k, v] for k, v in cont.items())
+    return cont
+
+
+def _doses_mes(ano, mes):
     url = f'{BASE}PNI/csv/vacinacao_{mes}_{ano}_csv.zip'
     cont = collections.Counter()
     it = linhas_zip(url)
@@ -74,10 +93,12 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--ano', type=int, default=2025)
     ap.add_argument('--threads', type=int, default=3)
+    ap.add_argument('--cache', default=os.path.join(RAIZ, '.cache_pni'))
     a = ap.parse_args()
+    os.makedirs(a.cache, exist_ok=True)
     total = collections.Counter()
     with ThreadPoolExecutor(a.threads) as ex:
-        for c in ex.map(lambda m: doses_mes(a.ano, m), MESES):
+        for c in ex.map(lambda m: doses_mes(a.ano, m, a.cache), MESES):
             total.update(c)
     saida = os.path.join(RAIZ, 'dados', 'mt', f'vacinacao_doses_mt_{a.ano}.csv')
     with open(saida, 'w', newline='', encoding='utf-8') as fh:
