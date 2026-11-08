@@ -1,14 +1,8 @@
 # Radar Fiscal de Mato Grosso
 
-Painel das finanças municipais, da saúde e da educação dos seis polos da disciplina **Introdução à Economia** (Bacharelado em Administração Pública EaD, UNEMAT/DEAD, 2026/2), organizado por secretaria, com dados do **Radar de Controle Público do TCE-MT**.
+Painel das finanças dos 142 municípios de Mato Grosso: índice de gestão fiscal, indicadores no padrão do TCE-MT, receitas, despesa por função de governo e vacinação, com dados do SICONFI (Tesouro Nacional), do Ministério da Saúde e do IBGE. Para seis municípios (Ribeirão Cascalheira, São Félix do Araguaia, Água Boa, Canarana, Arenápolis e Alto Araguaia) traz também o detalhamento por secretaria do **Radar de Controle Público do TCE-MT**. Material de apoio da disciplina **Introdução à Economia** (Bacharelado em Administração Pública EaD, UNEMAT/DEAD).
 
 **Acesse o painel:** https://cleitonfranco74.github.io/radar_fiscal_municipal/
-
-| Horário da aula síncrona | Polos |
-|---|---|
-| 19h | Ribeirão Cascalheira, São Félix do Araguaia |
-| 20h | Água Boa, Canarana |
-| 21h | Arenápolis, Alto Araguaia |
 
 ## O que o painel mostra
 
@@ -21,7 +15,7 @@ Painel das finanças municipais, da saúde e da educação dos seis polos da dis
 - **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
 - **Mato Grosso: gestão fiscal**: os 142 municípios do estado, com busca por nome. Índice de gestão fiscal construído com os cinco pilares do IGFM do TCE-MT (receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida), conceito de A a D, posição no estado, comparação com a mediana do grupo populacional, receita própria e transferências (FPM, ICMS, FUNDEB e SUS) por habitante, ranking de 2021 a 2025 e cobertura vacinal de crianças em 2025 (BCG, pentavalente, pólio, pneumocócica, rotavírus e tríplice viral), com um gráfico do repasse do SUS por habitante contra a cobertura média.
 - **Mato Grosso: receitas e despesas**: para os 142 municípios, composição da receita de 2021 a 2025 (tributos próprios, União, Estado, FUNDEB e outras), receita por origem e despesa liquidada por função de governo por habitante, com a mediana do grupo populacional.
-- **Comparar municípios**: qualquer município de MT ao lado do seu grupo populacional, dos polos ou de todo o estado: gasto por habitante em cada função de governo e indicadores no padrão do Radar Situação Fiscal do TCE-MT (pessoal, art. 167-A, resultado orçamentário e receita própria por habitante), recalculados com o SICONFI.
+- **Comparar municípios**: qualquer município de MT ao lado do seu grupo populacional ou de todo o estado: gasto por habitante em cada função de governo e indicadores no padrão do Radar Situação Fiscal do TCE-MT (pessoal, art. 167-A, resultado orçamentário e receita própria por habitante), recalculados com o SICONFI.
 - **Valores nominais ou em reais de 2025**: seletor no topo que corrige os valores pelo IPCA.
 - **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
 - **Pesquisar**: busca por palavra em todas as secretarias e receitas.
@@ -32,7 +26,7 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 
 | Arquivo | Conteúdo |
 |---|---|
-| `municipios.csv` | Polo, população, grupo populacional e região |
+| `municipios.csv` | Os seis municípios com detalhamento do TCE-MT: horário da turma, população, grupo populacional e região |
 | `despesa_natureza.csv` | Empenhado, liquidado e pago por órgão e natureza da despesa |
 | `despesa_elemento.csv` | Liquidado por órgão e elemento de despesa |
 | `despesa_fonte.csv` | Liquidado por órgão e fonte de recurso |
@@ -89,7 +83,7 @@ Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py`
 - Exercícios de 2021 a 2025 encerrados; 2026 parcial até a data da extração.
 - Valores em reais correntes por padrão; o seletor "Valores" converte para reais de 2025 pelo IPCA. Filtro Orçamento Fiscal e da Seguridade Social (OFSS) do Radar.
 - Por habitante: estimativas do IBGE de cada ano (Censo 2022 para 2022 e 2023).
-- O grupo "Demais Transferências do Município" do Radar Receita corresponde ao FUNDEB nos seis polos.
+- O grupo "Demais Transferências do Município" do Radar Receita corresponde ao FUNDEB nos seis municípios detalhados.
 - No Radar, cada secretaria é um **órgão**. O nome muda de um município para outro e às vezes entre anos; para comparar municípios, use a **função de governo**.
 - São dados declaratórios, não auditados. Para o relatório, confirme cada valor no próprio Radar e registre a data de acesso e os filtros usados.
 
