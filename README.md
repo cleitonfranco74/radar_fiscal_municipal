@@ -76,6 +76,8 @@ Reprodução para estudo, **não é o índice oficial do TCE-MT**. Cada pilar vi
 | Investimentos | Investimentos liquidados (DCA I-D) | 0% | 20% ou mais | 22,5% |
 | Custo da dívida | Juros e amortização (DCA I-D) | 13% ou mais | 0% | 10% |
 
+De 2015 a 2017 muitos municípios não publicaram no SICONFI o quadro de caixa do RGF (anexo 5), e o índice completo existe para cerca de 50 municípios por ano; de 2018 em diante, para mais de 100. O SICONFI usa três planos de contas da receita no período (2015–2017, 2018–2021 e 2022 em diante), convertidos para os mesmos grupos em `scripts/siconfi_mt.py`.
+
 Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py` (API pública do SICONFI, cerca de uma hora), `python scripts/vacinacao_mt.py` (lê os 12 arquivos mensais do PNI, cerca de 22 GB, sem gravá-los; requer `pip install stream-unzip`) e `python scripts/indicadores_mt.py`, que grava os CSV em `dados/mt/` e atualiza os dados dentro do `index.html`. Os cortes ficam em `CORTES`, no início de `scripts/indicadores_mt.py`.
 
 ### Como ler

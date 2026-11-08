@@ -138,8 +138,10 @@ def rgf(anexo, cod, ano, cache):
 
 
 def valor(itens, coluna, cod_conta, conta=None):
+    """Valor de uma conta numa coluna; nomes comparados sem diferenciar maiúsculas (os anos antigos variam)."""
+    coluna, conta = coluna.upper(), conta.upper() if conta else None
     for i in itens:
-        if i['coluna'].startswith(coluna) and i['cod_conta'] == cod_conta and (conta is None or i['conta'].startswith(conta)):
+        if i['coluna'].upper().startswith(coluna) and i['cod_conta'] == cod_conta and (conta is None or i['conta'].upper().startswith(conta)):
             return i['valor']
     return None
 
