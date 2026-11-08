@@ -20,6 +20,10 @@ Painel das finanças dos 142 municípios de Mato Grosso: índice de gestão fisc
 - **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
 - **Pesquisar**: busca por palavra em todas as secretarias e receitas.
 
+### Abas para todos os municípios
+
+Escolhido na lista do topo um município sem o detalhamento do Radar do TCE-MT, as abas Receitas, Elementos de despesa, Situação fiscal, Saúde, Educação e Assistência, agricultura e saneamento passam a usar o SICONFI e o IBGE (2015 a 2025): receita por origem e espécie, principais tributos e transferências por habitante, PIB, despesa por natureza e elemento, indicadores no padrão do TCE-MT, gasto por função e subfunção com a mediana do grupo populacional, repasses do SUS, vacinação 2025 e produção agropecuária. Secretarias, Roteiro da AD2 e Pesquisar continuam só para os seis municípios com dados do TCE-MT, porque dependem da despesa por órgão.
+
 ## Dados
 
 Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UTF-8) e podem ser abertos no Excel, no LibreOffice ou no R:
@@ -60,6 +64,8 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `mt/vacinacao_doses_mt_2025.csv` | Doses aplicadas em 2025 em residentes de MT, por município, imunobiológico, dose e idade (microdados do PNI) |
 | `mt/nascidos_vivos_mt_2025.csv` | Nascidos vivos de 2025 por município de residência (SINASC) |
 | `mt/cobertura_vacinal_mt_2025.csv` | Cobertura vacinal de crianças por município (doses ÷ nascidos vivos, em %) |
+| `mt/municipios/<código>.json` | Detalhamento de cada município, 2015 a 2025: receita por espécie (DCA I-C), despesa por elemento (DCA I-D) e por subfunção (DCA I-E) |
+| `mt/ibge_mt.csv` | PIB (2015 a 2023), área colhida, valor da produção agrícola, soja e rebanho bovino (2015 a 2024), IBGE |
 | `mt/populacao_mt.csv` | População dos 142 municípios: estimativas 2021, 2024 e 2025 e Censo 2022 (IBGE) |
 
 **Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). IBGE: [SIDRA, tabela 5938](https://sidra.ibge.gov.br/tabela/5938) (PIB dos Municípios) e [tabela 4709](https://sidra.ibge.gov.br/tabela/4709) (Censo 2022). MDS: [VIS Data](https://aplicacoes.mds.gov.br/sagi/vis/data3/). IBGE: PAM (tabela 5457), PPM (tabela 3939), Censo 2022 (tabelas 6803 e 6805), estimativas de população (tabela 6579) e IPCA (tabela 1737). Tesouro Nacional: [SICONFI](https://siconfi.tesouro.gov.br/) (RGF e DCA, pela [API de dados abertos](https://apidatalake.tesouro.gov.br/docs/siconfi/)). Extração em 26 e 27/09/2026 (TCE-MT e INEP), 08/10/2026 (IBGE e MDS) e 08/11/2026 (SICONFI e população dos 142 municípios).
@@ -78,7 +84,7 @@ Reprodução para estudo, **não é o índice oficial do TCE-MT**. Cada pilar vi
 
 De 2015 a 2017 muitos municípios não publicaram no SICONFI o quadro de caixa do RGF (anexo 5), e o índice completo existe para cerca de 50 municípios por ano; de 2018 em diante, para mais de 100. O SICONFI usa três planos de contas da receita no período (2015–2017, 2018–2021 e 2022 em diante), convertidos para os mesmos grupos em `scripts/siconfi_mt.py`.
 
-Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py` (API pública do SICONFI, cerca de uma hora), `python scripts/vacinacao_mt.py` (lê os 12 arquivos mensais do PNI, cerca de 22 GB, sem gravá-los; requer `pip install stream-unzip`) e `python scripts/indicadores_mt.py`, que grava os CSV em `dados/mt/` e atualiza os dados dentro do `index.html`. Os cortes ficam em `CORTES`, no início de `scripts/indicadores_mt.py`.
+Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py` (API pública do SICONFI, cerca de uma hora), `python scripts/vacinacao_mt.py` (lê os 12 arquivos mensais do PNI, cerca de 22 GB, sem gravá-los; requer `pip install stream-unzip`) `python scripts/ibge_mt.py`, `python scripts/detalhe_mt.py` e `python scripts/indicadores_mt.py`, que grava os CSV em `dados/mt/` e atualiza os dados dentro do `index.html`. Os cortes ficam em `CORTES`, no início de `scripts/indicadores_mt.py`.
 
 ### Como ler
 
