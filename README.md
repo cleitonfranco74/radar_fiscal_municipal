@@ -19,6 +19,7 @@ Painel das finanças municipais, da saúde e da educação dos seis polos da dis
 - **Saúde: gasto e resultado**: gasto em saúde por habitante ao lado da cobertura vacinal, da cobertura da Saúde da Família, de médicos e leitos por mil habitantes e da população com plano privado.
 - **Assistência, agricultura e saneamento**: gasto da função ao lado do Cadastro Único, Bolsa Família e BPC (MDS), da produção agrícola e do rebanho (IBGE, PAM e PPM) e de água e esgoto nos domicílios (Censo 2022).
 - **Educação: gasto e resultado**: gasto por aluno da rede municipal ao lado do Ideb e das matrículas por rede e etapa.
+- **Mato Grosso: gestão fiscal**: os 142 municípios do estado, com busca por nome. Índice de gestão fiscal construído com os cinco pilares do IGFM do TCE-MT (receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida), conceito de A a D, posição no estado, comparação com a mediana do grupo populacional, receita própria e transferências (FPM, ICMS, FUNDEB e SUS) por habitante, ranking de 2021 a 2025 e cobertura vacinal de crianças em 2025 (BCG, pentavalente, pólio, pneumocócica, rotavírus e tríplice viral), com um gráfico do repasse do SUS por habitante contra a cobertura média.
 - **Comparar polos**: gasto por habitante em cada função de governo e indicadores fiscais lado a lado.
 - **Valores nominais ou em reais de 2025**: seletor no topo que corrige os valores pelo IPCA.
 - **Quadro para o Word**: a ficha de indicadores da secretaria pode ser baixada como quadro com título e fonte.
@@ -56,8 +57,28 @@ Os arquivos em [`dados/`](dados/) estão em CSV (separador `;`, codificação UT
 | `saude_estrutura_cnes.csv` | Equipes, profissionais, médicos, estabelecimentos e leitos (CNES, 08/2026) |
 | `educacao_ideb.csv` | Ideb, meta, nota Saeb e rendimento por etapa e rede (2017 a 2025) |
 | `educacao_matriculas_2025.csv` | Matrículas da educação básica por rede e etapa (Censo Escolar 2025) |
+| `mt/siconfi_mt.csv` | Os 142 municípios de MT, 2021 a 2025: RCL, despesa com pessoal, caixa e restos a pagar (RGF do Executivo), receita tributária, IPTU, ISS, ITBI, FPM, ICMS, FUNDEB, SUS da União e do Estado (DCA I-C) e investimentos, juros e amortização (DCA I-D) |
+| `mt/indice_gestao_fiscal_mt.csv` | Indicadores (% da RCL), notas de 0 a 1, índice e conceito de cada município e ano |
+| `mt/vacinacao_doses_mt_2025.csv` | Doses aplicadas em 2025 em residentes de MT, por município, imunobiológico, dose e idade (microdados do PNI) |
+| `mt/nascidos_vivos_mt_2025.csv` | Nascidos vivos de 2025 por município de residência (SINASC) |
+| `mt/cobertura_vacinal_mt_2025.csv` | Cobertura vacinal de crianças por município (doses ÷ nascidos vivos, em %) |
+| `mt/populacao_mt.csv` | População dos 142 municípios: estimativas 2021, 2024 e 2025 e Censo 2022 (IBGE) |
 
-**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). IBGE: [SIDRA, tabela 5938](https://sidra.ibge.gov.br/tabela/5938) (PIB dos Municípios) e [tabela 4709](https://sidra.ibge.gov.br/tabela/4709) (Censo 2022). MDS: [VIS Data](https://aplicacoes.mds.gov.br/sagi/vis/data3/). IBGE: PAM (tabela 5457), PPM (tabela 3939), Censo 2022 (tabelas 6803 e 6805), estimativas de população (tabela 6579) e IPCA (tabela 1737). Extração em 26 e 27/09/2026 (TCE-MT e INEP) e 08/10/2026 (IBGE e MDS).
+**Fonte:** Tribunal de Contas do Estado de Mato Grosso, Radar de Controle Público: módulos [Despesas](https://radardespesa.tce.mt.gov.br/), [Receita](https://radarreceita.tce.mt.gov.br/) e [Situação Fiscal dos Municípios](https://radarsituacaofiscalmunicipios.tce.mt.gov.br/), base APLIC, e [Radar Saúde](https://radarsaude.tce.mt.gov.br/) (dados do Ministério da Saúde, CNES e ANS). INEP: [resultados do Ideb](https://www.gov.br/inep/pt-br/areas-de-atuacao/pesquisas-estatisticas-e-indicadores/ideb/resultados) e [Sinopse Estatística da Educação Básica 2025](https://www.gov.br/inep/pt-br/acesso-a-informacao/dados-abertos/sinopses-estatisticas/educacao-basica). IBGE: [SIDRA, tabela 5938](https://sidra.ibge.gov.br/tabela/5938) (PIB dos Municípios) e [tabela 4709](https://sidra.ibge.gov.br/tabela/4709) (Censo 2022). MDS: [VIS Data](https://aplicacoes.mds.gov.br/sagi/vis/data3/). IBGE: PAM (tabela 5457), PPM (tabela 3939), Censo 2022 (tabelas 6803 e 6805), estimativas de população (tabela 6579) e IPCA (tabela 1737). Tesouro Nacional: [SICONFI](https://siconfi.tesouro.gov.br/) (RGF e DCA, pela [API de dados abertos](https://apidatalake.tesouro.gov.br/docs/siconfi/)). Extração em 26 e 27/09/2026 (TCE-MT e INEP), 08/10/2026 (IBGE e MDS) e 08/11/2026 (SICONFI e população dos 142 municípios).
+
+### Índice de gestão fiscal (aba Mato Grosso)
+
+Reprodução para estudo, **não é o índice oficial do TCE-MT**. Cada pilar vira uma nota de 0 a 1, linear entre os cortes abaixo; o índice é a soma ponderada e o conceito segue as faixas do IFGF da FIRJAN, em que o IGFM se baseia (A ≥ 0,8; B 0,6 a 0,8; C 0,4 a 0,6; D < 0,4).
+
+| Pilar | Indicador (÷ receita corrente líquida) | Nota 0 | Nota 1 | Peso |
+|---|---|---|---|---|
+| Receita própria | Receita tributária própria (impostos, taxas e contribuição de melhoria) | 0% | 25% ou mais | 22,5% |
+| Gasto com pessoal | Despesa total com pessoal do Executivo (RGF) | 60% ou mais | 30% ou menos | 22,5% |
+| Liquidez | Caixa de recursos não vinculados após restos a pagar (RGF Anexo 5) | 0% ou menos | 10% ou mais | 22,5% |
+| Investimentos | Investimentos liquidados (DCA I-D) | 0% | 20% ou mais | 22,5% |
+| Custo da dívida | Juros e amortização (DCA I-D) | 13% ou mais | 0% | 10% |
+
+Para atualizar: `python scripts/populacao_mt.py`, `python scripts/siconfi_mt.py` (API pública do SICONFI, cerca de uma hora), `python scripts/vacinacao_mt.py` (lê os 12 arquivos mensais do PNI, cerca de 22 GB, sem gravá-los; requer `pip install stream-unzip`) e `python scripts/indicadores_mt.py`, que grava os CSV em `dados/mt/` e atualiza os dados dentro do `index.html`. Os cortes ficam em `CORTES`, no início de `scripts/indicadores_mt.py`.
 
 ### Como ler
 
