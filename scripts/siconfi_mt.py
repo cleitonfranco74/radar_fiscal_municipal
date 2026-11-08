@@ -1,6 +1,6 @@
 """Extrai do SICONFI (Tesouro Nacional) os dados fiscais dos 142 municípios de MT.
 
-Uso:  python scripts/siconfi_mt.py  [--anos 2021-2025] [--cache pasta]
+Uso:  python scripts/siconfi_mt.py  [--anos 2015-2025] [--cache pasta]
 
 Gera dados/mt/siconfi_mt.csv: uma linha por município e ano, com os valores
 usados nos indicadores de gestão fiscal (ver scripts/indicadores_mt.py).
@@ -22,20 +22,20 @@ API = 'https://apidatalake.tesouro.gov.br/ords/siconfi/tt/'
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # conta do DCA I-C (coluna "Receitas Brutas Realizadas") -> nome da variável.
-# Cada variável tem os códigos do ementário atual e, depois de "|", os do ementário
-# antigo (usado até 2021); vários códigos na mesma lista são somados.
+# Cada variável tem os códigos do ementário atual (2022 em diante) e, separados por "|",
+# os de 2018 a 2021 e os de 2015 a 2017; vários códigos na mesma lista são somados.
 RECEITAS = {
-    'receita_corrente': ['RO1.0.0.0.00.0.0'],
-    'receita_tributaria': ['RO1.1.0.0.00.0.0'],      # impostos, taxas e contribuição de melhoria
-    'iptu': ['RO1.1.1.2.50.0.0', '|', 'RO1.1.1.8.01.1.0'],
-    'iss': ['RO1.1.1.4.51.1.0', '|', 'RO1.1.1.8.02.3.0'],
-    'itbi': ['RO1.1.1.2.53.0.0', '|', 'RO1.1.1.8.01.4.0'],
-    'fpm': ['RO1.7.1.1.51.0.0', '|', 'RO1.7.1.8.01.2.0', 'RO1.7.1.8.01.3.0', 'RO1.7.1.8.01.4.0'],
-    'icms': ['RO1.7.2.1.50.0.0', '|', 'RO1.7.2.8.01.1.0'],
-    'sus_uniao': ['RO1.7.1.3.00.0.0', '|', 'RO1.7.1.8.03.0.0', 'RO1.7.1.8.04.0.0'],
-    'sus_estado': ['RO1.7.2.3.00.0.0', '|', 'RO1.7.2.8.03.0.0'],
-    'fundeb': ['RO1.7.5.1.00.0.0', '|', 'RO1.7.5.8.01.0.0'],
-    'operacoes_credito': ['RO2.1.0.0.00.0.0'],
+    'receita_corrente': ['RO1.0.0.0.00.0.0', '|', 'RO1.0.0.0.00.00.00'],
+    'receita_tributaria': ['RO1.1.0.0.00.0.0', '|', 'RO1.1.0.0.00.00.00'],      # impostos, taxas e contribuição de melhoria
+    'iptu': ['RO1.1.1.2.50.0.0', '|', 'RO1.1.1.8.01.1.0', '|', 'RO1.1.1.2.02.00.00'],
+    'iss': ['RO1.1.1.4.51.1.0', '|', 'RO1.1.1.8.02.3.0', '|', 'RO1.1.1.3.05.00.00'],
+    'itbi': ['RO1.1.1.2.53.0.0', '|', 'RO1.1.1.8.01.4.0', '|', 'RO1.1.1.2.08.00.00'],
+    'fpm': ['RO1.7.1.1.51.0.0', '|', 'RO1.7.1.8.01.2.0', 'RO1.7.1.8.01.3.0', 'RO1.7.1.8.01.4.0', '|', 'RO1.7.2.1.01.02.00'],
+    'icms': ['RO1.7.2.1.50.0.0', '|', 'RO1.7.2.8.01.1.0', '|', 'RO1.7.2.2.01.01.00'],
+    'sus_uniao': ['RO1.7.1.3.00.0.0', '|', 'RO1.7.1.8.03.0.0', 'RO1.7.1.8.04.0.0', '|', 'RO1.7.2.1.33.00.00'],
+    'sus_estado': ['RO1.7.2.3.00.0.0', '|', 'RO1.7.2.8.03.0.0', '|', 'RO1.7.2.2.33.00.00'],
+    'fundeb': ['RO1.7.5.1.00.0.0', '|', 'RO1.7.5.8.01.0.0', '|', 'RO1.7.2.4.01.00.00'],
+    'operacoes_credito': ['RO2.1.0.0.00.0.0', '|', 'RO2.1.0.0.00.00.00'],
 }
 # conta do DCA I-D (coluna "Despesas Liquidadas")
 DESPESAS = {
@@ -70,6 +70,25 @@ ORIGENS = {
     'Outras transferências': ([_r('1.7'), _r('2.4')], [_r('1.7.1'), _r('1.7.2'), _r('1.7.5'), _r('2.4.1'), _r('2.4.2')]),
     'Operações de crédito': ([_r('2.1')], []),
     'Outras receitas de capital': ([_r('2')], [_r('2.1'), _r('2.4')]),
+}
+
+
+# 2015 a 2017: códigos com sete níveis e transferências agrupadas de outro jeito
+def _ra(n):
+    return f'RO{n}' + '.0' * (3 - n.count('.')) + '.00.00.00'
+
+
+ORIGENS_2015 = {
+    'Tributos próprios': ([_ra('1.1')], []),
+    'Contribuições': ([_ra('1.2')], []),
+    'Patrimonial, serviços e outras correntes': ([_ra('1.3'), _ra('1.4'), _ra('1.5'), _ra('1.6'), _ra('1.9')], []),
+    'Transferências da União': ([_ra('1.7.2.1'), _ra('2.4.2.1'), _ra('1.7.6.1'), _ra('2.4.7.1')], []),
+    'Transferências do Estado': ([_ra('1.7.2.2'), _ra('2.4.2.2'), _ra('1.7.6.2'), _ra('2.4.7.2')], []),
+    'FUNDEB': ([_ra('1.7.2.4')], []),
+    'Outras transferências': ([_ra('1.7'), _ra('2.4')], [_ra('1.7.2.1'), _ra('2.4.2.1'), _ra('1.7.6.1'), _ra('2.4.7.1'),
+                                                          _ra('1.7.2.2'), _ra('2.4.2.2'), _ra('1.7.6.2'), _ra('2.4.7.2'), _ra('1.7.2.4')]),
+    'Operações de crédito': ([_ra('2.1')], []),
+    'Outras receitas de capital': ([_ra('2')], [_ra('2.1'), _ra('2.4')]),
 }
 
 
@@ -119,8 +138,10 @@ def rgf(anexo, cod, ano, cache):
 
 
 def valor(itens, coluna, cod_conta, conta=None):
+    """Valor de uma conta numa coluna; nomes comparados sem diferenciar maiúsculas (os anos antigos variam)."""
+    coluna, conta = coluna.upper(), conta.upper() if conta else None
     for i in itens:
-        if i['coluna'].startswith(coluna) and i['cod_conta'] == cod_conta and (conta is None or i['conta'].startswith(conta)):
+        if i['coluna'].upper().startswith(coluna) and i['cod_conta'] == cod_conta and (conta is None or i['conta'].upper().startswith(conta)):
             return i['valor']
     return None
 
@@ -137,6 +158,11 @@ def linha(ente, ano, cache):
     nv = 'TOTAL DOS RECURSOS NÃO VINCULADOS'
     r['caixa_bruta_nv'] = valor(a5, 'DISPONIBILIDADE DE CAIXA BRUTA', 'DisponibilidadeDeCaixaBruta', nv)
     r['caixa_liquida_apos_rp_nv'] = valor(a5, 'DISPONIBILIDADE DE CAIXA LÍQUIDA (APÓS', 'DisponibilidadeDeCaixaLiquidaAposRP', nv)
+    if r['caixa_liquida_apos_rp_nv'] is None:  # anos antigos: caixa líquida menos restos a pagar não processados
+        cl = valor(a5, 'DISPONIBILIDADE DE CAIXA LÍQUIDA', 'DisponibilidadeDeCaixaLiquida', nv) or valor(a5, 'DISPONIBILIDADE DE CAIXA LÍQUIDA', 'DisponibilidadeDeCaixaLiquida', 'Total dos Recursos Não Vinculados')
+        rpnp = valor(a5, 'RESTOS A PAGAR EMPENHADOS E NÃO LIQUIDADOS DO', 'RestosAPagarEmpenhadosENaoLiquidadosDoExercicio', nv) or valor(a5, 'RESTOS A PAGAR EMPENHADOS E NÃO LIQUIDADOS DO', 'RestosAPagarEmpenhadosENaoLiquidadosDoExercicio', 'Total dos Recursos Não Vinculados')
+        if cl is not None:
+            r['caixa_liquida_apos_rp_nv'] = cl - (rpnp or 0)
     rp = [valor(a5, c, k, nv) for c, k in (
         ('De Exercícios Anteriores', 'RestosAPagarLiquidadosENaoPagosDeExerciciosAnteriores'),
         ('Do Exercício', 'RestosAPagarLiquidadosENaoPagosDoExercicio'),
@@ -149,8 +175,7 @@ def linha(ente, ano, cache):
         r[n] = None
         if not dc:
             continue
-        atual, _, antigo = ' '.join(codigos).partition(' | ')
-        for lista in (atual.split(), antigo.split()):
+        for lista in (alt.split() for alt in ' '.join(codigos).split('|')):
             if any(c in realizadas for c in lista):
                 r[n] = sum(realizadas.get(c, 0) for c in lista)
                 break
@@ -162,14 +187,15 @@ def linha(ente, ano, cache):
         if dd and r[n] is None:
             r[n] = 0
     r['receita_total'] = realizadas.get('TotalReceitas') if dc else None
-    deducoes = [i for i in dc if i['coluna'] in ('Deduções - FUNDEB', 'Outras Deduções da Receita')]
+    deducoes = [i for i in dc if i['coluna'].startswith('Deduções') or i['coluna'] == 'Outras Deduções da Receita']
     r['deducoes_total'] = sum(i['valor'] for i in deducoes if i['cod_conta'] == 'TotalReceitas') if dc else None
     r['deducoes_correntes'] = sum(i['valor'] for i in deducoes if i['cod_conta'] == 'RO1.0.0.0.00.0.0') if dc else None
     for n, k in EMPENHADAS.items():
         r[n] = valor(dd, 'Despesas Empenhadas', k) if dd else None
     r['_origem'] = {}
     if dc:
-        for n, (mais, menos) in ORIGENS.items():
+        tabela = ORIGENS_2015 if _ra('1') in realizadas else ORIGENS
+        for n, (mais, menos) in tabela.items():
             r['_origem'][n] = round(sum(realizadas.get(c, 0) for c in mais) - sum(realizadas.get(c, 0) for c in menos), 2)
     r['_funcao'] = {}
     de = baixar('dca', cache, an_exercicio=ano, no_anexo='DCA-Anexo I-E', id_ente=cod)
@@ -186,7 +212,7 @@ def linha(ente, ano, cache):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--anos', default='2021-2025')
+    ap.add_argument('--anos', default='2015-2025')
     ap.add_argument('--cache', default=os.path.join(RAIZ, '.cache_siconfi'))
     ap.add_argument('--threads', type=int, default=4)
     a = ap.parse_args()
