@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Despesas por secretaria, receitas, situação fiscal, saúde e educação dos municípios-polo da disciplina Introdução à Economia (UNEMAT/DEAD), com dados do TCE-MT e do INEP, e índice de gestão fiscal dos 142 municípios de Mato Grosso (SICONFI).">
+<meta name="description" content="Despesas por secretaria, receitas, situação fiscal, saúde e educação dos 142 municípios de Mato Grosso, com dados do SICONFI, do Ministério da Saúde, do IBGE e do Radar de Controle Público do TCE-MT. Material da disciplina Introdução à Economia (UNEMAT/DEAD).">
 <meta charset="utf-8">
 <title>Radar Fiscal de Mato Grosso</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -160,12 +160,12 @@ select{max-width:100%}
     <div>
       <div class="eyebrow">Introdução à Economia · Administração Pública EaD · UNEMAT/DEAD · 2026/2</div>
       <h1>Radar Fiscal de Mato Grosso</h1>
-      <p class="lede">As finanças das prefeituras dos seis polos da turma, secretaria por secretaria, com dados do Radar de Controle Público do TCE-MT. Nas abas Mato Grosso e Comparar municípios, os 142 municípios do estado: índice de gestão fiscal, indicadores no padrão do TCE-MT, receitas, despesa por função e vacinação, com dados do SICONFI e do Ministério da Saúde.</p>
+      <p class="lede">As finanças dos 142 municípios de Mato Grosso: gestão fiscal, receitas, despesas, indicadores no padrão do TCE-MT e vacinação. Para Ribeirão Cascalheira, São Félix do Araguaia, Água Boa, Canarana, Arenápolis e Alto Araguaia, o painel traz também o detalhamento por secretaria do Radar de Controle Público do TCE-MT.</p>
     </div>
     <div class="stamp">Dados consultados em 26/09/2026<br>2021–2025 exercícios encerrados · 2026 parcial</div>
   </div>
   <div class="pickers">
-    <div class="field"><label for="mun">Município (polos da turma)</label><select id="mun"></select></div>
+    <div class="field"><label for="mun">Município</label><select id="mun"></select></div>
     <div class="field"><label for="ano">Exercício</label><select id="ano"></select></div>
     <div class="field"><label for="valores">Valores</label><select id="valores"><option value="nom">Nominais (como no Radar)</option><option value="real">Em reais de 2025 (IPCA)</option></select></div>
   </div>
@@ -381,7 +381,11 @@ const n2 = v => String(Math.round(v)); // CSV numeric
 
 // ---------- header controls ----------
 function renderPickers(){
-  $('#mun').innerHTML = M.map((m,i)=>`<option value="${i}" ${i===S.m?'selected':''}>${esc(m.nome)}</option>`).join('');
+  // os 142 municípios em ordem alfabética; os seis com detalhamento do TCE-MT usam também as abas detalhadas
+  const selPolo = mtPolo.has(S.mt) ? M.findIndex(mm=>mtIdx.get(norm(mm.nome))===S.mt) : -1;
+  if(selPolo>=0 && selPolo!==S.m){ S.m=selPolo; store.set('m',S.m); }
+  $('#mun').innerHTML = MTD.M.map((x,k)=>{ const pm=M.findIndex(mm=>mtIdx.get(norm(mm.nome))===k);
+    return `<option value="${pm>=0?'p'+pm:'m'+k}" ${k===S.mt?'selected':''}>${esc(x.n)}${pm>=0?' · detalhado':''}</option>`; }).join('');
   const vs=$('#valores'); vs.value=S.real?'real':'nom';
   const sel=$('#ano'); sel.innerHTML = YEARS.slice().reverse().map(y=>`<option value="${y}" ${y===S.y?'selected':''}>${y}${y===PARCIAL?' (parcial)':''}</option>`).join('');
 }
@@ -390,7 +394,9 @@ document.addEventListener('click', e=>{
   const t=e.target.closest('.tab'); if(t){ setTab(t.dataset.tab); return; }
   const o=e.target.closest('.org'); if(o){ S.org=+o.dataset.o; store.set('org',S.org); render(); return; }
 });
-$('#mun').addEventListener('change', e=>{ S.m=+e.target.value; S.org=null; store.set('m',S.m); store.set('org',null); const k=mtIdx.get(norm(M[S.m].nome)); if(k!=null){ S.mt=k; store.set('mt',k); } render(); });
+$('#mun').addEventListener('change', e=>{ const v=e.target.value;
+  if(v[0]==='p'){ S.m=+v.slice(1); S.org=null; store.set('m',S.m); store.set('org',null); const k=mtIdx.get(norm(M[S.m].nome)); if(k!=null){ S.mt=k; store.set('mt',k); } render(); }
+  else { S.mt=+v.slice(1); store.set('mt',S.mt); if(POLO_TABS.includes(S.tab)) setTab('mt'); else render(); } });
 $('#ano').addEventListener('change', e=>{ S.y=+e.target.value; store.set('y',S.y); render(); });
 $('#valores').addEventListener('change', e=>{ S.real=e.target.value==='real'; store.set('real',S.real); applyReal(S.real); render(); });
 function setTab(t){ S.tab=t; document.querySelectorAll('.tab').forEach(b=>b.setAttribute('aria-selected', b.dataset.tab===t)); document.querySelectorAll('section.view').forEach(v=>v.hidden = v.id!=='v-'+t);
@@ -548,7 +554,7 @@ function ibgePanel(m){
     </div>
     <div class="grid2">
       <div><h4 style="margin:0 0 6px;font-size:14.5px">De onde vem a riqueza local</h4><p class="sub">Valor adicionado por setor, 2021 (último ano com setores divulgados por município). Barra clara: Mato Grosso.</p>${hbars(items)}</div>
-      <div><h4 style="margin:0 0 6px;font-size:14.5px">PIB por habitante nos seis polos, 2022</h4><p class="sub">Em laranja, ${esc(M[m].nome)}. Mato Grosso: ${reais(pibpcMT())}.</p>${hbars(ord.map(o=>({label:o.n, v:o.v, color:o.i===m?'var(--s2)':'var(--s1)', valText:reais(o.v)})))}</div>
+      <div><h4 style="margin:0 0 6px;font-size:14.5px">PIB por habitante nos seis municípios detalhados, 2022</h4><p class="sub">Em laranja, ${esc(M[m].nome)}. Mato Grosso: ${reais(pibpcMT())}.</p>${hbars(ord.map(o=>({label:o.n, v:o.v, color:o.i===m?'var(--s2)':'var(--s1)', valText:reais(o.v)})))}</div>
     </div>
     <p class="note" style="margin-top:12px">PIB alto não significa prefeitura rica: boa parte da riqueza do agronegócio não é tributada pelo município (o ICMS é estadual e volta só em parte, pela cota-parte). Comparar PIB por habitante com receita própria por habitante ajuda a discutir a autonomia do Eixo D.</p>
   </div>`;
@@ -582,7 +588,7 @@ function renderReceitas(){
       <div class="kpi"><span class="k">Transferências (União + Estado)</span><span class="v">${(()=>{const rc=revComp(m,y); return pct((rc.v[1]+rc.v[2])/rc.tot*100);})()}</span><span class="d">da receita arrecadada, sem RPPS</span></div>
     </div>
     <div class="panel"><div class="row-between"><div><h3>Composição da receita, 2023 a 2025</h3><p class="sub">Participação de cada origem na receita arrecadada dos três últimos exercícios encerrados (Eixo D da AD2), sem a previdência própria, que é dinheiro reservado às aposentadorias e não amplia a capacidade de gasto. Não muda com o exercício escolhido no topo.</p></div>${copyBtn('cp-comp')}</div>${compTable(m)}
-      <p class="sub" style="margin-top:8px">Arrecadação própria = grupo "Receita do Município" do Radar (tributos, contribuições, receitas patrimoniais e de serviços), mais alienação de bens e demais receitas. FUNDEB = grupo "Demais Transferências do Município" do Radar (transferências de outras instituições públicas), que nos seis polos corresponde ao FUNDEB: um fundo formado por impostos do Estado e dos municípios e redistribuído conforme as matrículas. Fonte: TCE-MT, Radar Receita. Confira os valores no Radar e registre a data de acesso.</p></div>
+      <p class="sub" style="margin-top:8px">Arrecadação própria = grupo "Receita do Município" do Radar (tributos, contribuições, receitas patrimoniais e de serviços), mais alienação de bens e demais receitas. FUNDEB = grupo "Demais Transferências do Município" do Radar (transferências de outras instituições públicas), que nesses seis municípios corresponde ao FUNDEB: um fundo formado por impostos do Estado e dos municípios e redistribuído conforme as matrículas. Fonte: TCE-MT, Radar Receita. Confira os valores no Radar e registre a data de acesso.</p></div>
     ${ibgePanel(m)}
     <div class="panel"><h3>Receita arrecadada por origem</h3><p class="sub">R$ milhões por ano. Inclui a receita do regime próprio de previdência (RPPS). * 2026 parcial.</p>${legend(series)}${stackedCols(cols,series,{aria:'Receita arrecadada por origem',W:1000,h:300})}</div>
     <div class="grid2">
@@ -633,10 +639,10 @@ const SEARCH = (()=>{ const out=[];
 function renderPesquisar(){
   const el=$('#v-pesquisar');
   if(!el.dataset.ready){
-    el.innerHTML=`<div class="head-org"><div class="eyebrow">Busca em todas as secretarias e receitas dos seis polos</div><h2>Pesquisar nos dados</h2></div>
+    el.innerHTML=`<div class="head-org"><div class="eyebrow">Busca em todas as secretarias e receitas dos seis municípios detalhados</div><h2>Pesquisar nos dados</h2></div>
     <div class="searchbar">
       <div class="field"><label for="q">Termo</label><input type="search" id="q" placeholder="Ex.: transporte escolar, merenda, iluminação, atenção básica, diárias" autocomplete="off"></div>
-      <div class="field"><label for="qm">Município</label><select id="qm"><option value="-1">Todos os polos</option>${M.map((mm,i)=>`<option value="${i}">${esc(mm.nome)}</option>`).join('')}</select></div>
+      <div class="field"><label for="qm">Município</label><select id="qm"><option value="-1">Todos os seis municípios</option>${M.map((mm,i)=>`<option value="${i}">${esc(mm.nome)}</option>`).join('')}</select></div>
       <div class="field"><label for="qy">Exercício</label><select id="qy"><option value="-1">Todos</option>${YEARS.slice().reverse().map(y=>`<option value="${y}">${y}${y===PARCIAL?' (parcial)':''}</option>`).join('')}</select></div>
       <div class="field"><label for="qt">Tipo</label><select id="qt"><option value="todos">Todos</option><option>Elemento de despesa</option><option>Programa</option><option>Fonte de recurso</option><option>Secretaria (total)</option><option>Receita</option></select></div>
     </div>
@@ -680,7 +686,7 @@ function renderSobre(){
     <li>Filtro do Radar mantido: Orçamento Fiscal e da Seguridade Social (OFSS).</li>
     <li><b>Saúde</b>: cobertura vacinal e planos privados vêm do Radar Saúde (Painel Imunização, com dados do Ministério da Saúde e da ANS); equipes, profissionais, médicos, leitos e estabelecimentos vêm do Painel Gestor do Radar Saúde (CNES, competência 08/2026).</li>
     <li><b>IBGE</b>: PIB a preços correntes 2021 a 2023 e valor adicionado por setor 2021 (SIDRA, tabela 5938; os setores de 2022 e 2023 não estavam divulgados por município na consulta), população do Censo 2022 (tabela 4709). PIB por habitante = PIB 2022 ÷ população do Censo 2022. Consulta em 08/10/2026.</li>
-    <li><b>Composição da receita</b> (aba Receitas): arrecadação própria = grupo "Receita do Município" do Radar Receita, mais alienação de bens e demais receitas. O grupo "Demais Transferências do Município" corresponde, nos seis polos, ao FUNDEB (transferências de outras instituições públicas; conferido em 2021, quando o Radar detalha o FUNDEB). A receita do regime próprio de previdência (RPPS) fica fora do total da composição.</li>
+    <li><b>Composição da receita</b> (aba Receitas): arrecadação própria = grupo "Receita do Município" do Radar Receita, mais alienação de bens e demais receitas. O grupo "Demais Transferências do Município" corresponde, nos seis municípios detalhados, ao FUNDEB (transferências de outras instituições públicas; conferido em 2021, quando o Radar detalha o FUNDEB). A receita do regime próprio de previdência (RPPS) fica fora do total da composição.</li>
     <li><b>População</b>: estimativas do IBGE de cada ano (2021, 2024, 2025 e 2026) e Censo 2022 para 2022 e 2023, ano em que o IBGE não publicou estimativa. A população de 2024 é a mesma usada pelo Radar do TCE-MT. Entre 2021 e 2022 a série muda de base (estimativa para Censo), o que afeta o gasto por habitante; em Alto Araguaia, a estimativa de 2021 era 19.714 e o Censo contou 17.193.</li>
     <li><b>Valores em reais de 2025</b> (seletor "Valores" no topo): cada ano é multiplicado pela variação do IPCA de dezembro daquele ano a dezembro de 2025 (IBGE, SIDRA tabela 1737). 2026 fica sem correção. Os indicadores da aba Situação fiscal e a Pesquisa ficam sempre nominais.</li>
     <li><b>Assistência, agricultura e saneamento</b>: Cadastro Único, Bolsa Família, BPC e CRAS do MDS (VIS Data, posição de dezembro de 2023, 2024 e 2025); área colhida e valor da produção (IBGE, PAM, tabela 5457), rebanho bovino (IBGE, PPM, tabela 3939) e água e esgoto nos domicílios (IBGE, Censo 2022, tabelas 6803 e 6805), consultados em 08/10/2026.</li>
@@ -773,7 +779,7 @@ function renderSaude(){
     <div class="kpi"><span class="k">Médicos por mil habitantes</span><span class="v">${nf2.format(c.med/c.pop*1000)}</span><span class="d">${c.med} médicos no CNES</span></div>
     <div class="kpi"><span class="k">Com plano de saúde privado</span><span class="v">${pl?pct(pl.b/pl.p*100):'–'}</span><span class="d">${pl?`${nf0.format(pl.b)} pessoas (${pl.t})`:''}</span></div>
   </div>
-  <div class="panel"><h3>Gasto e resultado nos seis polos</h3><p class="sub">Cada ponto é um município em ${yg}: gasto em saúde por habitante contra a cobertura vacinal média. Em laranja, ${esc(mun.nome)}. Linha tracejada: média de MT.</p>
+  <div class="panel"><h3>Gasto e resultado nos seis municípios detalhados</h3><p class="sub">Cada ponto é um município em ${yg}: gasto em saúde por habitante contra a cobertura vacinal média. Em laranja, ${esc(mun.nome)}. Linha tracejada: média de MT.</p>
     ${scatter(pts,{aria:'Gasto em saúde por habitante e cobertura vacinal',xl:'Gasto em saúde por habitante (R$)',yl:'Cobertura vacinal média',fx:v=>'R$ '+nf0.format(v),fy:v=>nf0.format(v)+'%',yref:SE.vacMT[yg]*100,yrefLabel:'média MT'})}
     <p class="sub" style="margin-top:8px">Gastar mais não garante cobertura maior. A pergunta de eficiência é: com o mesmo gasto, por que um município vacina mais que outro?</p></div>
   <div class="grid2">
@@ -781,7 +787,7 @@ function renderSaude(){
     <div class="fcard"><h4>Cobertura vacinal média</h4><div class="rule">Média das vacinas do calendário infantil. Traço preto: média de MT</div>${miniCols(vObj,{fmt:v=>nf0.format(v)+'%',ref:mtRef,aria:'Cobertura vacinal média'})}</div>
   </div>
   <div class="panel"><h3>Cobertura por vacina em ${yv}${yv===2026?' (parcial)':''}</h3><p class="sub">Vacinas do calendário com meta do Ministério da Saúde (90% ou 95%); em laranja, abaixo da meta. Passe o cursor para ver doses, público-alvo e a média de MT. Coberturas acima de 100% ocorrem quando o público estimado é menor que o vacinado.</p>${vitems.length?hbars(vitems):'<p class="muted">Sem dados para este ano.</p>'}</div>
-  <div class="panel"><div class="row-between"><div><h3>Estrutura de saúde dos seis polos</h3><p class="sub">Cadastro Nacional de Estabelecimentos de Saúde (CNES), competência 08/2026, e beneficiários de planos privados (ANS).</p></div>${copyBtn('cp-sau')}</div>
+  <div class="panel"><div class="row-between"><div><h3>Estrutura de saúde dos seis municípios detalhados</h3><p class="sub">Cadastro Nacional de Estabelecimentos de Saúde (CNES), competência 08/2026, e beneficiários de planos privados (ANS).</p></div>${copyBtn('cp-sau')}</div>
     <div class="tbl-wrap"><table><thead><tr><th>Município</th><th class="num">População</th><th class="num">Equipes ESF</th><th class="num">Cobertura ESF</th><th class="num">Profissionais</th><th class="num">Médicos por mil</th><th class="num">Leitos por mil</th><th class="num">Estabelecimentos</th><th class="num">Com plano privado</th></tr></thead><tbody>
     ${rows.map(({r,mm,p})=>`<tr ${r.m===m?'style="background:var(--accent-soft)"':''}><td>${esc(mm.nome)}</td><td class="num">${nf0.format(r.pop)}</td><td class="num">${r.esf}</td><td class="num">${pct100(r.cobESF)}</td><td class="num">${nf0.format(r.prof)}</td><td class="num">${nf2.format(r.med/r.pop*1000)}</td><td class="num">${nf2.format(r.leitos/r.pop*1000)}</td><td class="num">${r.estab}</td><td class="num">${p?pct(p.b/p.p*100):'–'}</td></tr>`).join('')}
     </tbody></table></div></div>
@@ -815,7 +821,7 @@ function renderEducacao(){
     <div class="kpi"><span class="k">Ideb anos finais · rede pública</span><span class="v">${af&&af[4]!=null?d1(af[4]):'–'}</span><span class="d">2025 · municipal e estadual juntas</span></div>
     <div class="kpi"><span class="k">% aplicado em Educação</span><span class="v">${pct(F[m].edu['2023'])}</span><span class="d">2023 · mínimo de 25%</span></div>
   </div>
-  <div class="panel"><h3>Gasto por aluno e Ideb nos seis polos</h3><p class="sub">Cada ponto é um município: gasto em educação por aluno da rede municipal (2025) contra o Ideb dos anos iniciais da rede municipal (2025). Em laranja, ${esc(mun.nome)}. Linha tracejada: meta nacional de 6,0.</p>
+  <div class="panel"><h3>Gasto por aluno e Ideb nos seis municípios detalhados</h3><p class="sub">Cada ponto é um município: gasto em educação por aluno da rede municipal (2025) contra o Ideb dos anos iniciais da rede municipal (2025). Em laranja, ${esc(mun.nome)}. Linha tracejada: meta nacional de 6,0.</p>
     ${pts.length?scatter(pts,{aria:'Gasto por aluno e Ideb',xl:'Gasto por aluno da rede municipal (R$)',yl:'Ideb anos iniciais',fx:v=>'R$ '+nf0.format(v),fy:v=>nf1.format(v),yref:6,yrefLabel:'meta 6,0',y0:4.5,y1:7.5}):''}
     <p class="sub" style="margin-top:8px">O gasto da função Educação inclui creche, pré-escola, transporte e merenda, e parte dele atende alunos de outras etapas: leia o gasto por aluno como aproximação.</p></div>
   <div class="grid2">
@@ -823,7 +829,7 @@ function renderEducacao(){
     <div class="fcard"><h4>Ideb anos finais · rede pública</h4><div class="rule">Escala de 0 a 10. Rede municipal e estadual juntas</div>${Object.keys(afObj).length?miniCols(afObj,{fmt:d1,aria:'Ideb anos finais'}):'<p class="muted">Sem Ideb divulgado.</p>'}</div>
   </div>
   <div class="panel"><h3>Quem estuda onde em ${esc(mun.nome)}</h3><p class="sub">Matrículas da educação básica em 2025. Azul: rede municipal (a responsabilidade da prefeitura); verde: rede estadual; cinza: rede privada.</p>${hbars(comp)}</div>
-  <div class="panel"><div class="row-between"><div><h3>Os seis polos lado a lado</h3><p class="sub">Gasto de 2025, matrículas do Censo Escolar 2025 e Ideb 2025.</p></div>${copyBtn('cp-edu')}</div>
+  <div class="panel"><div class="row-between"><div><h3>Os seis municípios detalhados lado a lado</h3><p class="sub">Gasto de 2025, matrículas do Censo Escolar 2025 e Ideb 2025.</p></div>${copyBtn('cp-edu')}</div>
     <div class="tbl-wrap"><table><thead><tr><th>Município</th><th class="num">Gasto em educação</th><th class="num">Alunos rede municipal</th><th class="num">Gasto por aluno</th><th class="num">Ideb AI municipal</th><th class="num">Ideb AF pública</th><th class="num">% Educação 2023</th></tr></thead><tbody>
     ${tbl.map(t=>`<tr ${t.i===m?'style="background:var(--accent-soft)"':''}><td>${esc(t.mm.nome)}</td><td class="num">${brl(t.g)}</td><td class="num">${nf0.format(t.mt.municipal)}</td><td class="num">${reais(t.pa)}</td><td class="num">${t.ai!=null?d1(t.ai):'–'}</td><td class="num">${t.af!=null?d1(t.af):'–'}</td><td class="num">${pct(t.edu)}</td></tr>`).join('')}
     </tbody></table></div></div>
@@ -898,7 +904,7 @@ function renderElementos(){
     ${rows.map(r=>`<tr data-q="${esc(norm(r.n+' '+r.c))}"><td style="white-space:normal">${esc(r.n)}</td><td class="muted" style="white-space:normal">${esc(r.c)}</td><td class="num">${brl(r.p2)}</td><td class="num">${brl(r.p)}</td><td class="num"><b>${brl(r.v)}</b></td><td class="num">${varTxt(r.v,r.p)}</td><td class="num">${pct(r.v/cur.tot*100)}</td><td class="num">${reais(r.v/pop)}</td></tr>`).join('')}
     </tbody></table></div>
     <p class="sub" style="margin-top:8px">Clique em um elemento para compará-lo entre os municípios no quadro abaixo.</p></div>
-  <div class="panel"><div class="row-between"><div><h3>Administração geral nos polos, ${y}</h3><p class="sub">Órgãos de gabinete, administração, finanças, planejamento e governo, identificados pelo nome no Radar. Não inclui Câmara nem previdência.</p></div>${copyBtn('cp-adm')}</div>
+  <div class="panel"><div class="row-between"><div><h3>Administração geral nos seis municípios detalhados, ${y}</h3><p class="sub">Órgãos de gabinete, administração, finanças, planejamento e governo, identificados pelo nome no Radar. Não inclui Câmara nem previdência.</p></div>${copyBtn('cp-adm')}</div>
     <div class="tbl-wrap"><table><thead><tr><th>Município</th><th class="num">Liquidado</th><th class="num">Por habitante</th><th class="num">% da prefeitura</th><th class="num">Pessoal no grupo</th><th>Maior elemento</th></tr></thead><tbody>
     ${admRows.map(r=>`<tr ${r.i===m?'style="background:var(--accent-soft)"':''}><td>${esc(r.mm.nome)}</td><td class="num">${brl(r.a)}</td><td class="num">${reais(r.pc)}</td><td class="num">${pct(r.sh)}</td><td class="num">${pct(r.pes)}</td><td style="white-space:normal">${esc(r.top)} (${brl(r.topv)})</td></tr>`).join('')}
     </tbody></table></div>
@@ -969,7 +975,7 @@ function renderSocial(){
       <tr><td>Rebanho bovino (cabeças)</td>${ys.map(y=>`<td class="num">${nf0.format(AG.bov[y][m])}</td>`).join('')}</tr>
       <tr><td>Gasto da prefeitura em agricultura</td>${ys.map(y=>`<td class="num">${brl(funL(m,+y,'Agricultura'))}</td>`).join('')}</tr>
     </tbody></table></div>
-    <p class="note" style="margin-top:12px">A produção é privada e depende de preço, clima e crédito: entre 2022 e 2024 o valor da produção caiu nos seis polos, embora a área colhida tenha aumentado em quatro deles, o que aponta para preços mais baixos dos grãos, e não para a atuação da secretaria. Use a produção para caracterizar a economia local (Eixos B e D). Os produtos da secretaria de agricultura são os serviços que ela presta (horas de patrulha mecanizada, estradas vicinais recuperadas, produtores atendidos, feiras), que vêm da entrevista e dos relatórios da própria secretaria.</p>
+    <p class="note" style="margin-top:12px">A produção é privada e depende de preço, clima e crédito: entre 2022 e 2024 o valor da produção caiu nos seis municípios, embora a área colhida tenha aumentado em quatro deles, o que aponta para preços mais baixos dos grãos, e não para a atuação da secretaria. Use a produção para caracterizar a economia local (Eixos B e D). Os produtos da secretaria de agricultura são os serviços que ela presta (horas de patrulha mecanizada, estradas vicinais recuperadas, produtores atendidos, feiras), que vêm da entrevista e dos relatórios da própria secretaria.</p>
   </div>
 
   <div class="panel"><div class="row-between"><div><h3>Saneamento</h3><p class="sub">Domicílios: IBGE, Censo Demográfico 2022 (tabelas 6803 e 6805). Gasto: funções Saneamento e Urbanismo, liquidado em 2025, por habitante.</p></div>${copyBtn('cp-sa')}</div>
@@ -977,7 +983,7 @@ function renderSocial(){
     ${saRows.map(r=>`<tr${hl(r.i)}><td>${esc(r.mm.nome)}</td><td class="num">${pct(r.agua)}</td><td class="num">${pct(r.esg)}</td><td class="num">${pct(r.sep)}</td><td class="num">${pct(r.rud)}</td><td class="num">${reais(r.san)}</td><td class="num">${reais(r.urb)}</td></tr>`).join('')}
     <tr><td><b>Mato Grosso</b></td><td class="num">${pct(SA.mt[0])}</td><td class="num">${pct(SA.mt[1])}</td><td class="num">${pct(SA.mt[2])}</td><td class="num">${pct(SA.mt[3])}</td><td class="num">–</td><td class="num">–</td></tr>
     </tbody></table></div>
-    <p class="note" style="margin-top:12px">Em todos os polos a cobertura de esgoto por rede está muito abaixo da média de Mato Grosso, e a fossa rudimentar é a forma mais comum. É um exemplo claro de externalidade (Eixo B): o esgoto de uma casa afeta a saúde dos vizinhos. Atenção: quando a água e o esgoto são prestados por autarquia (SAAE) ou empresa concessionária, o gasto pode não aparecer na função Saneamento da prefeitura.</p>
+    <p class="note" style="margin-top:12px">Nos seis municípios a cobertura de esgoto por rede está muito abaixo da média de Mato Grosso, e a fossa rudimentar é a forma mais comum. É um exemplo claro de externalidade (Eixo B): o esgoto de uma casa afeta a saúde dos vizinhos. Atenção: quando a água e o esgoto são prestados por autarquia (SAAE) ou empresa concessionária, o gasto pode não aparecer na função Saneamento da prefeitura.</p>
   </div>`;
   wireCopy('cp-as', ()=>toCSV(['Município','Ano','Gasto assistência social (R$)','Gasto por habitante (R$)','Famílias CadÚnico','Famílias extrema pobreza','Famílias Bolsa Família','Pessoas Bolsa Família','Gasto por família cadastrada (R$)','BPC'], asRows.map(r=>[r.mm.nome,ya,n2(r.g),n2(r.pc),r.cad,r.ext,r.pbf,r.pbfp,n2(r.porFam),r.bpc])));
   wireCopy('cp-ag', ()=>toCSV(['Município','Gasto agricultura 2024 (R$)','Área colhida 2024 (ha)','Valor da produção agrícola 2024 (R$)','Soja 2024 (t)','Rebanho bovino 2024'], agRows.map(r=>[r.mm.nome,n2(r.g),r.area,n2(r.val),r.soja,r.bov])));
@@ -1113,7 +1119,7 @@ function mtStrip(y, sel){
     s+=`<text x="${(X(lo)+X(hi))/2}" y="${pt-10}" text-anchor="middle" class="lab" style="font-size:16px">${c[1]}</text>`; });
   pts.forEach(p=>{ const jit=((p.i*37)%17)/17; const isSel=p.i===sel;
     if(isSel) return;
-    s+=`<circle cx="${X(p.v)}" cy="${pt+4+jit*(H-pt-30)}" r="4" fill="${mtPolo.has(p.i)?'var(--s1)':'var(--s1-soft)'}" data-tip="${esc(`<b>${MTD.M[p.i].n}</b><br>Índice ${nf2.format(p.v)}`)}"/>`; });
+    s+=`<circle cx="${X(p.v)}" cy="${pt+4+jit*(H-pt-30)}" r="4" fill="var(--s1-soft)" data-tip="${esc(`<b>${MTD.M[p.i].n}</b><br>Índice ${nf2.format(p.v)}`)}"/>`; });
   const sp=pts.find(p=>p.i===sel); if(sp) s+=`<circle cx="${X(sp.v)}" cy="${(H-12+pt-6)/2}" r="7" fill="var(--s2)" stroke="var(--surface)" stroke-width="2" data-tip="${esc(`<b>${MTD.M[sel].n}</b><br>Índice ${nf2.format(sp.v)}`)}"/>`;
   for(const v of [0,.2,.4,.6,.8,1]) s+=`<text x="${X(v)}" y="${H-1}" text-anchor="middle" style="font-size:14px">${nf1.format(v)}</text>`;
   return s+'</svg>';
@@ -1143,7 +1149,7 @@ function mtVacPanel(m){
   s+=`<text x="${(pl+W-pr)/2}" y="${H-4}" text-anchor="middle">Repasses do SUS da União e do Estado por habitante (R$), ${y}</text>`;
   s+=`<line x1="${pl}" x2="${W-pr}" y1="${Y(95)}" y2="${Y(95)}" stroke="var(--warn)" stroke-dasharray="5 4"/><text x="${W-pr}" y="${Y(95)-4}" text-anchor="end">meta 95%</text>`;
   s+=`<line x1="${X(0)}" x2="${X(xm)}" y1="${Y(a0)}" y2="${Y(a0+b*xm)}" stroke="var(--ink-2)" stroke-width="1.5"/>`;
-  for(const p of pts){ if(p.i===m) continue; s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${p.nv<100?3:4.5}" fill="${mtPolo.has(p.i)?'var(--s1)':'var(--s1-soft)'}" data-tip="${esc(`<b>${MTD.M[p.i].n}</b><br>SUS: ${reais(p.x)} por hab.<br>Cobertura média: ${pct(p.y)}<br>${nf0.format(p.nv)} nascidos vivos`)}"/>`; }
+  for(const p of pts){ if(p.i===m) continue; s+=`<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="${p.nv<100?3:4.5}" fill="var(--s1-soft)" data-tip="${esc(`<b>${MTD.M[p.i].n}</b><br>SUS: ${reais(p.x)} por hab.<br>Cobertura média: ${pct(p.y)}<br>${nf0.format(p.nv)} nascidos vivos`)}"/>`; }
   const sp=pts.find(p=>p.i===m); if(sp) s+=`<circle cx="${X(sp.x)}" cy="${Y(sp.y)}" r="7" fill="var(--s2)" stroke="var(--surface)" stroke-width="2" data-tip="${esc(`<b>${mm.n}</b><br>SUS: ${reais(sp.x)} por hab.<br>Cobertura média: ${pct(sp.y)}`)}"/>`;
   s+=`<line class="axis" x1="${pl}" x2="${W-pr}" y1="${Y(0)}" y2="${Y(0)}"/></svg>`;
   return `<div class="grid2">
@@ -1154,19 +1160,18 @@ function mtVacPanel(m){
   </div>`;
 }
 
-// cabeçalho comum às abas de MT: busca, exercício e atalhos dos polos
+// cabeçalho comum às abas de MT: busca e exercício
 function mtHeader(id, titulo){
   const m=S.mt, mm=MTD.M[m], y=S.mty, g=mm.g;
   return `<div class="row-between"><div class="head-org"><div class="eyebrow">Os ${MTD.M.length} municípios de Mato Grosso · SICONFI (Tesouro Nacional)</div><h2>${esc(titulo)}</h2>
-    <p class="sub" style="margin:0">${esc(MTD.GRUPOS[g]||'Grupo populacional não informado')}${mtPop(m,y)?' · '+nf0.format(mtPop(m,y))+' hab. em '+y:''}${mtPolo.has(m)?' · polo da turma':''}</p></div>
+    <p class="sub" style="margin:0">${esc(MTD.GRUPOS[g]||'Grupo populacional não informado')}${mtPop(m,y)?' · '+nf0.format(mtPop(m,y))+' hab. em '+y:''}${mtPolo.has(m)?' · com detalhamento do TCE-MT nas outras abas':''}</p></div>
     <div class="pickers">
       <div class="field" style="min-width:min(100%,280px)"><label for="${id}-q">Buscar município de MT</label><input type="search" id="${id}-q" class="mtq" list="${id}-list" placeholder="Digite o nome, ex.: Nova Xavantina" autocomplete="off"><datalist id="${id}-list">${MTD.M.map(x=>`<option value="${esc(x.n)}">`).join('')}</datalist></div>
       <div class="field"><label for="${id}-y">Exercício</label><select id="${id}-y" class="mty">${MT_ANOS.slice().reverse().map(yy=>`<option ${yy===y?'selected':''}>${yy}</option>`).join('')}</select></div>
-    </div></div>
-  <div class="polo"><span class="polo-label">Polos da turma</span><div class="chips">${[...mtPolo].filter(i=>i!=null).map(i=>`<button class="chip mtchip" data-mt="${i}" aria-pressed="${i===m}">${esc(MTD.M[i].n)}</button>`).join('')}</div></div>`;
+    </div></div>`;
 }
 function mtWire(el){
-  const pick=i=>{ if(i==null||!MTD.M[i]) return; S.mt=i; store.set('mt',i); render(); };
+  const pick=i=>{ if(i==null||!MTD.M[i]) return; S.mt=i; store.set('mt',i); const pm=M.findIndex(mm=>mtIdx.get(norm(mm.nome))===i); if(pm>=0&&pm!==S.m){ S.m=pm; S.org=null; store.set('m',pm); store.set('org',null); } renderPickers(); render(); };
   const q=el.querySelector('.mtq');
   q.addEventListener('change', ()=>pick(mtIdx.get(norm(q.value.trim()))));
   q.addEventListener('keydown', e=>{ if(e.key==='Enter'){ const n=norm(q.value.trim()); let i=mtIdx.get(n); if(i==null){ const k=[...mtIdx.keys()].find(s=>s.startsWith(n)) ?? [...mtIdx.keys()].find(s=>s.includes(n)); i=k!=null?mtIdx.get(k):null; } pick(i); } });
@@ -1217,18 +1222,18 @@ function renderMT(){
     <div class="kpi"><span class="k">Posição em Mato Grosso</span><span class="v">${pos}º <span style="font-size:15px;color:var(--muted)">de ${rank.length}</span></span><span class="d">Mediana de MT: ${nf2.format(mtMed)}</span></div>
     <div class="kpi"><span class="k">Mediana do grupo populacional</span><span class="v">${gMed(y)==null?'–':nf2.format(gMed(y))}</span><span class="d">${peers.length} municípios no ${esc((MTD.GRUPOS[g]||'').replace(/ \(.*/,''))}</span></div>
   </div>`:`<div class="note"><b>${esc(mm.n)}</b> ficou sem índice em ${y}: ${esc(a?.obs||'sem demonstrativos no SICONFI')}. Escolha outro exercício.</div>`}
-  <div class="head-org"><h3 style="font-size:20px">Indicadores no padrão do TCE-MT</h3><p class="sub" style="margin:0">Os mesmos indicadores da aba Situação fiscal (Radar Situação Fiscal dos Municípios), recalculados com o SICONFI para todos os municípios. Aplicação em Educação e Saúde e FUNDEB dependem do SIOPE e do SIOPS e não estão aqui. Barras em laranja: fora do limite. Os valores ficam próximos, mas não iguais aos do TCE-MT, que faz ajustes próprios: em Água Boa, 2023, o art. 167-A dá 94,9% aqui e 89,9% no Radar, e o resultado orçamentário dá +5,0% aqui e −2,7% no Radar. Para os seis polos, prefira a aba Situação fiscal.</p></div>
+  <div class="head-org"><h3 style="font-size:20px">Indicadores no padrão do TCE-MT</h3><p class="sub" style="margin:0">Os mesmos indicadores da aba Situação fiscal (Radar Situação Fiscal dos Municípios), recalculados com o SICONFI para todos os municípios. Aplicação em Educação e Saúde e FUNDEB dependem do SIOPE e do SIOPS e não estão aqui. Barras em laranja: fora do limite. Os valores ficam próximos, mas não iguais aos do TCE-MT, que faz ajustes próprios: em Água Boa, 2023, o art. 167-A dá 94,9% aqui e 89,9% no Radar, e o resultado orçamentário dá +5,0% aqui e −2,7% no Radar. Para os seis municípios com detalhamento do TCE-MT, prefira a aba Situação fiscal.</p></div>
   <div class="fcards">${mtTceCards(m)}</div>
-  <div class="panel"><h3>Mato Grosso inteiro em ${y}</h3><p class="sub">Cada ponto é um município; em laranja, ${esc(mm.n)}; em azul forte, os polos da turma. Conceitos: A, gestão de excelência (0,8 ou mais); B, boa gestão (0,6 a 0,8); C, gestão em dificuldade (0,4 a 0,6); D, gestão crítica (abaixo de 0,4).</p>${mtStrip(y,m)}</div>
+  <div class="panel"><h3>Mato Grosso inteiro em ${y}</h3><p class="sub">Cada ponto é um município; em laranja, ${esc(mm.n)}. Conceitos: A, gestão de excelência (0,8 ou mais); B, boa gestão (0,6 a 0,8); C, gestão em dificuldade (0,4 a 0,6); D, gestão crítica (abaixo de 0,4).</p>${mtStrip(y,m)}</div>
   <div class="fcards">${cards.map(([t,r,o,opt,j])=>{ const ys=Object.keys(o); const nt=j!=null&&a?a.nt[j]:null;
      return `<div class="fcard"><div class="row-between"><h4>${t}</h4>${j!=null?`<span class="pill neu">nota ${y}: ${nota(nt)}</span>`:''}</div><div class="rule">${r}</div>${ys.length?miniCols(o,{...opt,aria:t}):'<p class="muted">Sem dados.</p>'}</div>`; }).join('')}</div>
   <div class="panel"><h3>Receita própria e transferências por habitante, ${y}</h3><p class="sub">Barra forte: ${esc(mm.n)}. Barra clara: mediana do ${esc(MTD.GRUPOS[g]||'grupo')}. Valores brutos do DCA (antes da dedução para o FUNDEB)${S.real?', em reais de 2025':''}.</p>${hbars(recItems)}
     <p class="note" style="margin-top:12px">O FPM e a cota-parte do ICMS são repartidos por regras fixas (população, valor adicionado e critérios da lei estadual). Os repasses do SUS dependem em parte de indicadores de desempenho, por isso a cobertura de saúde também tem efeito sobre a receita.</p></div>
   ${mtVacPanel(m)}
   <div class="panel"><div class="row-between"><div><h3>Ranking de ${y}</h3><p class="sub">Clique em um município para ver a ficha. Notas de 0 a 1 em cada pilar.</p></div>
-    <div class="row-between"><div class="field"><label for="mtg">Mostrar</label><select id="mtg"><option value="grupo" ${S.mtg==='grupo'?'selected':''}>Mesmo grupo populacional</option><option value="todos" ${S.mtg==='todos'?'selected':''}>Todos os municípios</option><option value="polos" ${S.mtg==='polos'?'selected':''}>Só os polos da turma</option></select></div>${copyBtn('cp-mt')}</div></div>
+    <div class="row-between"><div class="field"><label for="mtg">Mostrar</label><select id="mtg"><option value="grupo" ${S.mtg==='grupo'?'selected':''}>Mesmo grupo populacional</option><option value="todos" ${S.mtg==='todos'?'selected':''}>Todos os municípios</option></select></div>${copyBtn('cp-mt')}</div></div>
     <div class="tbl-wrap" style="max-height:560px"><table><thead><tr><th class="num">#</th><th>Município</th><th class="num">Índice</th><th>Conceito</th>${MTD.PIL.map(k=>`<th class="num">${PIL_LAB[k][0]}</th>`).join('')}</tr></thead><tbody>
-    ${list.map(r=>{ const A=mtA(r.i,y), cc=mtConc(A.i); const sel=r.i===m; return `<tr class="mtrow" data-mt="${r.i}" style="cursor:pointer;${sel?'background:var(--accent-soft);font-weight:600':''}"><td class="num">${rank.indexOf(r)+1}</td><td>${esc(MTD.M[r.i].n)}${mtPolo.has(r.i)?' <span class="pill neu">polo</span>':''}</td><td class="num">${nf2.format(A.i)}</td><td><span class="pill ${pillClass(cc)}">${cc[1]}</span></td>${A.nt.map(v=>`<td class="num">${nota(v)}</td>`).join('')}</tr>`; }).join('')}
+    ${list.map(r=>{ const A=mtA(r.i,y), cc=mtConc(A.i); const sel=r.i===m; return `<tr class="mtrow" data-mt="${r.i}" style="cursor:pointer;${sel?'background:var(--accent-soft);font-weight:600':''}"><td class="num">${rank.indexOf(r)+1}</td><td>${esc(MTD.M[r.i].n)}</td><td class="num">${nf2.format(A.i)}</td><td><span class="pill ${pillClass(cc)}">${cc[1]}</span></td>${A.nt.map(v=>`<td class="num">${nota(v)}</td>`).join('')}</tr>`; }).join('')}
     </tbody></table></div></div>
   <div class="note"><b>Como o índice foi construído.</b> Os cinco pilares são os do Índice de Gestão Fiscal Municipal (IGFM) do TCE-MT: receita própria, gasto com pessoal, liquidez, investimentos e custo da dívida. Pesos e faixas de conceito seguem o IFGF da FIRJAN, em que o IGFM se baseia. As notas de corte de cada pilar estão descritas nos cartões. Os dados vêm dos demonstrativos que as prefeituras enviam ao Tesouro Nacional (SICONFI): RGF do Poder Executivo no último período do ano e Declaração de Contas Anuais (DCA). <b>É uma reprodução para estudo, não o índice oficial do TCE-MT</b>: os valores podem diferir do Radar, que usa o sistema APLIC. A maior diferença está no gasto com pessoal: o RGF traz o percentual declarado pela prefeitura, e o TCE-MT o recalcula com critérios próprios. Em Canarana, em 2021, o RGF informa 33,9% da RCL e o TCE-MT calculou 42,9%. Quando os demonstrativos de um ano faltam no SICONFI ou são incoerentes (RCL muito diferente da receita corrente), o município fica sem índice naquele ano.</div>`;
   mtWire(el);
@@ -1265,7 +1270,7 @@ function renderMTRD(){
     <div class="panel"><div class="row-between"><div><h3>Despesa por função de governo, ${y}</h3><p class="sub">Liquidada por habitante. Barra forte: ${esc(mm.n)}; barra clara: mediana do ${esc(MTD.GRUPOS[mm.g]||'grupo')}. Total: ${brl(ftot*mtReal(y))}.</p></div>${copyBtn('cp-rd-f')}</div>
       ${funs.length&&a&&a.f?hbars(funs.map(r=>({label:funLab(r.f), v:r.v||0, v2:r.md, valText:r.v==null?'–':reais(r.v), tip:`<b>${esc(funLab(r.f))}</b> em ${y}<br>${esc(mm.n)}: ${brl(a.f[r.fi]*mtReal(y))} (${pct(a.f[r.fi]/ftot*100)} da despesa)<br>${r.v==null?'–':reais(r.v)} por habitante<br>Mediana do grupo: ${r.md==null?'–':reais(r.md)}`}))):'<p class="muted">DCA não publicada no SICONFI para este ano.</p>'}</div>
   </div>
-  <div class="note">Fonte: Declaração de Contas Anuais (DCA) enviada ao Tesouro Nacional, anexos I-C (receita) e I-E (despesa por função, sem as despesas intraorçamentárias). A função "Previdência Social" inclui o regime próprio de previdência; "Encargos Especiais" reúne dívida, precatórios e transferências. Os nomes das secretarias não aparecem no SICONFI: para o detalhe por secretaria, use as abas dos polos.</div>`;
+  <div class="note">Fonte: Declaração de Contas Anuais (DCA) enviada ao Tesouro Nacional, anexos I-C (receita) e I-E (despesa por função, sem as despesas intraorçamentárias). A função "Previdência Social" inclui o regime próprio de previdência; "Encargos Especiais" reúne dívida, precatórios e transferências. Os nomes das secretarias não aparecem no SICONFI: o detalhe por secretaria existe só para os seis municípios com dados do Radar do TCE-MT (abas Secretarias e Elementos de despesa).</div>`;
   mtWire(el);
   wireCopy('cp-rd-r', ()=>toCSV(['Município','Ano','Origem','Arrecadada'], a&&a.o?MTD.ORIG.map((o,j)=>[mm.n,y,o,n2(a.o[j]*mtReal(y))]):[]));
   wireCopy('cp-rd-f', ()=>toCSV(['Município','Ano','Função','Liquidado','Por habitante','Mediana do grupo por habitante'], funs.map(r=>[mm.n,y,funLab(r.f),a&&a.f?n2(a.f[r.fi]*mtReal(y)):'',r.v==null?'':n2(r.v),r.md==null?'':n2(r.md)])));
@@ -1278,22 +1283,22 @@ function renderComparar(){
   const funs=MTD.FUN.map(funLab);
   if(!funs.includes(S.cmpFun)) S.cmpFun='Saúde';
   const fi=funs.indexOf(S.cmpFun);
-  const set=MTD.M.map((_,i)=>i).filter(i=> i===m || (S.cmpSet==='todos') || (S.cmpSet==='grupo'&&MTD.M[i].g===mm.g) || (S.cmpSet==='polos'&&mtPolo.has(i)));
+  const set=MTD.M.map((_,i)=>i).filter(i=> i===m || (S.cmpSet==='todos') || (S.cmpSet==='grupo'&&MTD.M[i].g===mm.g) || false);
   const vals=set.map(i=>{ const A=mtA(i,y); const L=A&&A.f?A.f[fi]*mtReal(y):null, T=A&&A.f?A.f.reduce((s,v)=>s+v,0)*mtReal(y):null; return {i, L, pc:mtFunPc(i,y,fi), sh:T?L/T*100:null}; }).filter(v=>v.pc!=null).sort((p,q)=>q.pc-p.pc);
   const md=median(vals.map(v=>v.pc));
-  const items=vals.map(v=>({label:MTD.M[v.i].n+(mtPolo.has(v.i)?' · polo':''), v:v.pc, color:v.i===m?'var(--s2)':(mtPolo.has(v.i)?'var(--s1)':'var(--s1-soft)'), valText:reais(v.pc), tip:`<b>${esc(MTD.M[v.i].n)}</b><br>${esc(S.cmpFun)} em ${y}: ${brl(v.L)}<br>${pct(v.sh)} da despesa total<br>${esc(MTD.GRUPOS[MTD.M[v.i].g]||'')}`}));
+  const items=vals.map(v=>({label:MTD.M[v.i].n, v:v.pc, color:v.i===m?'var(--s2)':'var(--s1)', valText:reais(v.pc), tip:`<b>${esc(MTD.M[v.i].n)}</b><br>${esc(S.cmpFun)} em ${y}: ${brl(v.L)}<br>${pct(v.sh)} da despesa total<br>${esc(MTD.GRUPOS[MTD.M[v.i].g]||'')}`}));
   const rows=set.slice().sort((p,q)=>MTD.M[p].n.localeCompare(MTD.M[q].n,'pt'));
   const tcell=(v,j)=>{ if(v==null) return '<td class="num muted">–</td>'; const o=TCE_CFG[j][2]; const bad=o.limit!=null&&(o.dir==='min'?v<o.limit:v>o.limit); return `<td class="num" style="${bad?'color:var(--warn);font-weight:700':''}">${o.fmt(v)}</td>`; };
   el.innerHTML=`${mtHeader('cmp','Comparar municípios: '+mm.n)}
   <div class="pickers">
     <div class="field"><label for="cmpf">Função de governo</label><select id="cmpf">${funs.slice().sort((p,q)=>p.localeCompare(q,'pt')).map(f=>`<option ${f===S.cmpFun?'selected':''}>${esc(f)}</option>`).join('')}</select></div>
-    <div class="field"><label for="cmps">Comparar com</label><select id="cmps"><option value="grupo" ${S.cmpSet==='grupo'?'selected':''}>Mesmo grupo populacional</option><option value="polos" ${S.cmpSet==='polos'?'selected':''}>Polos da turma</option><option value="todos" ${S.cmpSet==='todos'?'selected':''}>Todos os municípios de MT</option></select></div>
+    <div class="field"><label for="cmps">Comparar com</label><select id="cmps"><option value="grupo" ${S.cmpSet==='grupo'?'selected':''}>Mesmo grupo populacional</option><option value="todos" ${S.cmpSet==='todos'?'selected':''}>Todos os municípios de MT</option></select></div>
   </div>
-  <div class="panel"><div class="row-between"><div><h3>${esc(S.cmpFun)}: despesa liquidada por habitante, ${y}</h3><p class="sub">Em laranja, ${esc(mm.n)}; em azul forte, os polos da turma. ${vals.length} municípios; mediana ${md==null?'–':reais(md)}${S.real?' (reais de 2025)':''}.</p></div>${copyBtn('cp-cmp')}</div>
+  <div class="panel"><div class="row-between"><div><h3>${esc(S.cmpFun)}: despesa liquidada por habitante, ${y}</h3><p class="sub">Em laranja, ${esc(mm.n)}. ${vals.length} municípios; mediana ${md==null?'–':reais(md)}${S.real?' (reais de 2025)':''}.</p></div>${copyBtn('cp-cmp')}</div>
     <div style="max-height:640px;overflow:auto;padding-right:4px">${hbars(items)}</div></div>
   <div class="panel"><div class="row-between"><div><h3>Indicadores lado a lado, ${y}</h3><p class="sub">Padrão do Radar Situação Fiscal do TCE-MT, recalculado com o SICONFI, e índice de gestão fiscal. Em laranja, fora do limite.</p></div>${copyBtn('cp-cmp2')}</div>
     <div class="tbl-wrap" style="max-height:560px"><table><thead><tr><th>Município</th>${TCE_CFG.map(c=>`<th class="num">${esc(c[0])}</th>`).join('')}<th class="num">Índice de gestão fiscal</th></tr></thead><tbody>
-    ${rows.map(i=>{ const A=mtA(i,y); return `<tr class="mtrow" data-mt="${i}" style="cursor:pointer;${i===m?'background:var(--accent-soft);font-weight:600':''}"><td>${esc(MTD.M[i].n)}${mtPolo.has(i)?' <span class="pill neu">polo</span>':''}</td>${TCE_CFG.map((_,j)=>tcell(A?.t?.[j],j)).join('')}<td class="num">${A&&A.i!=null?nf2.format(A.i)+' '+mtConc(A.i)[1]:'–'}</td></tr>`; }).join('')}
+    ${rows.map(i=>{ const A=mtA(i,y); return `<tr class="mtrow" data-mt="${i}" style="cursor:pointer;${i===m?'background:var(--accent-soft);font-weight:600':''}"><td>${esc(MTD.M[i].n)}</td>${TCE_CFG.map((_,j)=>tcell(A?.t?.[j],j)).join('')}<td class="num">${A&&A.i!=null?nf2.format(A.i)+' '+mtConc(A.i)[1]:'–'}</td></tr>`; }).join('')}
     </tbody></table></div></div>
   <div class="note">O nome das secretarias muda de um município para outro; a <b>função de governo</b> é padronizada (Portaria 42/1999) e permite comparar. Municípios pequenos têm custo fixo alto por habitante: compare com o mesmo grupo populacional. Por habitante: estimativas do IBGE de cada ano (Censo 2022 para 2022 e 2023).</div>`;
   mtWire(el);
@@ -1323,7 +1328,22 @@ function render(){
   const txt=STAMP[S.tab]; const realTxt = S.real && !['fiscal','pesquisar','sobre'].includes(S.tab) ? ' <b>Valores em reais de 2025, corrigidos pelo IPCA</b> (2026 sem correção).' : '';
   if(txt) v.insertAdjacentHTML('afterbegin', `<p class="tabstamp">${txt}${realTxt}</p>`);
 }
+// abas com o detalhamento do TCE-MT, extraído só para seis municípios
+const POLO_TABS=['ad2','secretarias','elementos','receitas','fiscal','saude','educacao','social'];
+function renderSoPolos(){
+  const el=$('#v-'+S.tab), nome=MTD.M[S.mt].n;
+  el.innerHTML=`<div class="panel" style="max-width:780px"><h3>Esta aba tem dados detalhados só para seis municípios</h3>
+    <p>O detalhamento desta aba (secretarias, elementos de despesa, fontes de recurso e indicadores do Radar Situação Fiscal, Saúde e Educação) vem do Radar de Controle Público do TCE-MT e foi extraído para Ribeirão Cascalheira, São Félix do Araguaia, Água Boa, Canarana, Arenápolis e Alto Araguaia.</p>
+    <p>Para ${esc(nome)} e os demais municípios de Mato Grosso, use:</p>
+    <div class="row-between" style="justify-content:flex-start">
+      <button class="btn" data-go="mt">Mato Grosso: gestão fiscal →</button>
+      <button class="btn" data-go="mtrd">Mato Grosso: receitas e despesas →</button>
+      <button class="btn" data-go="comparar">Comparar municípios →</button></div>
+    <p class="sub" style="margin-top:12px">Para voltar aos dados detalhados, escolha na lista "Município" do topo um dos municípios marcados como "detalhado".</p></div>`;
+  el.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>setTab(b.dataset.go)));
+}
 function renderTab(){
+  if(POLO_TABS.includes(S.tab) && !mtPolo.has(S.mt)) return renderSoPolos();
   if(S.tab==='ad2') renderAD2();
   else if(S.tab==='social') renderSocial();
   else if(S.tab==='elementos') renderElementos();
