@@ -82,6 +82,19 @@ def vacinacao(ano, cods):
     return {'ano': ano, 'vac': [[v[0], v[1]] for v in VACINAS], 'm': bloco}
 
 
+def ibge():
+    """PIB, área colhida, valor da produção agrícola, soja e rebanho bovino (dados/mt/ibge_mt.csv)."""
+    arq = os.path.join(MT, 'ibge_mt.csv')
+    if not os.path.exists(arq):
+        return None
+    out = {}
+    campos = ['pib_mil_reais', 'area_colhida_ha', 'valor_producao_agricola_mil_reais', 'soja_toneladas', 'rebanho_bovino_cabecas']
+    with open(arq, encoding='utf-8') as f:
+        for r in csv.DictReader(f, delimiter=';'):
+            out.setdefault(r['cod_ibge'], {})[r['ano']] = [int(r[c]) if r[c] else None for c in campos]
+    return out
+
+
 def nota(x, zero, um):
     if x is None:
         return None
@@ -182,7 +195,7 @@ def main():
     bloco = {'VARS': VARS, 'PIL': list(CORTES), 'CORTES': CORTES, 'GRUPOS': [g for _, g in GRUPOS],
              'CONC': [[lim, c, d] for lim, c, d in CONCEITOS], 'ORIG': ORIG, 'FUN': FUN, 'TCE': TCE,
              'M': sorted(mun.values(), key=lambda m: m['n']),
-             'VAC': vacinacao(2025, list(mun))}
+             'VAC': vacinacao(2025, list(mun)), 'IB': ibge()}
     js = json.dumps(bloco, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     p = os.path.join(RAIZ, 'index.html')
     html = open(p, encoding='utf-8').read()
