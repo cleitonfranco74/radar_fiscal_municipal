@@ -122,6 +122,19 @@ def cnes():
         return {r['co_municipio_ibge6']: [int(r[c]) for c in list(r)[2:]] for r in csv.DictReader(f, delimiter=';')}
 
 
+def assistencia():
+    """Bolsa Família e BPC por município e mês de referência (Portal da Transparência)."""
+    arq = os.path.join(MT, 'assistencia_transparencia_mt.csv')
+    if not os.path.exists(arq):
+        return None
+    out = {}
+    with open(arq, encoding='utf-8') as f:
+        for r in csv.DictReader(f, delimiter=';'):
+            out.setdefault(r['cod_ibge'], {})[r['referencia']] = [int(r['familias_bolsa_familia']), round(float(r['valor_bolsa_familia_reais'])),
+                                                                  int(r['beneficios_bpc']), round(float(r['valor_bpc_reais']))]
+    return out
+
+
 def nota(x, zero, um):
     if x is None:
         return None
@@ -222,7 +235,7 @@ def main():
     bloco = {'VARS': VARS, 'PIL': list(CORTES), 'CORTES': CORTES, 'GRUPOS': [g for _, g in GRUPOS],
              'CONC': [[lim, c, d] for lim, c, d in CONCEITOS], 'ORIG': ORIG, 'FUN': FUN, 'TCE': TCE,
              'M': sorted(mun.values(), key=lambda m: m['n']),
-             'VAC': vacinacao(2025, list(mun)), 'IB': ibge(), 'EDU': educacao(), 'CNES': cnes()}
+             'VAC': vacinacao(2025, list(mun)), 'IB': ibge(), 'EDU': educacao(), 'CNES': cnes(), 'ASSIST': assistencia()}
     js = json.dumps(bloco, ensure_ascii=False, separators=(',', ':')).replace('</', '<\\/')
     p = os.path.join(RAIZ, 'index.html')
     html = open(p, encoding='utf-8').read()
